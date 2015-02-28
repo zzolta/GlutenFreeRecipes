@@ -117,15 +117,13 @@ public class SearchableActivity extends ActionBarActivity {
 
     private void updateSearchList(RecipeQueryResult recipeQueryResult) {
         final List<Match> recipes = recipeQueryResult.getMatches();
-        final Collection<String> recipeNames = new ArrayList<>(recipes.size());
+        final Collection<String> recipeIDs = new ArrayList<>(recipes.size());
         for (final Match recipe : recipes) {
-            recipeNames.add(recipe.getRecipeName());
+            recipeIDs.add(recipe.getId());
         }
-        if (recipeNames.size() > 0) {
+        if (recipeIDs.size() > 0) {
             recipeAdapter.clear();
-            for (final String recipeName : recipeNames) {
-                recipeAdapter.add(recipeName);
-            }
+            recipeAdapter.addAll(recipeIDs);
         }
         runOnUiThread(new Runnable() {
             @Override

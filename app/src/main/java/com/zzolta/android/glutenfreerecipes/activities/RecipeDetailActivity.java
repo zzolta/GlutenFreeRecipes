@@ -15,7 +15,7 @@ public class RecipeDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_recipe_detail);
-        TextView viewById = (TextView) findViewById(R.id.recipe_name);
+        TextView viewById = (TextView) findViewById(R.id.recipe_id);
         viewById.setText(getIntent().getStringExtra(ApplicationConstants.RECIPE_ID));
     }
 }
