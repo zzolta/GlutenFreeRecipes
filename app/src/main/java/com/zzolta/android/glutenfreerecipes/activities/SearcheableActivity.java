@@ -1,4 +1,4 @@
-package com.zzolta.android.glutenfreerecipes;
+package com.zzolta.android.glutenfreerecipes.activities;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.zzolta.android.glutenfreerecipes.R;
 
 import java.util.Arrays;
 import java.util.List;

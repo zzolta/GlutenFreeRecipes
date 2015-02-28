@@ -1,4 +1,4 @@
-package com.zzolta.android.glutenfreerecipes;
+package com.zzolta.android.glutenfreerecipes.fragments;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.zzolta.android.glutenfreerecipes.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

@@ -1,4 +1,4 @@
-package com.zzolta.android.glutenfreerecipes;
+package com.zzolta.android.glutenfreerecipes.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,8 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
+import com.zzolta.android.glutenfreerecipes.R;
+import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
+import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
