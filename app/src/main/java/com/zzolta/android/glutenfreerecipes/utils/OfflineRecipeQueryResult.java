@@ -5,333 +5,333 @@ package com.zzolta.android.glutenfreerecipes.utils;
  */
 public final class OfflineRecipeQueryResult {
     public static final String pizzaRecipeQueryResult = "{\n" +
-                                                         "   \"attribution\":{\n" +
-                                                         "      \"html\":\"Recipe search powered by <a href='http:\\/\\/www.yummly.com\\/recipes'><img alt='Yummly' src='http:\\/\\/static.yummly.com\\/api-logo.png'\\/><\\/a>\",\n" +
-                                                         "      \"url\":\"http:\\/\\/www.yummly.com\\/recipes\\/\",\n" +
-                                                         "      \"text\":\"Recipe search powered by Yummly\",\n" +
-                                                         "      \"logo\":\"http:\\/\\/static.yummly.com\\/api-logo.png\"\n" +
-                                                         "   },\n" +
-                                                         "   \"totalMatchCount\":134,\n" +
-                                                         "   \"facetCounts\":{\n" +
-                                                         "\n" +
-                                                         "   },\n" +
-                                                         "   \"matches\":[\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/ohr21Gq5MbkeiA29Myf2g9sWMzOVaDmTAIBLI2YejLOKvx4NWJsvvEkSBJ3lKXDq8PGQi1vuTjuk_h5kpVsnCD8=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Skinnytaste\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"zucchini\",\n" +
-                                                         "            \"olive oil spray\",\n" +
-                                                         "            \"pepper\",\n" +
-                                                         "            \"salt\",\n" +
-                                                         "            \"marinara sauce\",\n" +
-                                                         "            \"part-skim mozzarella\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Zucchini-pizza-bites-352293\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh5.ggpht.com\\/tuKYaTKkYtjeMAYA8AsjBZrQssPm4cCrQ0iZVJFlMio13CH9PDAdCj58S5rojVdIrwQFhNvh_bKz3FEDVBCWIQ=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Zucchini Pizza Bites\",\n" +
-                                                         "         \"totalTimeInSeconds\":null,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Appetizers\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":null,\n" +
-                                                         "         \"rating\":5\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/DR_whVuz0_gR4taW4HG0p6VrhNy3EQKY7Dz9mLsLY9T_tnDSM884rdZNtyahLb6Vc58aa1kq-D4Jn1pJBwh9=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"I Breathe... I'm Hungry...\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"cauliflower\",\n" +
-                                                         "            \"heavy cream\",\n" +
-                                                         "            \"butter\",\n" +
-                                                         "            \"pepperoni\",\n" +
-                                                         "            \"shredded mozzarella cheese\",\n" +
-                                                         "            \"salt\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Pepperoni-Pizza-Cauliflower-Casserole-_Low-Carb-and-Gluten-Free_-483101\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh6.ggpht.com\\/PTceCu9Di-66DFW4qzA_bjpCEBv0RpxtV0gUWGIsE70wcj8j9Xo5x4TaxHPEmVKaQGq5s5-IaOSggpO_pRiu5Q=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Pepperoni Pizza Cauliflower Casserole (Low Carb and Gluten Free)\",\n" +
-                                                         "         \"totalTimeInSeconds\":2700,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Main Dishes\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"sweet\":0.16666666666666666,\n" +
-                                                         "            \"sour\":0.8333333333333334,\n" +
-                                                         "            \"salty\":1,\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"meaty\":1,\n" +
-                                                         "            \"bitter\":1\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/FtdtfOQPFeGe7jxj90GZwSSWHaoX7-9VAtoC_GJIjgIOm_vMqTLpklA6XwvxaIIX-1SySrSwuzJw3YtQ-rHijQ=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Almonds and Avocados\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"quinoa\",\n" +
-                                                         "            \"water\",\n" +
-                                                         "            \"olive oil\",\n" +
-                                                         "            \"salt\",\n" +
-                                                         "            \"garlic\",\n" +
-                                                         "            \"italian seasoning\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Gluten-Free-Quinoa-Pizza-Crust-and-Vegan-Pizza-768412\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh6.ggpht.com\\/PMLG---UOoL9srBm0uUceFK1x0SmbCaZNBX9Ds4Gu7KzuageMD3lBiSzD-CpSLuwidEedlLnE0aLQuL18j57Dg=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Gluten-Free Quinoa Pizza Crust and Vegan Pizza\",\n" +
-                                                         "         \"totalTimeInSeconds\":2400,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Main Dishes\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"salty\":0.8333333333333334,\n" +
-                                                         "            \"sour\":0.16666666666666666,\n" +
-                                                         "            \"sweet\":0,\n" +
-                                                         "            \"bitter\":0.8333333333333334,\n" +
-                                                         "            \"meaty\":0.8333333333333334,\n" +
-                                                         "            \"piquant\":0\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/RHhzkYzJBsI_KQFig7MvkpTLvahRjkbh4Oy8JZbENXBr9EnLNTdvZVgS1uDGVkz5gvdC5oOf-ba1pNlgoPudKg=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Rachael Ray Show\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"cauliflower florets\",\n" +
-                                                         "            \"eggs\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Cauliflower-Pizza-Dough-897222\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh5.ggpht.com\\/L3PCAJ9-_F3UyE_mkzYUEvWMBTYP668E3Ep62NSEiKazMEIXUDlF2G5kAK85Ua4pOE-dnfjzBzfeSCmGMq3W=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Cauliflower Pizza Dough\",\n" +
-                                                         "         \"totalTimeInSeconds\":null,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"salty\":0.16666666666666666,\n" +
-                                                         "            \"sour\":0.8333333333333334,\n" +
-                                                         "            \"sweet\":0.3333333333333333,\n" +
-                                                         "            \"bitter\":0.8333333333333334,\n" +
-                                                         "            \"meaty\":0.16666666666666666,\n" +
-                                                         "            \"piquant\":0\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":3\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/-fi4wF1lht4P1cI_K5a8qLMinslNVWWPrS2EQLMTkJv5Y6MrjVQPdOv7dbROUsIbSl41UjdcbTW7I9wfa_ReVw=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Saveur\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"plum tomatoes\",\n" +
-                                                         "            \"salt\",\n" +
-                                                         "            \"extra-virgin olive oil\",\n" +
-                                                         "            \"tomatoes\",\n" +
-                                                         "            \"garlic cloves\",\n" +
-                                                         "            \"fresh leav oregano\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Marinara-Pizza-Topping-441919\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh4.ggpht.com\\/UEJM4nXt2FT5tyieSnyVgD3IIDqFpK-H3GTsQ1iGxvce75CVk66slVdnEHrLztOEG0luKX3XmxcWzirceQSRXA=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Marinara Pizza Topping\",\n" +
-                                                         "         \"totalTimeInSeconds\":3300,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Main Dishes\",\n" +
-                                                         "               \"Condiments and Sauces\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"sweet\":0.6666666666666666,\n" +
-                                                         "            \"sour\":1,\n" +
-                                                         "            \"salty\":0.16666666666666666,\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"meaty\":0.16666666666666666,\n" +
-                                                         "            \"bitter\":0.6666666666666666\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":5\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/s8HKd3k2bvDs_uYdvnrzLgEu_avZx22M99gWroxFFewj1heEiSzwqRJQPn6bd4dMz0RC7LWdaGRTYqH-RakQ=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Whippin It Up 4 Foodies \",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"french fri frozen\",\n" +
-                                                         "            \"pizza sauce\",\n" +
-                                                         "            \"shredded mozzarella cheese\",\n" +
-                                                         "            \"pepperoni\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Pizza-Fries-753754\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh6.ggpht.com\\/vvcsypBCsLiWsUghvYFvHPFFPfJecB7JUBfEtk9t9YRl-ZF-Igsearr5VBggpOXUqTk3-dIkTIOOH-7mmiTNLQ=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Pizza Fries\",\n" +
-                                                         "         \"totalTimeInSeconds\":1800,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "\n" +
-                                                         "            ],\n" +
-                                                         "            \"cuisine\":[\n" +
-                                                         "               \"Kid-Friendly\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"bitter\":0.6666666666666666,\n" +
-                                                         "            \"sour\":0.5,\n" +
-                                                         "            \"meaty\":0.16666666666666666,\n" +
-                                                         "            \"salty\":0.8333333333333334,\n" +
-                                                         "            \"sweet\":0.16666666666666666\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/71kbZYQag146zuAaVzeBKGkXtE43axtKVrJtOuTMy8dcyfZqcv5BFPGGH_1Qlfi9tVA8Re26s1g9mg5hTBQgXQ=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"ifoodreal\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"cauliflower\",\n" +
-                                                         "            \"eggs\",\n" +
-                                                         "            \"parmesan cheese\",\n" +
-                                                         "            \"herb seasoning\",\n" +
-                                                         "            \"salt\",\n" +
-                                                         "            \"ground black pepper\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Cauliflower-Pizza-Crust-596388\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh5.ggpht.com\\/z9LhqLD9pO56NRgSTPf0UqmsJM5LiRbkO5Yx2HCXwv-_1jI5dV5jvFW8YuaScidWFGkP4oCBedpMG2LSV8oCRBg=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Cauliflower Pizza Crust\",\n" +
-                                                         "         \"totalTimeInSeconds\":2400,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Main Dishes\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":null,\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/Q3VSpop1THw2YlSXeoCLP-5-D2TC7ivZtQ3rj9rp0tn-VsWUt6Gm1un4uN8-CIS3l8ilrMA1d91wNYvAchUXS3g=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Unilever North America\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"ragu old world style pasta sauc\",\n" +
-                                                         "            \"ragu cheesi classic alfredo sauc\",\n" +
-                                                         "            \"shredded mozzarella cheese\",\n" +
-                                                         "            \"pepperoni\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Pepperoni-pizza-dip-298542\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh6.ggpht.com\\/a-sCGOrvUecQqujF670vg3krt7YM3r_L9RGPjRpn5qPFpf5pDN3Mcczh7guWvSH2fvsO3GHojX062zQ04NbizA=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Pepperoni Pizza Dip\",\n" +
-                                                         "         \"totalTimeInSeconds\":900,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Lunch and Snacks\",\n" +
-                                                         "               \"Appetizers\"\n" +
-                                                         "            ],\n" +
-                                                         "            \"holiday\":[\n" +
-                                                         "               \"New Year\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":null,\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/wQzYE02YKX7TEO5f1Bn_Vxt1ByXwnQGoYJc-7OLKlweUfi13EU9QWqWQhulZOS9MPtM4j0QiIi249YYApARA=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Crunchy Creamy Sweet\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"water\",\n" +
-                                                         "            \"sugar\",\n" +
-                                                         "            \"yeast\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"The-Best-Homemade-Pizza-Dough-_photo-tutorial_-680993\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh5.ggpht.com\\/yvn2Y0J-PXbGSL5gPdf1lrO5fR3sgjUpIhNaByYQmOOV97U_f3IN3372d46LF7Ul32yUeNcX7E4Fgq9lstowlA=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"The Best Homemade Pizza Dough {photo tutorial}\",\n" +
-                                                         "         \"totalTimeInSeconds\":2700,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "\n" +
-                                                         "            ],\n" +
-                                                         "            \"cuisine\":[\n" +
-                                                         "               \"Kid-Friendly\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":null,\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/_-n6LvPxCf5u7Wy3Bn5LF78a1jM1QlOeoDpQgBkkFdUB8Oh-uLW3GeHXAWgYxsidstWru0JyVfdwuWEZFpO-7w=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Unilever North America\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"ground beef\",\n" +
-                                                         "            \"ragu old world style pasta sauc\",\n" +
-                                                         "            \"pepperoni\",\n" +
-                                                         "            \"tortilla chips\",\n" +
-                                                         "            \"shredded mozzarella cheese\",\n" +
-                                                         "            \"pizza toppings\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Pizza-nachos-297675\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh6.ggpht.com\\/pjtPf4GeVmugoIcHIcH_gmS8t6mfXqLh1lRylRtsKsQ796tkChNB-bXwlRxQ3nf6IC2p1CC1mOaGh7X_UHK-ug=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Pizza Nachos\",\n" +
-                                                         "         \"totalTimeInSeconds\":720,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Main Dishes\",\n" +
-                                                         "               \"Lunch and Snacks\",\n" +
-                                                         "               \"Appetizers\"\n" +
-                                                         "            ],\n" +
-                                                         "            \"holiday\":[\n" +
-                                                         "               \"Halloween\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":null,\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      }\n" +
-                                                         "   ],\n" +
-                                                         "   \"criteria\":{\n" +
-                                                         "      \"excludedIngredients\":null,\n" +
-                                                         "      \"allowedIngredients\":null,\n" +
-                                                         "      \"terms\":null,\n" +
-                                                         "      \"requirePictures\":true\n" +
-                                                         "   }\n" +
-                                                         "}";
+                                                        "   \"attribution\":{\n" +
+                                                        "      \"html\":\"Recipe search powered by <a href='http:\\/\\/www.yummly.com\\/recipes'><img alt='Yummly' src='http:\\/\\/static.yummly.com\\/api-logo.png'\\/><\\/a>\",\n" +
+                                                        "      \"url\":\"http:\\/\\/www.yummly.com\\/recipes\\/\",\n" +
+                                                        "      \"text\":\"Recipe search powered by Yummly\",\n" +
+                                                        "      \"logo\":\"http:\\/\\/static.yummly.com\\/api-logo.png\"\n" +
+                                                        "   },\n" +
+                                                        "   \"totalMatchCount\":134,\n" +
+                                                        "   \"facetCounts\":{\n" +
+                                                        "\n" +
+                                                        "   },\n" +
+                                                        "   \"matches\":[\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/ohr21Gq5MbkeiA29Myf2g9sWMzOVaDmTAIBLI2YejLOKvx4NWJsvvEkSBJ3lKXDq8PGQi1vuTjuk_h5kpVsnCD8=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Skinnytaste\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"zucchini\",\n" +
+                                                        "            \"olive oil spray\",\n" +
+                                                        "            \"pepper\",\n" +
+                                                        "            \"salt\",\n" +
+                                                        "            \"marinara sauce\",\n" +
+                                                        "            \"part-skim mozzarella\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Zucchini-pizza-bites-352293\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh5.ggpht.com\\/tuKYaTKkYtjeMAYA8AsjBZrQssPm4cCrQ0iZVJFlMio13CH9PDAdCj58S5rojVdIrwQFhNvh_bKz3FEDVBCWIQ=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Zucchini Pizza Bites\",\n" +
+                                                        "         \"totalTimeInSeconds\":null,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Appetizers\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":null,\n" +
+                                                        "         \"rating\":5\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/DR_whVuz0_gR4taW4HG0p6VrhNy3EQKY7Dz9mLsLY9T_tnDSM884rdZNtyahLb6Vc58aa1kq-D4Jn1pJBwh9=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"I Breathe... I'm Hungry...\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"cauliflower\",\n" +
+                                                        "            \"heavy cream\",\n" +
+                                                        "            \"butter\",\n" +
+                                                        "            \"pepperoni\",\n" +
+                                                        "            \"shredded mozzarella cheese\",\n" +
+                                                        "            \"salt\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Pepperoni-Pizza-Cauliflower-Casserole-_Low-Carb-and-Gluten-Free_-483101\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh6.ggpht.com\\/PTceCu9Di-66DFW4qzA_bjpCEBv0RpxtV0gUWGIsE70wcj8j9Xo5x4TaxHPEmVKaQGq5s5-IaOSggpO_pRiu5Q=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Pepperoni Pizza Cauliflower Casserole (Low Carb and Gluten Free)\",\n" +
+                                                        "         \"totalTimeInSeconds\":2700,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Main Dishes\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"sweet\":0.16666666666666666,\n" +
+                                                        "            \"sour\":0.8333333333333334,\n" +
+                                                        "            \"salty\":1,\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"meaty\":1,\n" +
+                                                        "            \"bitter\":1\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/FtdtfOQPFeGe7jxj90GZwSSWHaoX7-9VAtoC_GJIjgIOm_vMqTLpklA6XwvxaIIX-1SySrSwuzJw3YtQ-rHijQ=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Almonds and Avocados\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"quinoa\",\n" +
+                                                        "            \"water\",\n" +
+                                                        "            \"olive oil\",\n" +
+                                                        "            \"salt\",\n" +
+                                                        "            \"garlic\",\n" +
+                                                        "            \"italian seasoning\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Gluten-Free-Quinoa-Pizza-Crust-and-Vegan-Pizza-768412\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh6.ggpht.com\\/PMLG---UOoL9srBm0uUceFK1x0SmbCaZNBX9Ds4Gu7KzuageMD3lBiSzD-CpSLuwidEedlLnE0aLQuL18j57Dg=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Gluten-Free Quinoa Pizza Crust and Vegan Pizza\",\n" +
+                                                        "         \"totalTimeInSeconds\":2400,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Main Dishes\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"salty\":0.8333333333333334,\n" +
+                                                        "            \"sour\":0.16666666666666666,\n" +
+                                                        "            \"sweet\":0,\n" +
+                                                        "            \"bitter\":0.8333333333333334,\n" +
+                                                        "            \"meaty\":0.8333333333333334,\n" +
+                                                        "            \"piquant\":0\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/RHhzkYzJBsI_KQFig7MvkpTLvahRjkbh4Oy8JZbENXBr9EnLNTdvZVgS1uDGVkz5gvdC5oOf-ba1pNlgoPudKg=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Rachael Ray Show\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"cauliflower florets\",\n" +
+                                                        "            \"eggs\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Cauliflower-Pizza-Dough-897222\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh5.ggpht.com\\/L3PCAJ9-_F3UyE_mkzYUEvWMBTYP668E3Ep62NSEiKazMEIXUDlF2G5kAK85Ua4pOE-dnfjzBzfeSCmGMq3W=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Cauliflower Pizza Dough\",\n" +
+                                                        "         \"totalTimeInSeconds\":null,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"salty\":0.16666666666666666,\n" +
+                                                        "            \"sour\":0.8333333333333334,\n" +
+                                                        "            \"sweet\":0.3333333333333333,\n" +
+                                                        "            \"bitter\":0.8333333333333334,\n" +
+                                                        "            \"meaty\":0.16666666666666666,\n" +
+                                                        "            \"piquant\":0\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":3\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/-fi4wF1lht4P1cI_K5a8qLMinslNVWWPrS2EQLMTkJv5Y6MrjVQPdOv7dbROUsIbSl41UjdcbTW7I9wfa_ReVw=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Saveur\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"plum tomatoes\",\n" +
+                                                        "            \"salt\",\n" +
+                                                        "            \"extra-virgin olive oil\",\n" +
+                                                        "            \"tomatoes\",\n" +
+                                                        "            \"garlic cloves\",\n" +
+                                                        "            \"fresh leav oregano\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Marinara-Pizza-Topping-441919\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh4.ggpht.com\\/UEJM4nXt2FT5tyieSnyVgD3IIDqFpK-H3GTsQ1iGxvce75CVk66slVdnEHrLztOEG0luKX3XmxcWzirceQSRXA=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Marinara Pizza Topping\",\n" +
+                                                        "         \"totalTimeInSeconds\":3300,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Main Dishes\",\n" +
+                                                        "               \"Condiments and Sauces\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"sweet\":0.6666666666666666,\n" +
+                                                        "            \"sour\":1,\n" +
+                                                        "            \"salty\":0.16666666666666666,\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"meaty\":0.16666666666666666,\n" +
+                                                        "            \"bitter\":0.6666666666666666\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":5\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/s8HKd3k2bvDs_uYdvnrzLgEu_avZx22M99gWroxFFewj1heEiSzwqRJQPn6bd4dMz0RC7LWdaGRTYqH-RakQ=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Whippin It Up 4 Foodies \",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"french fri frozen\",\n" +
+                                                        "            \"pizza sauce\",\n" +
+                                                        "            \"shredded mozzarella cheese\",\n" +
+                                                        "            \"pepperoni\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Pizza-Fries-753754\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh6.ggpht.com\\/vvcsypBCsLiWsUghvYFvHPFFPfJecB7JUBfEtk9t9YRl-ZF-Igsearr5VBggpOXUqTk3-dIkTIOOH-7mmiTNLQ=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Pizza Fries\",\n" +
+                                                        "         \"totalTimeInSeconds\":1800,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "\n" +
+                                                        "            ],\n" +
+                                                        "            \"cuisine\":[\n" +
+                                                        "               \"Kid-Friendly\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"bitter\":0.6666666666666666,\n" +
+                                                        "            \"sour\":0.5,\n" +
+                                                        "            \"meaty\":0.16666666666666666,\n" +
+                                                        "            \"salty\":0.8333333333333334,\n" +
+                                                        "            \"sweet\":0.16666666666666666\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/71kbZYQag146zuAaVzeBKGkXtE43axtKVrJtOuTMy8dcyfZqcv5BFPGGH_1Qlfi9tVA8Re26s1g9mg5hTBQgXQ=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"ifoodreal\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"cauliflower\",\n" +
+                                                        "            \"eggs\",\n" +
+                                                        "            \"parmesan cheese\",\n" +
+                                                        "            \"herb seasoning\",\n" +
+                                                        "            \"salt\",\n" +
+                                                        "            \"ground black pepper\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Cauliflower-Pizza-Crust-596388\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh5.ggpht.com\\/z9LhqLD9pO56NRgSTPf0UqmsJM5LiRbkO5Yx2HCXwv-_1jI5dV5jvFW8YuaScidWFGkP4oCBedpMG2LSV8oCRBg=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Cauliflower Pizza Crust\",\n" +
+                                                        "         \"totalTimeInSeconds\":2400,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Main Dishes\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":null,\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/Q3VSpop1THw2YlSXeoCLP-5-D2TC7ivZtQ3rj9rp0tn-VsWUt6Gm1un4uN8-CIS3l8ilrMA1d91wNYvAchUXS3g=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Unilever North America\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"ragu old world style pasta sauc\",\n" +
+                                                        "            \"ragu cheesi classic alfredo sauc\",\n" +
+                                                        "            \"shredded mozzarella cheese\",\n" +
+                                                        "            \"pepperoni\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Pepperoni-pizza-dip-298542\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh6.ggpht.com\\/a-sCGOrvUecQqujF670vg3krt7YM3r_L9RGPjRpn5qPFpf5pDN3Mcczh7guWvSH2fvsO3GHojX062zQ04NbizA=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Pepperoni Pizza Dip\",\n" +
+                                                        "         \"totalTimeInSeconds\":900,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Lunch and Snacks\",\n" +
+                                                        "               \"Appetizers\"\n" +
+                                                        "            ],\n" +
+                                                        "            \"holiday\":[\n" +
+                                                        "               \"New Year\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":null,\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/wQzYE02YKX7TEO5f1Bn_Vxt1ByXwnQGoYJc-7OLKlweUfi13EU9QWqWQhulZOS9MPtM4j0QiIi249YYApARA=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Crunchy Creamy Sweet\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"water\",\n" +
+                                                        "            \"sugar\",\n" +
+                                                        "            \"yeast\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"The-Best-Homemade-Pizza-Dough-_photo-tutorial_-680993\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh5.ggpht.com\\/yvn2Y0J-PXbGSL5gPdf1lrO5fR3sgjUpIhNaByYQmOOV97U_f3IN3372d46LF7Ul32yUeNcX7E4Fgq9lstowlA=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"The Best Homemade Pizza Dough {photo tutorial}\",\n" +
+                                                        "         \"totalTimeInSeconds\":2700,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "\n" +
+                                                        "            ],\n" +
+                                                        "            \"cuisine\":[\n" +
+                                                        "               \"Kid-Friendly\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":null,\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/_-n6LvPxCf5u7Wy3Bn5LF78a1jM1QlOeoDpQgBkkFdUB8Oh-uLW3GeHXAWgYxsidstWru0JyVfdwuWEZFpO-7w=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Unilever North America\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"ground beef\",\n" +
+                                                        "            \"ragu old world style pasta sauc\",\n" +
+                                                        "            \"pepperoni\",\n" +
+                                                        "            \"tortilla chips\",\n" +
+                                                        "            \"shredded mozzarella cheese\",\n" +
+                                                        "            \"pizza toppings\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Pizza-nachos-297675\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh6.ggpht.com\\/pjtPf4GeVmugoIcHIcH_gmS8t6mfXqLh1lRylRtsKsQ796tkChNB-bXwlRxQ3nf6IC2p1CC1mOaGh7X_UHK-ug=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Pizza Nachos\",\n" +
+                                                        "         \"totalTimeInSeconds\":720,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Main Dishes\",\n" +
+                                                        "               \"Lunch and Snacks\",\n" +
+                                                        "               \"Appetizers\"\n" +
+                                                        "            ],\n" +
+                                                        "            \"holiday\":[\n" +
+                                                        "               \"Halloween\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":null,\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      }\n" +
+                                                        "   ],\n" +
+                                                        "   \"criteria\":{\n" +
+                                                        "      \"excludedIngredients\":null,\n" +
+                                                        "      \"allowedIngredients\":null,\n" +
+                                                        "      \"terms\":null,\n" +
+                                                        "      \"requirePictures\":true\n" +
+                                                        "   }\n" +
+                                                        "}";
     public static final String onionRecipeQueryResult = "{\n" +
                                                         "   \"attribution\":{\n" +
                                                         "      \"html\":\"Recipe search powered by <a href='http:\\/\\/www.yummly.com\\/recipes'><img alt='Yummly' src='http:\\/\\/static.yummly.com\\/api-logo.png'\\/><\\/a>\",\n" +
@@ -654,15 +654,15 @@ public final class OfflineRecipeQueryResult {
                                                         "            \"piquant\":0\n" +
                                                         "         },\n" +
                                                         "         \"rating\":3\n" +
-                                                         "      }\n" +
-                                                         "   ],\n" +
-                                                         "   \"criteria\":{\n" +
-                                                         "      \"excludedIngredients\":null,\n" +
-                                                         "      \"allowedIngredients\":null,\n" +
-                                                         "      \"terms\":null,\n" +
-                                                         "      \"requirePictures\":true\n" +
-                                                         "   }\n" +
-                                                         "}";
+                                                        "      }\n" +
+                                                        "   ],\n" +
+                                                        "   \"criteria\":{\n" +
+                                                        "      \"excludedIngredients\":null,\n" +
+                                                        "      \"allowedIngredients\":null,\n" +
+                                                        "      \"terms\":null,\n" +
+                                                        "      \"requirePictures\":true\n" +
+                                                        "   }\n" +
+                                                        "}";
 
     private OfflineRecipeQueryResult() {
     }

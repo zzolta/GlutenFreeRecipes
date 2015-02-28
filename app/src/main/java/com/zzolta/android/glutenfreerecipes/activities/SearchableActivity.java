@@ -99,7 +99,7 @@ public class SearchableActivity extends ActionBarActivity {
 
         final ErrorListener errorListener = getErrorListener();
 
-        final String url = UriBuilder.createUri(query).toString();
+        final String url = UriBuilder.createQueryUri(query).toString();
 
         final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, listener, errorListener);
 

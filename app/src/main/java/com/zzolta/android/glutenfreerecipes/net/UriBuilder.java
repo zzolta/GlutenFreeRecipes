@@ -6,7 +6,7 @@ import android.net.Uri.Builder;
 /**
  * Created by Zolta.Szekely on 2015-02-28.
  */
-public class UriBuilder {
+public final class UriBuilder {
 
     private static final String HTTP = "http";
     private static final String AUTHORITY = "api.yummly.com";
@@ -26,16 +26,13 @@ public class UriBuilder {
     private static final String MAX_RESULT_VALUE = "10";
     private static final String START = "start";
     private static final String START_VALUE = "0";
+    private static final String RECIPE = "recipe";
 
     private UriBuilder() {
     }
 
-    public static Uri createUri(String query) {
-        return new Builder()
-                   .scheme(HTTP)
-                   .authority(AUTHORITY)
-                   .appendPath(VERSION)
-                   .appendPath(API)
+    public static Uri createQueryUri(String query) {
+        return getBuilder()
                    .appendPath(RECIPES)
                    .appendQueryParameter(APP_ID, APP_ID_VALUE)
                    .appendQueryParameter(APP_KEY, APP_KEY_VALUE)
@@ -45,5 +42,22 @@ public class UriBuilder {
                    .appendQueryParameter(MAX_RESULT, MAX_RESULT_VALUE)
                    .appendQueryParameter(START, START_VALUE)
                    .build();
+    }
+
+    public static Uri createGetUri(String recipeId) {
+        return getBuilder()
+                   .appendPath(RECIPE)
+                   .appendPath(recipeId)
+                   .appendQueryParameter(APP_ID, APP_ID_VALUE)
+                   .appendQueryParameter(APP_KEY, APP_KEY_VALUE)
+                   .build();
+    }
+
+    private static Builder getBuilder() {
+        return new Builder()
+                   .scheme(HTTP)
+                   .authority(AUTHORITY)
+                   .appendPath(VERSION)
+                   .appendPath(API);
     }
 }
