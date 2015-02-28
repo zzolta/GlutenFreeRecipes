@@ -92,10 +92,9 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
         final String[] menuItems = {
-                                       getString(R.string.title_section1),
-                                       getString(R.string.title_section2),
-                                       getString(R.string.title_section3),
-                                       getString(R.string.title_section4)
+                                       getString(R.string.title_home),
+                                       getString(R.string.title_my_recipes),
+                                       getString(R.string.title_settings)
         };
         mDrawerListView.setAdapter(new ArrayAdapter<>(
                                                          getActionBar().getThemedContext(),
