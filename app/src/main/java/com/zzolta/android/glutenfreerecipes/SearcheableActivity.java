@@ -8,6 +8,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Zolta.Szekely on 2015-02-28.
@@ -47,7 +52,15 @@ public class SearcheableActivity extends ActionBarActivity {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            //use the query to search your data somehow
+            doSearch(query);
         }
+    }
+
+    private void doSearch(String query) {
+        final String[] recipes = {"Onion Soup", "Chicken soup", "Beans soup"};
+        final List<String> recipeList = Arrays.asList(recipes);
+        final ArrayAdapter<String> recipeAdapter = new ArrayAdapter<>(this, R.layout.list_item_recipe, R.id.list_item_recipe_textview, recipeList);
+        final ListView listView = (ListView) findViewById(R.id.list_recipes);
+        listView.setAdapter(recipeAdapter);
     }
 }
