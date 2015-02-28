@@ -33,6 +33,11 @@
                     android:resource="@xml/searchable"/>
         </activity>
 
+        <activity android:name=".activities.RecipeDetailActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".activities.SearchableActivity"/>
+        </activity>
     </application>
 
 </manifest>

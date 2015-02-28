@@ -8,6 +8,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.android.volley.Response.ErrorListener;
@@ -20,6 +23,7 @@ import com.zzolta.android.glutenfreerecipes.jsonparse.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
+import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 import com.zzolta.android.glutenfreerecipes.utils.DevelopmentConstants;
 import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeQueryResult;
 
@@ -43,6 +47,16 @@ public class SearchableActivity extends ActionBarActivity {
         recipeAdapter = new ArrayAdapter<>(this, R.layout.list_item_recipe, R.id.list_item_recipe_textview, new ArrayList<String>(10));
         final ListView listView = (ListView) findViewById(R.id.list_recipes);
         listView.setAdapter(recipeAdapter);
+
+        listView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final String recipe = recipeAdapter.getItem(position);
+                final Intent intent = new Intent(getApplicationContext(), RecipeDetailActivity.class);
+                intent.putExtra(ApplicationConstants.RECIPE_ID, recipe);
+                startActivity(intent);
+            }
+        });
 
         handleIntent(getIntent());
     }
