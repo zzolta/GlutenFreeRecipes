@@ -1,5 +1,5 @@
 
-package com.zzolta.android.glutenfreerecipes.jsonparse;
+package com.zzolta.android.glutenfreerecipes.jsonparse.recipequery;
 
 import com.google.gson.annotations.Expose;
 
