@@ -1,6 +1,7 @@
 package com.zzolta.android.glutenfreerecipes;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -88,6 +89,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
+            startActivity(new Intent(this, SearcheableActivity.class));
             return true;
         }
 
