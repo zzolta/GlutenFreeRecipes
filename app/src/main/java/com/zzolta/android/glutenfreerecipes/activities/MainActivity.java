@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            startActivity(new Intent(this, SearcheableActivity.class));
+            startActivity(new Intent(this, SearchableActivity.class));
             return true;
         }
 

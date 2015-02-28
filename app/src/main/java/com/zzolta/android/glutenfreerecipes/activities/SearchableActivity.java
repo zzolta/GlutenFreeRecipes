@@ -14,24 +14,32 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.zzolta.android.glutenfreerecipes.R;
+import com.zzolta.android.glutenfreerecipes.jsonparse.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by Zolta.Szekely on 2015-02-28.
  */
-public class SearcheableActivity extends ActionBarActivity {
+public class SearchableActivity extends ActionBarActivity {
+
+    private ArrayAdapter<String> recipeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search);
+
+        recipeAdapter = new ArrayAdapter<>(this, R.layout.list_item_recipe, R.id.list_item_recipe_textview, new ArrayList<String>(10));
+        final ListView listView = (ListView) findViewById(R.id.list_recipes);
+        listView.setAdapter(recipeAdapter);
 
         handleIntent(getIntent());
     }
@@ -59,44 +67,60 @@ public class SearcheableActivity extends ActionBarActivity {
     private void handleIntent(Intent intent) {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            doVolley(query);
+            final String query = intent.getStringExtra(SearchManager.QUERY);
+            doSearch(query);
         }
     }
 
-    private void doVolley(String query) {
+    private void doSearch(String query) {
 
-        final Listener<RecipeQueryResult> listener = new Listener<RecipeQueryResult>() {
+        final Listener<RecipeQueryResult> listener = getRecipeQueryResultListener();
+
+        final ErrorListener errorListener = getErrorListener();
+
+        final String url = UriBuilder.createUri(query).toString();
+
+        final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, listener, errorListener);
+
+        ApplicationRequestQueue.getInstance(this.getApplicationContext()).addToRequestQueue(request);
+    }
+
+    private Listener<RecipeQueryResult> getRecipeQueryResultListener() {
+        return new Listener<RecipeQueryResult>() {
             @Override
             public void onResponse(RecipeQueryResult recipeQueryResult) {
-
-                process(recipeQueryResult);
-                //we will do something with this
+                updateSearchList(recipeQueryResult);
             }
 
-            private void process(RecipeQueryResult recipeQueryResult) {
-
+            private void updateSearchList(RecipeQueryResult recipeQueryResult) {
+                final List<Match> recipes = recipeQueryResult.getMatches();
+                final Collection<String> recipeNames = new ArrayList<>(recipes.size());
+                for (final Match recipe : recipes) {
+                    recipeNames.add(recipe.getRecipeName());
+                }
+                if (recipeNames.size() > 0) {
+                    recipeAdapter.clear();
+                    for (final String recipeName : recipeNames) {
+                        recipeAdapter.add(recipeName);
+                    }
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        recipeAdapter.notifyDataSetChanged();
+                    }
+                });
             }
         };
+    }
 
-        final ErrorListener errorListener = new ErrorListener() {
+    private ErrorListener getErrorListener() {
+        return new ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 throw new RuntimeException(volleyError);
             }
         };
-
-        GsonRequest request = new GsonRequest(UriBuilder.createUri(query).toString(), RecipeQueryResult.class, listener, errorListener);
-
-        ApplicationRequestQueue.getInstance(this.getApplicationContext()).addToRequestQueue(request);
-    }
-
-    private void doSearch(String query) {
-        final String[] recipes = {"Onion Soup", "Chicken soup", "Beans soup"};
-        final List<String> recipeList = Arrays.asList(recipes);
-        final ArrayAdapter<String> recipeAdapter = new ArrayAdapter<>(this, R.layout.list_item_recipe, R.id.list_item_recipe_textview, recipeList);
-        final ListView listView = (ListView) findViewById(R.id.list_recipes);
-        listView.setAdapter(recipeAdapter);
     }
 }
