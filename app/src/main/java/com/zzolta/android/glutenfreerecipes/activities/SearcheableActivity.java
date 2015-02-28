@@ -3,8 +3,6 @@ package com.zzolta.android.glutenfreerecipes.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.net.Uri.Builder;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
@@ -12,16 +10,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.jsonparse.RecipeQueryResult;
-import org.json.JSONObject;
+import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
+import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
+import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -69,25 +65,11 @@ public class SearcheableActivity extends ActionBarActivity {
     }
 
     private void doVolley(String query) {
-        Uri uri = new Builder()
-                      .scheme("http")
-                      .authority("api.yummly.com")
-                      .appendPath("v1")
-                      .appendPath("api")
-                      .appendPath("recipes")
-                      .appendQueryParameter("_app_id", "514ded55")
-                      .appendQueryParameter("_app_key", "f73d3a223a64565997bf9a08c5f9cb8b")
-                      .appendQueryParameter("q", query)
-                      .appendQueryParameter("requirePictures", "true")
-                      .appendQueryParameter("allowedAllergy[]", "393^Gluten-Free")
-                      .appendQueryParameter("maxResult", "10")
-                      .appendQueryParameter("start", "0")
-                      .build();
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, uri.toString(), null, new Response.Listener<JSONObject>() {
+
+        final Listener<RecipeQueryResult> listener = new Listener<RecipeQueryResult>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
-                RecipeQueryResult recipeQueryResult = new Gson().fromJson(jsonObject.toString(), RecipeQueryResult.class);
+            public void onResponse(RecipeQueryResult recipeQueryResult) {
+
                 process(recipeQueryResult);
                 //we will do something with this
             }
@@ -95,15 +77,19 @@ public class SearcheableActivity extends ActionBarActivity {
             private void process(RecipeQueryResult recipeQueryResult) {
 
             }
-        }, new Response.ErrorListener() {
+        };
+
+        final ErrorListener errorListener = new ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 throw new RuntimeException(volleyError);
             }
-        });
+        };
 
-        queue.add(request);
+        GsonRequest request = new GsonRequest(UriBuilder.createUri(query).toString(), RecipeQueryResult.class, listener, errorListener);
+
+        ApplicationRequestQueue.getInstance(this.getApplicationContext()).addToRequestQueue(request);
     }
 
     private void doSearch(String query) {
