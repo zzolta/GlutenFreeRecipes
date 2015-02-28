@@ -13,12 +13,15 @@ import android.widget.ListView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.jsonparse.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
+import com.zzolta.android.glutenfreerecipes.utils.DevelopmentConstants;
+import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeQueryResult;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,8 +70,12 @@ public class SearchableActivity extends ActionBarActivity {
     private void handleIntent(Intent intent) {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            final String query = intent.getStringExtra(SearchManager.QUERY);
-            doSearch(query);
+            if (DevelopmentConstants.OFFLINE) {
+                updateSearchList(new Gson().fromJson(OfflineRecipeQueryResult.pizzaRecipeQueryResult, RecipeQueryResult.class));
+            } else {
+                final String query = intent.getStringExtra(SearchManager.QUERY);
+                doSearch(query);
+            }
         }
     }
 
@@ -91,27 +98,27 @@ public class SearchableActivity extends ActionBarActivity {
             public void onResponse(RecipeQueryResult recipeQueryResult) {
                 updateSearchList(recipeQueryResult);
             }
-
-            private void updateSearchList(RecipeQueryResult recipeQueryResult) {
-                final List<Match> recipes = recipeQueryResult.getMatches();
-                final Collection<String> recipeNames = new ArrayList<>(recipes.size());
-                for (final Match recipe : recipes) {
-                    recipeNames.add(recipe.getRecipeName());
-                }
-                if (recipeNames.size() > 0) {
-                    recipeAdapter.clear();
-                    for (final String recipeName : recipeNames) {
-                        recipeAdapter.add(recipeName);
-                    }
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        recipeAdapter.notifyDataSetChanged();
-                    }
-                });
-            }
         };
+    }
+
+    private void updateSearchList(RecipeQueryResult recipeQueryResult) {
+        final List<Match> recipes = recipeQueryResult.getMatches();
+        final Collection<String> recipeNames = new ArrayList<>(recipes.size());
+        for (final Match recipe : recipes) {
+            recipeNames.add(recipe.getRecipeName());
+        }
+        if (recipeNames.size() > 0) {
+            recipeAdapter.clear();
+            for (final String recipeName : recipeNames) {
+                recipeAdapter.add(recipeName);
+            }
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                recipeAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private ErrorListener getErrorListener() {

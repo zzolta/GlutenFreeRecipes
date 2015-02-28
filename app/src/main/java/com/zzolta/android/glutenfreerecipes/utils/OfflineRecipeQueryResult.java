@@ -1,10 +1,10 @@
-package com.zzolta.android.glutenfreerecipes.jsonparse;
+package com.zzolta.android.glutenfreerecipes.utils;
 
 /**
  * Created by Zolta.Szekely on 2015-02-28.
  */
-public class RecipeQueryResultTest {
-    private static final String pizzaRecipeQueryResult = "{\n" +
+public final class OfflineRecipeQueryResult {
+    public static final String pizzaRecipeQueryResult = "{\n" +
                                                          "   \"attribution\":{\n" +
                                                          "      \"html\":\"Recipe search powered by <a href='http:\\/\\/www.yummly.com\\/recipes'><img alt='Yummly' src='http:\\/\\/static.yummly.com\\/api-logo.png'\\/><\\/a>\",\n" +
                                                          "      \"url\":\"http:\\/\\/www.yummly.com\\/recipes\\/\",\n" +
@@ -332,328 +332,328 @@ public class RecipeQueryResultTest {
                                                          "      \"requirePictures\":true\n" +
                                                          "   }\n" +
                                                          "}";
-    private static final String onionRecipeQueryResult = "{\n" +
-                                                         "   \"attribution\":{\n" +
-                                                         "      \"html\":\"Recipe search powered by <a href='http:\\/\\/www.yummly.com\\/recipes'><img alt='Yummly' src='http:\\/\\/static.yummly.com\\/api-logo.png'\\/><\\/a>\",\n" +
-                                                         "      \"url\":\"http:\\/\\/www.yummly.com\\/recipes\\/\",\n" +
-                                                         "      \"text\":\"Recipe search powered by Yummly\",\n" +
-                                                         "      \"logo\":\"http:\\/\\/static.yummly.com\\/api-logo.png\"\n" +
-                                                         "   },\n" +
-                                                         "   \"totalMatchCount\":8620,\n" +
-                                                         "   \"facetCounts\":{\n" +
-                                                         "\n" +
-                                                         "   },\n" +
-                                                         "   \"matches\":[\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/jE2saC20xv5PitQ31oFAFQYk2xZ7AQaMSvq7t39zcIjZryV_aEL4NS1N0BrPO5FgQ_C7z07uThaP8EtcoWRWcg=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"The Healthy Chef\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"onions\",\n" +
-                                                         "            \"olive oil\",\n" +
-                                                         "            \"sea salt\",\n" +
-                                                         "            \"aged balsamic vinegar\",\n" +
-                                                         "            \"coconut sugar\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Caramelised-Onions-755225\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh5.ggpht.com\\/MyDIcaHedcOeY67XiA6vevVmmadhzoGBJHxfjfYKXYeWhg_IUQ3RuzlsAAmGGal3wUoOmR021Og-DzERRCWAhuI=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Caramelised Onions\",\n" +
-                                                         "         \"totalTimeInSeconds\":1800,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":null,\n" +
-                                                         "         \"rating\":3\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh4.ggpht.com\\/glt962DKaO49Xtd76v1GHIF-xdGypO7yEbjNaa2uZO0u0fsbc6f5CL9SE7YaRtpkA-K3spL9wcVEI-6bFzXolYE=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Carb Wars Blog\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"white onion\",\n" +
-                                                         "            \"bacon\",\n" +
-                                                         "            \"ground black pepper\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"BACON-WRAPPED-ONION-RINGS-631422\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh4.ggpht.com\\/vGhnJvaddAtEdZv2AF2zDbFgwBmEBSoodLzWyYXQDCgruUVQpLGEtc9IxhOKchhCTwYuRPEhbkOwNZyMlS9k=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"BACON WRAPPED ONION RINGS\",\n" +
-                                                         "         \"totalTimeInSeconds\":4500,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":null,\n" +
-                                                         "         \"rating\":3\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/oobz_5wREuvFEoSSh4UkkTtoBrjkryDw--4dCgEf90U_h_TpLGMIF7lKs3_7W9qNkWtueYm8qNvvvpDWLHO7Aw=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"AllRecipes\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"cream cheese\",\n" +
-                                                         "            \"onions\",\n" +
-                                                         "            \"grated parmesan cheese\",\n" +
-                                                         "            \"mayonnaise\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Hot-Onion-Dip-Allrecipes\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh6.ggpht.com\\/_awvgsPZhcXvqA4h3ut4DYOFNcyl-4rDWlRLC6vI0eQtAIICZfbFsH7AsQ-KCtTRH81PbL77TeL340niKnWt8QI=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Hot Onion Dip\",\n" +
-                                                         "         \"totalTimeInSeconds\":2400,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Appetizers\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"salty\":0.8333333333333334,\n" +
-                                                         "            \"sour\":0.16666666666666666,\n" +
-                                                         "            \"sweet\":0.16666666666666666,\n" +
-                                                         "            \"bitter\":0.8333333333333334,\n" +
-                                                         "            \"meaty\":0.8333333333333334,\n" +
-                                                         "            \"piquant\":0\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":5\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/3e7-vq60HXyk3x4gQeBd4nWhZ3NuQ-GDQhzpAkAieMKvjTcVtKGgfhBT0XqwOp9ASYKbJKh7LXUPG9DPPXj0k8c=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"12Tomatoes\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"yellow onion\",\n" +
-                                                         "            \"dry white wine\",\n" +
-                                                         "            \"gruyere cheese\",\n" +
-                                                         "            \"low-fat swiss cheese\",\n" +
-                                                         "            \"beef broth\",\n" +
-                                                         "            \"low sodium chicken broth\",\n" +
-                                                         "            \"extra-virgin olive oil\",\n" +
-                                                         "            \"garlic\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"French-Onion-Soup-685454\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh3.ggpht.com\\/agUkZlwtGmBG7cL8mST44jxDXerTxl9gHOugm9DV1U906x2N6zC1du06h_ySOzB8zt0oFgViIA9dg6iEqLR2wbU=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"French Onion Soup\",\n" +
-                                                         "         \"totalTimeInSeconds\":6300,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Soups\"\n" +
-                                                         "            ],\n" +
-                                                         "            \"cuisine\":[\n" +
-                                                         "               \"French\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"salty\":0.16666666666666666,\n" +
-                                                         "            \"sour\":0.16666666666666666,\n" +
-                                                         "            \"sweet\":0.16666666666666666,\n" +
-                                                         "            \"bitter\":0.16666666666666666,\n" +
-                                                         "            \"meaty\":0.16666666666666666,\n" +
-                                                         "            \"piquant\":0\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/szFk-1gsK7frAUtVB_SGGrdN3BwWcwQYHIxtq2CiRawkeOx4pNNHzFTNl-jGxJtfLFmsTrMtRuEGkiP8P8k_EA=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Smitten Kitchen\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"peel tomato whole\",\n" +
-                                                         "            \"unsalted butter\",\n" +
-                                                         "            \"yellow onion\",\n" +
-                                                         "            \"salt\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Tomato-sauce-with-butter-and-onions-305484\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh4.ggpht.com\\/rVB98iBVKvn7g2LmWBIyx6PrBYXRcFQjyvQlDtZ5lExbVBve4G9R1vq4sBpjihCu6W05vReYkphOGvUY7oukVA=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Tomato Sauce with Butter and Onions\",\n" +
-                                                         "         \"totalTimeInSeconds\":3900,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Condiments and Sauces\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"sweet\":0.3333333333333333,\n" +
-                                                         "            \"sour\":0.16666666666666666,\n" +
-                                                         "            \"salty\":0.16666666666666666,\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"meaty\":0.3333333333333333,\n" +
-                                                         "            \"bitter\":0\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":5\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/jv-0Qf-3h5kvlmCyU0jHb_1nT8FLbIO7uyZQGokbYwI5i_XW9QFnz5uCM1ZdlKr3kBbobuyeJfhs944EQYdP=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Martha Stewart\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"tomatoes\",\n" +
-                                                         "            \"purple onion\",\n" +
-                                                         "            \"extra-virgin olive oil\",\n" +
-                                                         "            \"coarse salt\",\n" +
-                                                         "            \"ground pepper\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Tomato-Onion-Casserole-Martha-Stewart-196613\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh4.ggpht.com\\/GOwkHXcQ1y2NS4EIqnhp42qOfiNGOBt3qUJAI5rPKKeqeMDu2YnmdXvpmOlmo2RjcXM4ohZh9y0pcsqLqHjEBw=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Tomato-Onion Casserole\",\n" +
-                                                         "         \"totalTimeInSeconds\":3300,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Side Dishes\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"meaty\":0.16666666666666666,\n" +
-                                                         "            \"sour\":0.6666666666666666,\n" +
-                                                         "            \"bitter\":0.16666666666666666,\n" +
-                                                         "            \"salty\":0.16666666666666666,\n" +
-                                                         "            \"sweet\":0.5\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":5\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/IMiYiQmxVPcecsoxXY7Wt7JViq1rT6SecNRZI-QcF1v4TxhLnqqpTcUHRN3CwOCvevQXXrslKcghKL0bpy2Yzyg=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Food Republic\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"onions\",\n" +
-                                                         "            \"clarified butter\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"How-to-caramelize-onions-306131\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh4.ggpht.com\\/50UZClApCPv67Dk3eDTRv2t0b7nxLSpTthUt2HiM9gwMVDNnqAmfS0DiOxac84p1FRoZp9FgBDTZD9Rt3XR5=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"How To Caramelize Onions\",\n" +
-                                                         "         \"totalTimeInSeconds\":null,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"sweet\":0.8333333333333334,\n" +
-                                                         "            \"sour\":0.6666666666666666,\n" +
-                                                         "            \"salty\":0.16666666666666666,\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"meaty\":0.16666666666666666,\n" +
-                                                         "            \"bitter\":0\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":5\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh4.ggpht.com\\/4vLa_LtMBM5ooyQmpC3cuvN9dIdqZweOlHAbbnHPD6csEdIZlRKjVEtVT3T8T-GToyHnMhvxsdbcFbwdSer32w=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Simply Gluten Free\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"white onion\",\n" +
-                                                         "            \"buttermilk\",\n" +
-                                                         "            \"white rice flour\",\n" +
-                                                         "            \"yellow corn meal\",\n" +
-                                                         "            \"vegetable oil\",\n" +
-                                                         "            \"salt\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Gluten-Free-Onion-Rings-479271\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh6.ggpht.com\\/Uiz21eVWqp85UkgdyOVShnF7_3HaxWeRueCYr2UhiMdtoFoGwUAkV30lGAKI51_5urWbrTfaQHJ91XZVrB3kyg=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Gluten Free Onion Rings\",\n" +
-                                                         "         \"totalTimeInSeconds\":6300,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Side Dishes\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"sweet\":0.6666666666666666,\n" +
-                                                         "            \"sour\":0.16666666666666666,\n" +
-                                                         "            \"salty\":0.16666666666666666,\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"meaty\":1,\n" +
-                                                         "            \"bitter\":0.16666666666666666\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":4\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/58xNoYid4dEJEf5IjLoXVvUF3VcXeF3DPKReN2wKpWHOmGpLjc58tk73Iou1QtaP88Mnag7lAJAzBdlYfNtKEQ=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Southern Plate\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"cheese\",\n" +
-                                                         "            \"cream cheese\",\n" +
-                                                         "            \"vidalia\",\n" +
-                                                         "            \"mayonnaise\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"Cheesy-Baked-Vidalia-Dip-471150\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh5.ggpht.com\\/k4a3cFPx4sK8zw6-mvKl9DgsaibdAmEETZGz8S4vucULhNH_LzSLwWX5-j8wsDY5VUJLvcwak-zfD8FvZFSE=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"Cheesy Baked Vidalia Dip\",\n" +
-                                                         "         \"totalTimeInSeconds\":2100,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Appetizers\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"sweet\":0.6666666666666666,\n" +
-                                                         "            \"sour\":0.3333333333333333,\n" +
-                                                         "            \"salty\":1,\n" +
-                                                         "            \"piquant\":0,\n" +
-                                                         "            \"meaty\":1,\n" +
-                                                         "            \"bitter\":0.8333333333333334\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":5\n" +
-                                                         "      },\n" +
-                                                         "      {\n" +
-                                                         "         \"imageUrlsBySize\":{\n" +
-                                                         "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/bBONZG5FFzHxH3HbH_a9oJ5GnJgS0_v8D3bBHrE8QfxGlFShzD9gL-PmJGWPJJlJjxCNNYqV1fC8x8vBh82h=s90-c\"\n" +
-                                                         "         },\n" +
-                                                         "         \"sourceDisplayName\":\"Food52\",\n" +
-                                                         "         \"ingredients\":[\n" +
-                                                         "            \"olive oil\",\n" +
-                                                         "            \"onions\",\n" +
-                                                         "            \"garlic\",\n" +
-                                                         "            \"salt\",\n" +
-                                                         "            \"pepper\",\n" +
-                                                         "            \"apple cider vinegar\",\n" +
-                                                         "            \"beef broth\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"id\":\"5-ingredient-onion-garlic-soup-317796\",\n" +
-                                                         "         \"smallImageUrls\":[\n" +
-                                                         "            \"http:\\/\\/lh4.ggpht.com\\/jhsd2XuCoO1HF-a2z4EzNucAD3YlHyHYo8fGOgE3ejeV_PC3zyZRTfPIwc0EYS4cJsCzB9Rsl4H7XJX9uegr=s90\"\n" +
-                                                         "         ],\n" +
-                                                         "         \"recipeName\":\"5 Ingredient Onion Garlic Soup\",\n" +
-                                                         "         \"totalTimeInSeconds\":2700,\n" +
-                                                         "         \"attributes\":{\n" +
-                                                         "            \"course\":[\n" +
-                                                         "               \"Soups\"\n" +
-                                                         "            ]\n" +
-                                                         "         },\n" +
-                                                         "         \"flavors\":{\n" +
-                                                         "            \"salty\":0.5,\n" +
-                                                         "            \"sour\":0.16666666666666666,\n" +
-                                                         "            \"sweet\":0.16666666666666666,\n" +
-                                                         "            \"bitter\":0.16666666666666666,\n" +
-                                                         "            \"meaty\":0.16666666666666666,\n" +
-                                                         "            \"piquant\":0\n" +
-                                                         "         },\n" +
-                                                         "         \"rating\":3\n" +
+    public static final String onionRecipeQueryResult = "{\n" +
+                                                        "   \"attribution\":{\n" +
+                                                        "      \"html\":\"Recipe search powered by <a href='http:\\/\\/www.yummly.com\\/recipes'><img alt='Yummly' src='http:\\/\\/static.yummly.com\\/api-logo.png'\\/><\\/a>\",\n" +
+                                                        "      \"url\":\"http:\\/\\/www.yummly.com\\/recipes\\/\",\n" +
+                                                        "      \"text\":\"Recipe search powered by Yummly\",\n" +
+                                                        "      \"logo\":\"http:\\/\\/static.yummly.com\\/api-logo.png\"\n" +
+                                                        "   },\n" +
+                                                        "   \"totalMatchCount\":8620,\n" +
+                                                        "   \"facetCounts\":{\n" +
+                                                        "\n" +
+                                                        "   },\n" +
+                                                        "   \"matches\":[\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/jE2saC20xv5PitQ31oFAFQYk2xZ7AQaMSvq7t39zcIjZryV_aEL4NS1N0BrPO5FgQ_C7z07uThaP8EtcoWRWcg=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"The Healthy Chef\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"onions\",\n" +
+                                                        "            \"olive oil\",\n" +
+                                                        "            \"sea salt\",\n" +
+                                                        "            \"aged balsamic vinegar\",\n" +
+                                                        "            \"coconut sugar\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Caramelised-Onions-755225\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh5.ggpht.com\\/MyDIcaHedcOeY67XiA6vevVmmadhzoGBJHxfjfYKXYeWhg_IUQ3RuzlsAAmGGal3wUoOmR021Og-DzERRCWAhuI=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Caramelised Onions\",\n" +
+                                                        "         \"totalTimeInSeconds\":1800,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":null,\n" +
+                                                        "         \"rating\":3\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh4.ggpht.com\\/glt962DKaO49Xtd76v1GHIF-xdGypO7yEbjNaa2uZO0u0fsbc6f5CL9SE7YaRtpkA-K3spL9wcVEI-6bFzXolYE=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Carb Wars Blog\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"white onion\",\n" +
+                                                        "            \"bacon\",\n" +
+                                                        "            \"ground black pepper\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"BACON-WRAPPED-ONION-RINGS-631422\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh4.ggpht.com\\/vGhnJvaddAtEdZv2AF2zDbFgwBmEBSoodLzWyYXQDCgruUVQpLGEtc9IxhOKchhCTwYuRPEhbkOwNZyMlS9k=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"BACON WRAPPED ONION RINGS\",\n" +
+                                                        "         \"totalTimeInSeconds\":4500,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":null,\n" +
+                                                        "         \"rating\":3\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/oobz_5wREuvFEoSSh4UkkTtoBrjkryDw--4dCgEf90U_h_TpLGMIF7lKs3_7W9qNkWtueYm8qNvvvpDWLHO7Aw=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"AllRecipes\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"cream cheese\",\n" +
+                                                        "            \"onions\",\n" +
+                                                        "            \"grated parmesan cheese\",\n" +
+                                                        "            \"mayonnaise\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Hot-Onion-Dip-Allrecipes\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh6.ggpht.com\\/_awvgsPZhcXvqA4h3ut4DYOFNcyl-4rDWlRLC6vI0eQtAIICZfbFsH7AsQ-KCtTRH81PbL77TeL340niKnWt8QI=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Hot Onion Dip\",\n" +
+                                                        "         \"totalTimeInSeconds\":2400,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Appetizers\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"salty\":0.8333333333333334,\n" +
+                                                        "            \"sour\":0.16666666666666666,\n" +
+                                                        "            \"sweet\":0.16666666666666666,\n" +
+                                                        "            \"bitter\":0.8333333333333334,\n" +
+                                                        "            \"meaty\":0.8333333333333334,\n" +
+                                                        "            \"piquant\":0\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":5\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh6.ggpht.com\\/3e7-vq60HXyk3x4gQeBd4nWhZ3NuQ-GDQhzpAkAieMKvjTcVtKGgfhBT0XqwOp9ASYKbJKh7LXUPG9DPPXj0k8c=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"12Tomatoes\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"yellow onion\",\n" +
+                                                        "            \"dry white wine\",\n" +
+                                                        "            \"gruyere cheese\",\n" +
+                                                        "            \"low-fat swiss cheese\",\n" +
+                                                        "            \"beef broth\",\n" +
+                                                        "            \"low sodium chicken broth\",\n" +
+                                                        "            \"extra-virgin olive oil\",\n" +
+                                                        "            \"garlic\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"French-Onion-Soup-685454\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh3.ggpht.com\\/agUkZlwtGmBG7cL8mST44jxDXerTxl9gHOugm9DV1U906x2N6zC1du06h_ySOzB8zt0oFgViIA9dg6iEqLR2wbU=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"French Onion Soup\",\n" +
+                                                        "         \"totalTimeInSeconds\":6300,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Soups\"\n" +
+                                                        "            ],\n" +
+                                                        "            \"cuisine\":[\n" +
+                                                        "               \"French\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"salty\":0.16666666666666666,\n" +
+                                                        "            \"sour\":0.16666666666666666,\n" +
+                                                        "            \"sweet\":0.16666666666666666,\n" +
+                                                        "            \"bitter\":0.16666666666666666,\n" +
+                                                        "            \"meaty\":0.16666666666666666,\n" +
+                                                        "            \"piquant\":0\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/szFk-1gsK7frAUtVB_SGGrdN3BwWcwQYHIxtq2CiRawkeOx4pNNHzFTNl-jGxJtfLFmsTrMtRuEGkiP8P8k_EA=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Smitten Kitchen\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"peel tomato whole\",\n" +
+                                                        "            \"unsalted butter\",\n" +
+                                                        "            \"yellow onion\",\n" +
+                                                        "            \"salt\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Tomato-sauce-with-butter-and-onions-305484\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh4.ggpht.com\\/rVB98iBVKvn7g2LmWBIyx6PrBYXRcFQjyvQlDtZ5lExbVBve4G9R1vq4sBpjihCu6W05vReYkphOGvUY7oukVA=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Tomato Sauce with Butter and Onions\",\n" +
+                                                        "         \"totalTimeInSeconds\":3900,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Condiments and Sauces\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"sweet\":0.3333333333333333,\n" +
+                                                        "            \"sour\":0.16666666666666666,\n" +
+                                                        "            \"salty\":0.16666666666666666,\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"meaty\":0.3333333333333333,\n" +
+                                                        "            \"bitter\":0\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":5\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/jv-0Qf-3h5kvlmCyU0jHb_1nT8FLbIO7uyZQGokbYwI5i_XW9QFnz5uCM1ZdlKr3kBbobuyeJfhs944EQYdP=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Martha Stewart\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"tomatoes\",\n" +
+                                                        "            \"purple onion\",\n" +
+                                                        "            \"extra-virgin olive oil\",\n" +
+                                                        "            \"coarse salt\",\n" +
+                                                        "            \"ground pepper\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Tomato-Onion-Casserole-Martha-Stewart-196613\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh4.ggpht.com\\/GOwkHXcQ1y2NS4EIqnhp42qOfiNGOBt3qUJAI5rPKKeqeMDu2YnmdXvpmOlmo2RjcXM4ohZh9y0pcsqLqHjEBw=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Tomato-Onion Casserole\",\n" +
+                                                        "         \"totalTimeInSeconds\":3300,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Side Dishes\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"meaty\":0.16666666666666666,\n" +
+                                                        "            \"sour\":0.6666666666666666,\n" +
+                                                        "            \"bitter\":0.16666666666666666,\n" +
+                                                        "            \"salty\":0.16666666666666666,\n" +
+                                                        "            \"sweet\":0.5\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":5\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/IMiYiQmxVPcecsoxXY7Wt7JViq1rT6SecNRZI-QcF1v4TxhLnqqpTcUHRN3CwOCvevQXXrslKcghKL0bpy2Yzyg=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Food Republic\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"onions\",\n" +
+                                                        "            \"clarified butter\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"How-to-caramelize-onions-306131\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh4.ggpht.com\\/50UZClApCPv67Dk3eDTRv2t0b7nxLSpTthUt2HiM9gwMVDNnqAmfS0DiOxac84p1FRoZp9FgBDTZD9Rt3XR5=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"How To Caramelize Onions\",\n" +
+                                                        "         \"totalTimeInSeconds\":null,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"sweet\":0.8333333333333334,\n" +
+                                                        "            \"sour\":0.6666666666666666,\n" +
+                                                        "            \"salty\":0.16666666666666666,\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"meaty\":0.16666666666666666,\n" +
+                                                        "            \"bitter\":0\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":5\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh4.ggpht.com\\/4vLa_LtMBM5ooyQmpC3cuvN9dIdqZweOlHAbbnHPD6csEdIZlRKjVEtVT3T8T-GToyHnMhvxsdbcFbwdSer32w=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Simply Gluten Free\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"white onion\",\n" +
+                                                        "            \"buttermilk\",\n" +
+                                                        "            \"white rice flour\",\n" +
+                                                        "            \"yellow corn meal\",\n" +
+                                                        "            \"vegetable oil\",\n" +
+                                                        "            \"salt\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Gluten-Free-Onion-Rings-479271\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh6.ggpht.com\\/Uiz21eVWqp85UkgdyOVShnF7_3HaxWeRueCYr2UhiMdtoFoGwUAkV30lGAKI51_5urWbrTfaQHJ91XZVrB3kyg=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Gluten Free Onion Rings\",\n" +
+                                                        "         \"totalTimeInSeconds\":6300,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Side Dishes\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"sweet\":0.6666666666666666,\n" +
+                                                        "            \"sour\":0.16666666666666666,\n" +
+                                                        "            \"salty\":0.16666666666666666,\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"meaty\":1,\n" +
+                                                        "            \"bitter\":0.16666666666666666\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":4\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh5.ggpht.com\\/58xNoYid4dEJEf5IjLoXVvUF3VcXeF3DPKReN2wKpWHOmGpLjc58tk73Iou1QtaP88Mnag7lAJAzBdlYfNtKEQ=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Southern Plate\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"cheese\",\n" +
+                                                        "            \"cream cheese\",\n" +
+                                                        "            \"vidalia\",\n" +
+                                                        "            \"mayonnaise\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"Cheesy-Baked-Vidalia-Dip-471150\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh5.ggpht.com\\/k4a3cFPx4sK8zw6-mvKl9DgsaibdAmEETZGz8S4vucULhNH_LzSLwWX5-j8wsDY5VUJLvcwak-zfD8FvZFSE=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"Cheesy Baked Vidalia Dip\",\n" +
+                                                        "         \"totalTimeInSeconds\":2100,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Appetizers\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"sweet\":0.6666666666666666,\n" +
+                                                        "            \"sour\":0.3333333333333333,\n" +
+                                                        "            \"salty\":1,\n" +
+                                                        "            \"piquant\":0,\n" +
+                                                        "            \"meaty\":1,\n" +
+                                                        "            \"bitter\":0.8333333333333334\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":5\n" +
+                                                        "      },\n" +
+                                                        "      {\n" +
+                                                        "         \"imageUrlsBySize\":{\n" +
+                                                        "            \"90\":\"http:\\/\\/lh3.ggpht.com\\/bBONZG5FFzHxH3HbH_a9oJ5GnJgS0_v8D3bBHrE8QfxGlFShzD9gL-PmJGWPJJlJjxCNNYqV1fC8x8vBh82h=s90-c\"\n" +
+                                                        "         },\n" +
+                                                        "         \"sourceDisplayName\":\"Food52\",\n" +
+                                                        "         \"ingredients\":[\n" +
+                                                        "            \"olive oil\",\n" +
+                                                        "            \"onions\",\n" +
+                                                        "            \"garlic\",\n" +
+                                                        "            \"salt\",\n" +
+                                                        "            \"pepper\",\n" +
+                                                        "            \"apple cider vinegar\",\n" +
+                                                        "            \"beef broth\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"id\":\"5-ingredient-onion-garlic-soup-317796\",\n" +
+                                                        "         \"smallImageUrls\":[\n" +
+                                                        "            \"http:\\/\\/lh4.ggpht.com\\/jhsd2XuCoO1HF-a2z4EzNucAD3YlHyHYo8fGOgE3ejeV_PC3zyZRTfPIwc0EYS4cJsCzB9Rsl4H7XJX9uegr=s90\"\n" +
+                                                        "         ],\n" +
+                                                        "         \"recipeName\":\"5 Ingredient Onion Garlic Soup\",\n" +
+                                                        "         \"totalTimeInSeconds\":2700,\n" +
+                                                        "         \"attributes\":{\n" +
+                                                        "            \"course\":[\n" +
+                                                        "               \"Soups\"\n" +
+                                                        "            ]\n" +
+                                                        "         },\n" +
+                                                        "         \"flavors\":{\n" +
+                                                        "            \"salty\":0.5,\n" +
+                                                        "            \"sour\":0.16666666666666666,\n" +
+                                                        "            \"sweet\":0.16666666666666666,\n" +
+                                                        "            \"bitter\":0.16666666666666666,\n" +
+                                                        "            \"meaty\":0.16666666666666666,\n" +
+                                                        "            \"piquant\":0\n" +
+                                                        "         },\n" +
+                                                        "         \"rating\":3\n" +
                                                          "      }\n" +
                                                          "   ],\n" +
                                                          "   \"criteria\":{\n" +
@@ -663,4 +663,7 @@ public class RecipeQueryResultTest {
                                                          "      \"requirePictures\":true\n" +
                                                          "   }\n" +
                                                          "}";
+
+    private OfflineRecipeQueryResult() {
+    }
 }
