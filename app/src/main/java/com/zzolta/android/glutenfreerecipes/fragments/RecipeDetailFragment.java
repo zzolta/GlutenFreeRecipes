@@ -19,6 +19,7 @@ import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.adapters.GroupingAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.Image;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
+import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,18 +48,19 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     protected void loadData(RecipeDetailResult recipeDetailResult) {
-        setName(recipeDetailResult);
+        setName(recipeDetailResult.getName());
 
-        loadImage(recipeDetailResult);
+        loadImage(recipeDetailResult.getImages());
 
-        loadGroups(recipeDetailResult);
+        loadGroups(recipeDetailResult.getIngredientLines());
     }
 
-    private void setName(RecipeDetailResult recipeDetailResult) {
-        final TextView recipeName = (TextView) rootView.findViewById(R.id.recipe_name);
-        recipeName.setText(recipeDetailResult.getName());
-        final Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), FONTS_SNICKLES_TTF);
-        recipeName.setTypeface(typeFace);
+    protected void loadData(Recipe recipe) {
+        setName(recipe.getName());
+
+        loadImage(null);
+
+        loadGroups(recipe.getIngredients());
     }
 
     protected ErrorListener getErrorListener() {
@@ -71,12 +73,19 @@ public class RecipeDetailFragment extends Fragment {
         };
     }
 
-    private void loadGroups(RecipeDetailResult recipeDetailResult) {
+    private void setName(String name) {
+        final TextView recipeName = (TextView) rootView.findViewById(R.id.recipe_name);
+        recipeName.setText(name);
+        final Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), FONTS_SNICKLES_TTF);
+        recipeName.setTypeface(typeFace);
+    }
+
+    private void loadGroups(List<String> ingredientLines) {
         final ExpandableListView expandableListView = (ExpandableListView) rootView.findViewById(R.id.details);
 
         final List<String> groups = new ArrayList<>(Arrays.asList(getString(R.string.ingredients), getString(R.string.details)));
         final List<List<String>> groupedItems = new ArrayList<>(2);
-        groupedItems.add(recipeDetailResult.getIngredientLines());
+        groupedItems.add(ingredientLines);
         groupedItems.add(new ArrayList<String>(0));
 
         final ExpandableListAdapter groupingAdapter = createExpandableListAdapter(groups, groupedItems);
@@ -94,11 +103,14 @@ public class RecipeDetailFragment extends Fragment {
                    .setInflater((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE));
     }
 
-    private void loadImage(RecipeDetailResult recipeDetailResult) {
+    private void loadImage(List<Image> images) {
         final ImageView recipeImage = (ImageView) rootView.findViewById(R.id.recipe_image);
-        final List<Image> images = recipeDetailResult.getImages();
         //TODO: consider using ApplicationRequestQueue Volley implementation instead Picasso
         //TODO: only positive flow is implemented
-        Picasso.with(getActivity()).load(images.get(0).getHostedLargeUrl()).placeholder(R.mipmap.recipe_big_placeholder).into(recipeImage);
+        if (images != null && images.size() > 0) {
+            Picasso.with(getActivity()).load(images.get(0).getHostedLargeUrl()).placeholder(R.mipmap.recipe_big_placeholder).into(recipeImage);
+        } else {
+            Picasso.with(getActivity()).load(R.mipmap.recipe_big_placeholder).into(recipeImage);
+        }
     }
 }

@@ -17,12 +17,15 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.j256.ormlite.dao.Dao;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
+import com.zzolta.android.glutenfreerecipes.persistence.database.RecipeDBHelper;
+import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 import com.zzolta.android.glutenfreerecipes.utils.DevelopmentConstants;
 import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeQueryResult;
@@ -30,6 +33,7 @@ import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeQueryResult;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * Created by Zolta.Szekely on 2015-02-28.
@@ -107,13 +111,7 @@ public class SearchableActivity extends ActionBarActivity {
     }
 
     private Listener<RecipeQueryResult> getRecipeQueryResultListener() {
-        return new Listener<RecipeQueryResult>() {
-            @Override
-            public void onResponse(RecipeQueryResult recipeQueryResult) {
-                //TODO: save the recipes into a database
-                updateSearchList(recipeQueryResult);
-            }
-        };
+        return new RecipeQueryResultListener();
     }
 
     private void updateSearchList(RecipeQueryResult recipeQueryResult) {
@@ -142,5 +140,48 @@ public class SearchableActivity extends ActionBarActivity {
                 throw new RuntimeException(volleyError);
             }
         };
+    }
+
+    private class RecipeQueryResultListener implements Listener<RecipeQueryResult> {
+        @Override
+        public void onResponse(RecipeQueryResult recipeQueryResult) {
+            saveRecipes(convertRecipes(recipeQueryResult));
+            updateSearchList(recipeQueryResult);
+        }
+
+        private void saveRecipes(final Iterable<Recipe> recipes) {
+            //TODO: make db helper a singleton?
+            final RecipeDBHelper recipeDBHelper = new RecipeDBHelper(getApplicationContext());
+            try {
+                final Dao<Recipe, String> dao = recipeDBHelper.getDao();
+                dao.callBatchTasks(new Callable<Void>() {
+                    @Override
+                    public Void call() throws Exception {
+                        for (final Recipe recipe : recipes) {
+                            dao.createOrUpdate(recipe);
+                        }
+                        return null;
+                    }
+                });
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        private List<Recipe> convertRecipes(RecipeQueryResult recipeQueryResult) {
+            final List<Match> matches = recipeQueryResult.getMatches();
+            final List<Recipe> recipes = new ArrayList<>(matches.size());
+            for (final Match match : matches) {
+                recipes.add(new Recipe()
+                                .setId(match.getId())
+                                .setName(match.getRecipeName())
+                                .setIngredients(new ArrayList<>(match.getIngredients()))
+                                .setRating(match.getRating())
+                                .setTotalTimeInSeconds(match.getTotalTimeInSeconds())
+                           );
+            }
+            return recipes;
+        }
     }
 }
