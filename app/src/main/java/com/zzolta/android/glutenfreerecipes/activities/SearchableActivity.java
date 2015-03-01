@@ -110,6 +110,7 @@ public class SearchableActivity extends ActionBarActivity {
         return new Listener<RecipeQueryResult>() {
             @Override
             public void onResponse(RecipeQueryResult recipeQueryResult) {
+                //TODO: save the recipes into a database
                 updateSearchList(recipeQueryResult);
             }
         };
