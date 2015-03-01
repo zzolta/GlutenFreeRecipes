@@ -1,6 +1,7 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
@@ -26,6 +28,7 @@ import java.util.List;
  * Created by Zolta.Szekely on 2015-03-01.
  */
 public class RecipeDetailFragment extends Fragment {
+    private static final String FONTS_SNICKLES_TTF = "fonts/Snickles.ttf";
     private View rootView;
 
     @Override
@@ -44,9 +47,18 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     protected void loadData(RecipeDetailResult recipeDetailResult) {
+        setName(recipeDetailResult);
+
         loadImage(recipeDetailResult);
 
         loadGroups(recipeDetailResult);
+    }
+
+    private void setName(RecipeDetailResult recipeDetailResult) {
+        final TextView recipeName = (TextView) rootView.findViewById(R.id.recipe_name);
+        recipeName.setText(recipeDetailResult.getName());
+        final Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), FONTS_SNICKLES_TTF);
+        recipeName.setTypeface(typeFace);
     }
 
     protected ErrorListener getErrorListener() {
