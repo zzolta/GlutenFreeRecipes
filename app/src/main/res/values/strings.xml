@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">GlutenFreeRecipes</string>
+    <string name="app_name">Gluten Free Recipes</string>
 
     <string name="title_home">Today\'s Recipe</string>
     <string name="title_my_recipes">My Recipes</string>
     <string name="title_settings">Settings</string>
-    <string name="title_menu">Menu</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
