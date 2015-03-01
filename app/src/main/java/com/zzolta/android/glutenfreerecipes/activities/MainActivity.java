@@ -3,15 +3,19 @@ package com.zzolta.android.glutenfreerecipes.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
+import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
+import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
+import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
+import com.zzolta.android.glutenfreerecipes.utils.DevelopmentConstants;
+import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeDetailResult;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
@@ -99,15 +103,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends RecipeDetailFragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -123,7 +124,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            final View rootView = super.onCreateView(inflater, container, savedInstanceState);
+
+            if (DevelopmentConstants.OFFLINE) {
+                loadData(new Gson().fromJson(OfflineRecipeDetailResult.pizzaFriesRecipeDetailResult, RecipeDetailResult.class));
+            }
+
             return rootView;
         }
 
