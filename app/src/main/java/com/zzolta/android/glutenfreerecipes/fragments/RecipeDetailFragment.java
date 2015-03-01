@@ -58,6 +58,7 @@ public class RecipeDetailFragment extends Fragment {
     protected void loadData(Recipe recipe) {
         setName(recipe.getName());
 
+        //TODO: save image too so that it can be loaded offline
         loadImage(null);
 
         loadGroups(recipe.getIngredients());
