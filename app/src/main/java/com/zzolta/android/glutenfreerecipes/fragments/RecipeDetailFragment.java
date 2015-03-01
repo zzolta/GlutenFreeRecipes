@@ -81,6 +81,7 @@ public class RecipeDetailFragment extends Fragment {
 
         final ExpandableListAdapter groupingAdapter = createExpandableListAdapter(groups, groupedItems);
         expandableListView.setAdapter(groupingAdapter);
+        expandableListView.expandGroup(0);
     }
 
     private ExpandableListAdapter createExpandableListAdapter(List<String> groups, List<List<String>> groupedItems) {
