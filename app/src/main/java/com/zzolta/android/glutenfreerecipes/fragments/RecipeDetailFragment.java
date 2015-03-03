@@ -1,7 +1,6 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.adapters.GroupingAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.Image;
@@ -105,17 +103,10 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     private void loadImage(String imagePath) {
-        final ImageView recipeImage = (ImageView) rootView.findViewById(R.id.recipe_image);
-        //TODO: consider using ApplicationRequestQueue Volley implementation instead Picasso
-        //TODO: only positive flow is implemented
-        recipeImage.setImageResource(R.mipmap.recipe_big_placeholder);
+        final NetworkImageView recipeImage = (NetworkImageView) rootView.findViewById(R.id.recipe_image);
+        recipeImage.setDefaultImageResId(R.mipmap.recipe_big_placeholder);
         if (imagePath != null) {
-            ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).addToRequestQueue(new ImageRequest(imagePath, new Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap bitmap) {
-                    recipeImage.setImageBitmap(bitmap);
-                }
-            }, 0, 0, null, null));
+            recipeImage.setImageUrl(imagePath, ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).getImageLoader());
         }
     }
 
