@@ -107,12 +107,7 @@ public class SearchableActivity extends ActionBarActivity {
     }
 
     private Listener<RecipeQueryResult> getRecipeQueryResultListener() {
-        return new Listener<RecipeQueryResult>() {
-            @Override
-            public void onResponse(RecipeQueryResult recipeQueryResult) {
-                updateSearchList(recipeQueryResult);
-            }
-        };
+        return new RecipeQueryResultListener();
     }
 
     private void updateSearchList(RecipeQueryResult recipeQueryResult) {
@@ -141,5 +136,12 @@ public class SearchableActivity extends ActionBarActivity {
                 throw new RuntimeException(volleyError);
             }
         };
+    }
+
+    private class RecipeQueryResultListener implements Listener<RecipeQueryResult> {
+        @Override
+        public void onResponse(RecipeQueryResult recipeQueryResult) {
+            updateSearchList(recipeQueryResult);
+        }
     }
 }
