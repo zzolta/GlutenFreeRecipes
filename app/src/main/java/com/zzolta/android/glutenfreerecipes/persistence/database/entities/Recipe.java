@@ -25,6 +25,8 @@ public class Recipe {
     private Integer rating;
     @DatabaseField(columnName = Contract.Recipe.IMAGE_PATH)
     private String imagePath;
+    @DatabaseField(columnName = Contract.Recipe.SOURCE_RECIPE_URL)
+    private String sourceRecipeUrl;
 
     public String getId() {
         return id;
@@ -77,6 +79,15 @@ public class Recipe {
 
     public Recipe setImagePath(String imagePath) {
         this.imagePath = imagePath;
+        return this;
+    }
+
+    public String getSourceRecipeUrl() {
+        return sourceRecipeUrl;
+    }
+
+    public Recipe setSourceRecipeUrl(String sourceRecipeUrl) {
+        this.sourceRecipeUrl = sourceRecipeUrl;
         return this;
     }
 }

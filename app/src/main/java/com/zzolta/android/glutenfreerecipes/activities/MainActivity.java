@@ -10,9 +10,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
+import com.zzolta.android.glutenfreerecipes.fragments.BaseDetailFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
-import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
 import com.zzolta.android.glutenfreerecipes.utils.DevelopmentConstants;
 import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeDetailResult;
@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         // update the main content by replacing fragments
         final FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                       .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                       .replace(R.id.container, MainFragment.newInstance(position + 1))
                        .commit();
     }
 
@@ -103,7 +103,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends RecipeDetailFragment {
+    public static class MainFragment extends BaseDetailFragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -114,8 +114,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            final PlaceholderFragment fragment = new PlaceholderFragment();
+        public static MainFragment newInstance(int sectionNumber) {
+            final MainFragment fragment = new MainFragment();
             final Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);

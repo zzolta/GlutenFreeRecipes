@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
-import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
+import com.zzolta.android.glutenfreerecipes.fragments.BaseDetailFragment;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
@@ -33,12 +33,12 @@ public class RecipeDetailActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container, new PlaceholderFragment())
+                .add(R.id.container, new RecipeDetailFragment())
                 .commit();
         }
     }
 
-    public static class PlaceholderFragment extends RecipeDetailFragment {
+    public static class RecipeDetailFragment extends BaseDetailFragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

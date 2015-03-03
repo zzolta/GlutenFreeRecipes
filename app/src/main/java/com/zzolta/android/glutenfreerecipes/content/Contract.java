@@ -17,5 +17,6 @@ public final class Contract {
         public static final String TOTAL_TIME_IN_SECONDS = "total_time_in_seconds";
         public static final String RATING = "rating";
         public static final String IMAGE_PATH = "imagePath";
+        public static final String SOURCE_RECIPE_URL = "sourceRecipeUrl";
     }
 }

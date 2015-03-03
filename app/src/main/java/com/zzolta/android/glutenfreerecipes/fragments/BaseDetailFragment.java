@@ -1,15 +1,19 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -32,7 +36,7 @@ import java.util.List;
 /**
  * Created by Zolta.Szekely on 2015-03-01.
  */
-public class RecipeDetailFragment extends Fragment {
+public class BaseDetailFragment extends Fragment {
     private static final String FONTS_SNICKLES_TTF = "fonts/Snickles.ttf";
     private View rootView;
 
@@ -51,6 +55,8 @@ public class RecipeDetailFragment extends Fragment {
 
         loadImage(getImage(recipeDetailResult));
 
+        addHyperlinkToImage(recipeDetailResult.getSource().getSourceRecipeUrl());
+
         loadGroups(recipeDetailResult.getIngredientLines());
     }
 
@@ -58,6 +64,8 @@ public class RecipeDetailFragment extends Fragment {
         setName(recipe.getName());
 
         loadImage(recipe.getImagePath());
+
+        addHyperlinkToImage(recipe.getSourceRecipeUrl());
 
         loadGroups(recipe.getIngredients());
     }
@@ -70,6 +78,20 @@ public class RecipeDetailFragment extends Fragment {
                 throw new RuntimeException(volleyError);
             }
         };
+    }
+
+    private void addHyperlinkToImage(final String sourceRecipeUrl) {
+        final ImageView recipeImage = (ImageView) rootView.findViewById(R.id.recipe_image);
+        recipeImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(sourceRecipeUrl));
+                startActivity(intent);
+            }
+        });
     }
 
     private void setName(String name) {
@@ -148,7 +170,8 @@ public class RecipeDetailFragment extends Fragment {
                                       .setName(recipeDetailResult.getName())
                                       .setIngredients(new ArrayList<>(recipeDetailResult.getIngredientLines()))
                                       .setRating(recipeDetailResult.getRating())
-                                      .setTotalTimeInSeconds(recipeDetailResult.getTotalTimeInSeconds());
+                                      .setTotalTimeInSeconds(recipeDetailResult.getTotalTimeInSeconds())
+                                      .setImagePath(recipeDetailResult.getSource().getSourceRecipeUrl());
 
             final String imageUrlsBySize360 = getImage(recipeDetailResult);
 
