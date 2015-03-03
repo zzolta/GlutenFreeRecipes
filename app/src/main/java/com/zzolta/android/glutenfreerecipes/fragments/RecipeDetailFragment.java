@@ -1,6 +1,7 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,12 +16,13 @@ import android.widget.TextView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.squareup.picasso.Picasso;
+import com.android.volley.toolbox.ImageRequest;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.adapters.GroupingAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.Image;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.ImageUrlsBySize;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
+import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.persistence.database.RecipeDBHelper;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 
@@ -106,10 +108,14 @@ public class RecipeDetailFragment extends Fragment {
         final ImageView recipeImage = (ImageView) rootView.findViewById(R.id.recipe_image);
         //TODO: consider using ApplicationRequestQueue Volley implementation instead Picasso
         //TODO: only positive flow is implemented
+        recipeImage.setImageResource(R.mipmap.recipe_big_placeholder);
         if (imagePath != null) {
-            Picasso.with(getActivity()).load(imagePath).placeholder(R.mipmap.recipe_big_placeholder).into(recipeImage);
-        } else {
-            Picasso.with(getActivity()).load(R.mipmap.recipe_big_placeholder).into(recipeImage);
+            ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).addToRequestQueue(new ImageRequest(imagePath, new Listener<Bitmap>() {
+                @Override
+                public void onResponse(Bitmap bitmap) {
+                    recipeImage.setImageBitmap(bitmap);
+                }
+            }, 0, 0, null, null));
         }
     }
 
