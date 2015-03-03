@@ -23,6 +23,8 @@ public class Recipe {
     private Integer totalTimeInSeconds;
     @DatabaseField(columnName = Contract.Recipe.RATING)
     private Integer rating;
+    @DatabaseField(columnName = Contract.Recipe.IMAGE_PATH)
+    private String imagePath;
 
     public String getId() {
         return id;
@@ -66,6 +68,15 @@ public class Recipe {
 
     public Recipe setRating(Integer rating) {
         this.rating = rating;
+        return this;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public Recipe setImagePath(String imagePath) {
+        this.imagePath = imagePath;
         return this;
     }
 }

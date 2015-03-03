@@ -2,7 +2,6 @@ package com.zzolta.android.glutenfreerecipes.persistence.database;
 
 import android.test.AndroidTestCase;
 import com.j256.ormlite.dao.Dao;
-import com.zzolta.android.glutenfreerecipes.content.Contract;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 
 import java.sql.SQLException;
@@ -14,7 +13,6 @@ import java.util.Arrays;
  */
 public class TestDb extends AndroidTestCase {
 
-    private RecipeDBHelper recipeDBHelper;
     private Dao<Recipe, String> dao;
 
     @Override
@@ -23,19 +21,18 @@ public class TestDb extends AndroidTestCase {
 
         deleteDatabase();
 
-        recipeDBHelper = new RecipeDBHelper(this.mContext);
-        dao = recipeDBHelper.getDao();
+        dao = RecipeDBHelper.getInstance(this.mContext).getDao();
     }
 
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
 
-        recipeDBHelper.getConnectionSource().close();
+        RecipeDBHelper.getInstance(this.mContext).getConnectionSource().close();
     }
 
     public void deleteDatabase() {
-        mContext.deleteDatabase(Contract.DATABASE_NAME);
+        mContext.deleteDatabase(RecipeDBHelper.DATABASE_NAME);
     }
 
     public void testDatabaseCreation() throws SQLException {

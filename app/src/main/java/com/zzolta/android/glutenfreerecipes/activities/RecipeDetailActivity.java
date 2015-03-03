@@ -5,8 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
@@ -48,23 +46,15 @@ public class RecipeDetailActivity extends ActionBarActivity {
 
             final String recipeID = getActivity().getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
             final Recipe recipe = getRecipeFromDatabase(recipeID);
-            if (DevelopmentConstants.OFFLINE) {
-                if (recipe != null) {
-                    loadData(recipe);
-                } else {
-                    loadData(new Gson().fromJson(OfflineRecipeDetailResult.pizzaFriesRecipeDetailResult, RecipeDetailResult.class));
-                }
+            if (recipe != null) {
+                loadData(recipe);
             } else {
-                final Listener<RecipeDetailResult> listener = getRecipeQueryResultListener();
-
-                final ErrorListener errorListener = getErrorListener();
-
-                if (recipe != null) {
-                    loadData(recipe);
+                if (DevelopmentConstants.OFFLINE) {
+                    loadData(new Gson().fromJson(OfflineRecipeDetailResult.pizzaFriesRecipeDetailResult, RecipeDetailResult.class));
                 } else {
                     final String url = UriBuilder.createGetUri(recipeID).toString();
 
-                    final GsonRequest<RecipeDetailResult> request = new GsonRequest<>(url, RecipeDetailResult.class, listener, errorListener);
+                    final GsonRequest<RecipeDetailResult> request = new GsonRequest<>(url, RecipeDetailResult.class, getRecipeQueryResultListener(), getErrorListener());
 
                     ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
                 }
@@ -73,10 +63,8 @@ public class RecipeDetailActivity extends ActionBarActivity {
         }
 
         private Recipe getRecipeFromDatabase(String recipeID) {
-            //TODO: make db helper a singleton?
-            final RecipeDBHelper recipeDBHelper = new RecipeDBHelper(getActivity().getApplicationContext());
             try {
-                return recipeDBHelper.getDao().queryForId(recipeID);
+                return RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao().queryForId(recipeID);
             }
             catch (final SQLException e) {
                 e.printStackTrace();
