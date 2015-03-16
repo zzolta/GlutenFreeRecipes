@@ -11,24 +11,24 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
+import com.zzolta.android.glutenfreerecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
+import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 import com.zzolta.android.glutenfreerecipes.utils.DevelopmentConstants;
 import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeQueryResult;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,7 +36,7 @@ import java.util.List;
  */
 public class SearchableActivity extends ActionBarActivity {
 
-    private ArrayAdapter<String> recipeAdapter;
+    private RecipeListAdapter recipeListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +44,16 @@ public class SearchableActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_search);
 
-        recipeAdapter = new ArrayAdapter<>(this, R.layout.list_item_recipe, R.id.list_item_recipe_textview, new ArrayList<String>(10));
+        recipeListAdapter = new RecipeListAdapter(this, new ArrayList<Recipe>(10));
         final ListView listView = (ListView) findViewById(R.id.list_recipes);
-        listView.setAdapter(recipeAdapter);
+        listView.setAdapter(recipeListAdapter);
 
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final String recipe = recipeAdapter.getItem(position);
+                final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
                 final Intent intent = new Intent(getApplicationContext(), RecipeDetailActivity.class);
-                intent.putExtra(ApplicationConstants.RECIPE_ID, recipe);
+                intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
                 startActivity(intent);
             }
         });
@@ -111,21 +111,32 @@ public class SearchableActivity extends ActionBarActivity {
     }
 
     private void updateSearchList(RecipeQueryResult recipeQueryResult) {
-        final List<Match> recipes = recipeQueryResult.getMatches();
-        final Collection<String> recipeIDs = new ArrayList<>(recipes.size());
-        for (final Match recipe : recipes) {
-            recipeIDs.add(recipe.getId());
-        }
-        if (recipeIDs.size() > 0) {
-            recipeAdapter.clear();
-            recipeAdapter.addAll(recipeIDs);
+        final List<Match> matches = recipeQueryResult.getMatches();
+
+        final List<Recipe> recipes = matchRecipes(matches);
+
+        if (recipes.size() > 0) {
+            recipeListAdapter.setRecipes(recipes);
         }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                recipeAdapter.notifyDataSetChanged();
+                recipeListAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private List<Recipe> matchRecipes(List<Match> matches) {
+        final List<Recipe> recipes = new ArrayList<>(matches.size());
+        for (final Match match : matches) {
+            recipes.add(new Recipe()
+                            .setId(match.getId())
+                            .setName(match.getRecipeName())
+                            .setImagePath(match.getImageUrlsBySize().get90())
+                            .setRating(match.getRating())
+                            .setTotalTimeInSeconds(match.getTotalTimeInSeconds()));
+        }
+        return recipes;
     }
 
     private ErrorListener getErrorListener() {
