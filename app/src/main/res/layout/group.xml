@@ -4,6 +4,7 @@
               android:layout_height="40dp"
               android:clickable="true"
               android:orientation="vertical"
+              android:background="@color/list_row"
               android:paddingLeft="40dp"
               android:paddingStart="40dp"
               tools:context=".MainActivity">
@@ -21,6 +22,7 @@
                 android:layout_marginStart="5dp"
                 android:textIsSelectable="true"
                 android:textSize="14sp"
+                android:textColor="@color/details"
                 android:textStyle="bold"/>
     </LinearLayout>
 
