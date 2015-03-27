@@ -6,6 +6,8 @@ package com.zzolta.android.glutenfreerecipes.utils;
 public final class ApplicationConstants {
     public static final String URL = "URL";
     public static final String RECIPE_ID = "recipe_id";
+    public static final String START_INDEX = "0";
+    public static final int MAX_RESULT_VALUE = 6;
 
     private ApplicationConstants() {
     }

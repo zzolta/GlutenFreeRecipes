@@ -13,6 +13,7 @@ import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,16 +22,15 @@ import java.util.List;
 public class RecipeListAdapter extends BaseAdapter {
     private static final int SECONDS_IN_MINUTE = 60;
     private final Activity activity;
-    private List<Recipe> recipes;
+    private final List<Recipe> recipes = new ArrayList<>(0);
     private LayoutInflater inflater;
 
-    public RecipeListAdapter(Activity activity, List<Recipe> recipes) {
+    public RecipeListAdapter(Activity activity) {
         this.activity = activity;
-        this.recipes = recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public void addRecipes(final List<Recipe> recipes) {
+        this.recipes.addAll(recipes);
     }
 
     @Override

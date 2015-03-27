@@ -20,6 +20,7 @@ import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
+import com.zzolta.android.glutenfreerecipes.listeners.EndlessScrollListener;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
@@ -44,9 +45,17 @@ public class SearchableActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_search);
 
-        recipeListAdapter = new RecipeListAdapter(this, new ArrayList<Recipe>(10));
+        recipeListAdapter = new RecipeListAdapter(this);
         final ListView listView = (ListView) findViewById(R.id.list_recipes);
         listView.setAdapter(recipeListAdapter);
+
+        listView.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                final String query = getIntent().getStringExtra(SearchManager.QUERY);
+                doSearch(query, String.valueOf(page * ApplicationConstants.MAX_RESULT_VALUE));
+            }
+        });
 
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -88,18 +97,18 @@ public class SearchableActivity extends ActionBarActivity {
                 updateSearchList(new Gson().fromJson(OfflineRecipeQueryResult.pizzaRecipeQueryResult, RecipeQueryResult.class));
             } else {
                 final String query = intent.getStringExtra(SearchManager.QUERY);
-                doSearch(query);
+                doSearch(query, ApplicationConstants.START_INDEX);
             }
         }
     }
 
-    private void doSearch(String query) {
+    private void doSearch(String query, String from) {
 
         final Listener<RecipeQueryResult> listener = getRecipeQueryResultListener();
 
         final ErrorListener errorListener = getErrorListener();
 
-        final String url = UriBuilder.createQueryUri(query).toString();
+        final String url = UriBuilder.createQueryUri(query, from).toString();
 
         final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, listener, errorListener);
 
@@ -116,7 +125,7 @@ public class SearchableActivity extends ActionBarActivity {
         final List<Recipe> recipes = matchRecipes(matches);
 
         if (recipes.size() > 0) {
-            recipeListAdapter.setRecipes(recipes);
+            recipeListAdapter.addRecipes(recipes);
         }
         runOnUiThread(new Runnable() {
             @Override

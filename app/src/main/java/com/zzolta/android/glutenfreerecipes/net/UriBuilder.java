@@ -2,6 +2,7 @@ package com.zzolta.android.glutenfreerecipes.net;
 
 import android.net.Uri;
 import android.net.Uri.Builder;
+import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 
 /**
  * Created by Zolta.Szekely on 2015-02-28.
@@ -23,15 +24,13 @@ public final class UriBuilder {
     private static final String ALLOWED_ALLERGY = "allowedAllergy[]";
     private static final String GLUTEN_FREE = "393^Gluten-Free";
     private static final String MAX_RESULT = "maxResult";
-    private static final String MAX_RESULT_VALUE = "10";
     private static final String START = "start";
-    private static final String START_VALUE = "0";
     private static final String RECIPE = "recipe";
 
     private UriBuilder() {
     }
 
-    public static Uri createQueryUri(String query) {
+    public static Uri createQueryUri(String query, String startValue) {
         return getBuilder()
                    .appendPath(RECIPES)
                    .appendQueryParameter(APP_ID, APP_ID_VALUE)
@@ -39,8 +38,8 @@ public final class UriBuilder {
                    .appendQueryParameter(QUERY, query)
                    .appendQueryParameter(REQUIRE_PICTURES, TRUE)
                    .appendQueryParameter(ALLOWED_ALLERGY, GLUTEN_FREE)
-                   .appendQueryParameter(MAX_RESULT, MAX_RESULT_VALUE)
-                   .appendQueryParameter(START, START_VALUE)
+                   .appendQueryParameter(MAX_RESULT, String.valueOf(ApplicationConstants.MAX_RESULT_VALUE))
+                   .appendQueryParameter(START, startValue)
                    .build();
     }
 
