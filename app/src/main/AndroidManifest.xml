@@ -38,6 +38,12 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".activities.SearchableActivity"/>
         </activity>
+
+        <activity android:name=".activities.DirectionsActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".activities.RecipeDetailActivity"/>
+        </activity>
     </application>
 
 </manifest>

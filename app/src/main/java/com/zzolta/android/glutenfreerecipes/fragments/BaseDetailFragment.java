@@ -104,7 +104,7 @@ public class BaseDetailFragment extends Fragment {
     private void loadGroups(List<String> ingredientLines) {
         final ExpandableListView expandableListView = (ExpandableListView) rootView.findViewById(R.id.details);
 
-        final List<String> groups = new ArrayList<>(Arrays.asList(getString(R.string.ingredients), getString(R.string.details)));
+        final List<String> groups = new ArrayList<>(Arrays.asList(getString(R.string.ingredients), getString(R.string.directions)));
         final List<List<String>> groupedItems = new ArrayList<>(2);
         groupedItems.add(ingredientLines);
         groupedItems.add(new ArrayList<String>(0));

@@ -3,7 +3,6 @@ package com.zzolta.android.glutenfreerecipes.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,17 +10,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
+import com.zzolta.android.glutenfreerecipes.activities.DirectionsActivity;
 import com.zzolta.android.glutenfreerecipes.adapters.GroupingAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.Image;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.ImageUrlsBySize;
@@ -81,9 +80,7 @@ public class RecipeDetailFragment extends Fragment {
 
         loadImage(getImage(recipeDetailResult));
 
-        addHyperlinkToImage(recipeDetailResult.getSource().getSourceRecipeUrl());
-
-        loadIngredients(recipeDetailResult.getIngredientLines());
+        loadData(recipeDetailResult.getIngredientLines(), recipeDetailResult.getSource().getSourceRecipeUrl());
     }
 
     protected void loadData(Recipe recipe) {
@@ -91,9 +88,7 @@ public class RecipeDetailFragment extends Fragment {
 
         loadImage(recipe.getImagePath());
 
-        addHyperlinkToImage(recipe.getSourceRecipeUrl());
-
-        loadIngredients(recipe.getIngredients());
+        loadData(recipe.getIngredients(), recipe.getSourceRecipeUrl());
     }
 
     private void setName(String name) {
@@ -108,24 +103,10 @@ public class RecipeDetailFragment extends Fragment {
         }
     }
 
-    private void addHyperlinkToImage(final String sourceRecipeUrl) {
-        final ImageView recipeImage = (ImageView) view.findViewById(R.id.recipe_image);
-        recipeImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse(sourceRecipeUrl));
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void loadIngredients(List<String> ingredients) {
+    private void loadData(List<String> ingredients, final String sourceRecipeUrl) {
         final ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.parallaxList);
 
-        final List<String> groups = new ArrayList<>(Arrays.asList(getString(R.string.ingredients), getString(R.string.details)));
+        final List<String> groups = new ArrayList<>(Arrays.asList(getString(R.string.ingredients), getString(R.string.directions)));
         final List<List<String>> groupedItems = new ArrayList<>(2);
         groupedItems.add(ingredients);
         groupedItems.add(new ArrayList<String>(0));
@@ -133,6 +114,17 @@ public class RecipeDetailFragment extends Fragment {
         final ExpandableListAdapter groupingAdapter = createExpandableListAdapter(groups, groupedItems);
         expandableListView.setAdapter(groupingAdapter);
         expandableListView.expandGroup(0);
+
+        expandableListView.setOnGroupExpandListener(new OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition == 1) {
+                    final Intent intent = new Intent(getActivity(), DirectionsActivity.class);
+                    intent.putExtra(ApplicationConstants.URL, sourceRecipeUrl);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private ExpandableListAdapter createExpandableListAdapter(List<String> groups, List<List<String>> groupedItems) {
