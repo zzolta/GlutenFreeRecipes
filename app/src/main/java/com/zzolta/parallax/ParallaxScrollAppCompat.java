@@ -10,27 +10,27 @@ import android.support.v7.app.ActionBarActivity;
  */
 public class ParallaxScrollAppCompat extends ParallaxScroll {
 
-    private ActionBar mActionBar;
+    private ActionBar actionBar;
 
     @Override
     public void initActionBar(Activity activity) {
-        mActionBar = getActionBar(activity);
+        actionBar = getActionBar(activity);
         super.initActionBar(activity);
     }
 
     @Override
     protected int getActionBarHeight() {
-        return mActionBar.getHeight();
+        return actionBar.getHeight();
     }
 
     @Override
     protected boolean isActionBarNull() {
-        return mActionBar == null;
+        return actionBar == null;
     }
 
     @Override
     protected void setActionBarBackgroundDrawable(Drawable drawable) {
-        mActionBar.setBackgroundDrawable(drawable);
+        actionBar.setBackgroundDrawable(drawable);
     }
 
     private ActionBar getActionBar(Activity activity) {

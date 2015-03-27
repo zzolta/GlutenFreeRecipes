@@ -1,7 +1,7 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
-import android.R.layout;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,15 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
 import com.zzolta.android.glutenfreerecipes.R;
+import com.zzolta.android.glutenfreerecipes.adapters.GroupingAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.Image;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.ImageUrlsBySize;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
@@ -37,6 +38,7 @@ import com.zzolta.parallax.ParallaxScrollAppCompat;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,12 +46,12 @@ import java.util.List;
  */
 public class RecipeDetailFragment extends Fragment {
     public static final String LOG_TAG = RecipeDetailFragment.class.getName();
-    private ParallaxScrollAppCompat mFadingHelper;
+    private ParallaxScrollAppCompat parallaxScrollAppCompat;
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = mFadingHelper.createView(inflater);
+        view = parallaxScrollAppCompat.createView(inflater);
 
         final String recipeID = getActivity().getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
         final Recipe recipe = getRecipeFromDatabase(recipeID);
@@ -121,8 +123,26 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     private void loadIngredients(List<String> ingredients) {
-        final ListView listView = (ListView) view.findViewById(R.id.parallaxList);
-        listView.setAdapter(new ArrayAdapter<>(getActivity(), layout.simple_list_item_1, ingredients));
+        final ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.parallaxList);
+
+        final List<String> groups = new ArrayList<>(Arrays.asList(getString(R.string.ingredients), getString(R.string.details)));
+        final List<List<String>> groupedItems = new ArrayList<>(2);
+        groupedItems.add(ingredients);
+        groupedItems.add(new ArrayList<String>(0));
+
+        final ExpandableListAdapter groupingAdapter = createExpandableListAdapter(groups, groupedItems);
+        expandableListView.setAdapter(groupingAdapter);
+        expandableListView.expandGroup(0);
+    }
+
+    private ExpandableListAdapter createExpandableListAdapter(List<String> groups, List<List<String>> groupedItems) {
+        return new GroupingAdapter()
+                   .setGroups(groups)
+                   .setGroupLayoutResource(R.layout.group)
+                   .setGroupedItems(groupedItems)
+                   .setGroupedItemsLayoutResource(R.layout.row)
+                   .setGroupedItemId(R.id.groupedItem)
+                   .setInflater((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE));
     }
 
     protected ErrorListener getErrorListener() {
@@ -155,12 +175,18 @@ public class RecipeDetailFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        mFadingHelper = new ParallaxScrollAppCompat()
+        parallaxScrollAppCompat = new ParallaxScrollAppCompat()
                             .actionBarBackground(R.drawable.actionbar_background)
                             .headerLayout(R.layout.header)
                             .contentLayout(R.layout.parallax_listview)
                             .lightActionBar(true);
-        mFadingHelper.initActionBar(activity);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        parallaxScrollAppCompat.initActionBar(getActivity());
     }
 
     private Recipe getRecipeFromDatabase(String recipeID) {
