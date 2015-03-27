@@ -14,5 +14,5 @@
     <string name="recipe_detail_image" translateable="false">Detail image of the recipe</string>
 
     <string name="ingredients">Ingredients</string>
-    <string name="directions">Directions</string>
+    <string name="directions">Click here for directions</string>
 </resources>
