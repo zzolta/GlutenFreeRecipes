@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.SearchableActivity">
+        <activity android:name=".activities.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
@@ -36,7 +36,7 @@
         <activity android:name=".activities.RecipeDetailActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.SearchableActivity"/>
+                    android:value=".activities.SearchActivity"/>
         </activity>
 
         <activity android:name=".activities.DirectionsActivity">

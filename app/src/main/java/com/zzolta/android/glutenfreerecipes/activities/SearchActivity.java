@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Created by Zolta.Szekely on 2015-02-28.
  */
-public class SearchableActivity extends ActionBarActivity {
+public class SearchActivity extends ActionBarActivity {
 
     private RecipeListAdapter recipeListAdapter;
 

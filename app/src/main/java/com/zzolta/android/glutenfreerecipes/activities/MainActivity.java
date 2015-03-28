@@ -1,21 +1,19 @@
 package com.zzolta.android.glutenfreerecipes.activities;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.*;
-import com.google.gson.Gson;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.zzolta.android.glutenfreerecipes.R;
-import com.zzolta.android.glutenfreerecipes.fragments.BaseDetailFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
-import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
-import com.zzolta.android.glutenfreerecipes.utils.DevelopmentConstants;
-import com.zzolta.android.glutenfreerecipes.utils.OfflineRecipeDetailResult;
+import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
@@ -34,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
@@ -44,7 +42,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        final FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                        .replace(R.id.container, MainFragment.newInstance(position + 1))
                        .commit();
@@ -66,7 +64,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     public void restoreActionBar() {
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
@@ -93,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            startActivity(new Intent(this, SearchableActivity.class));
+            startActivity(new Intent(this, SearchActivity.class));
             return true;
         }
 
@@ -103,12 +100,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class MainFragment extends BaseDetailFragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    public static class MainFragment extends Fragment {
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -117,26 +109,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         public static MainFragment newInstance(int sectionNumber) {
             final MainFragment fragment = new MainFragment();
             final Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putInt(ApplicationConstants.ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            final View rootView = super.onCreateView(inflater, container, savedInstanceState);
-
-            if (DevelopmentConstants.OFFLINE) {
-                loadData(new Gson().fromJson(OfflineRecipeDetailResult.pizzaFriesRecipeDetailResult, RecipeDetailResult.class));
-            }
-
-            return rootView;
-        }
-
-        @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
         }
     }
 }
