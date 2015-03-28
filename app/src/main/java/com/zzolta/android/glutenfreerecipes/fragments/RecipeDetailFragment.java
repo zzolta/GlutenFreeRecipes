@@ -1,6 +1,5 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -41,6 +40,7 @@ import com.zzolta.parallax.ParallaxScrollAppCompat;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -96,11 +96,9 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     private void loadData(RecipeDetailResult recipeDetailResult) {
-        setName(recipeDetailResult.getName());
-
         loadImage(getImage(recipeDetailResult));
 
-        loadData(recipeDetailResult.getIngredientLines(), recipeDetailResult.getSource().getSourceRecipeUrl());
+        loadRecipeData(recipeDetailResult.getName(), recipeDetailResult.getIngredientLines(), recipeDetailResult.getSource().getSourceRecipeUrl());
     }
 
     @Nullable
@@ -109,18 +107,9 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     protected void loadData(Recipe recipe) {
-        setName(recipe.getName());
-
         loadImage(recipe.getImagePath());
 
-        loadData(recipe.getIngredients(), recipe.getSourceRecipeUrl());
-    }
-
-    private void setName(String name) {
-        final ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(name);
-        }
+        loadRecipeData(recipe.getName(), recipe.getIngredients(), recipe.getSourceRecipeUrl());
     }
 
     private void loadImage(String imagePath) {
@@ -131,22 +120,23 @@ public class RecipeDetailFragment extends Fragment {
         }
     }
 
-    private void loadData(List<String> ingredients, final String sourceRecipeUrl) {
+    private void loadRecipeData(final String name, List<String> ingredients, final String sourceRecipeUrl) {
         final ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.parallaxList);
 
-        final List<String> groups = new ArrayList<>(Arrays.asList(getString(R.string.ingredients), getString(R.string.directions)));
-        final List<List<String>> groupedItems = new ArrayList<>(2);
+        final List<String> groups = new ArrayList<>(Arrays.asList(name, getString(R.string.ingredients), getString(R.string.directions)));
+        final List<List<String>> groupedItems = new ArrayList<>(3);
+        groupedItems.add(Collections.<String>emptyList());
         groupedItems.add(ingredients);
-        groupedItems.add(new ArrayList<String>(0));
+        groupedItems.add(Collections.<String>emptyList());
 
         final ExpandableListAdapter groupingAdapter = createExpandableListAdapter(groups, groupedItems);
         expandableListView.setAdapter(groupingAdapter);
-        expandableListView.expandGroup(0);
+        expandableListView.expandGroup(1);
 
         expandableListView.setOnGroupExpandListener(new OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                if (groupPosition == 1) {
+                if (groupPosition == 2) {
                     final Intent intent = new Intent(getActivity(), DirectionsActivity.class);
                     intent.putExtra(ApplicationConstants.URL, sourceRecipeUrl);
                     startActivity(intent);
