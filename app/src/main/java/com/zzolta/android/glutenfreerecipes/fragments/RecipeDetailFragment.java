@@ -66,14 +66,14 @@ public class RecipeDetailFragment extends Fragment {
                 } else {
                     final String url = UriBuilder.createGetUri(recipeID).toString();
 
-                    final GsonRequest<RecipeDetailResult> request = new GsonRequest<>(url, RecipeDetailResult.class, getRecipeDetailResultListener(), getErrorListener());
+                    final GsonRequest<RecipeDetailResult> request = new GsonRequest<>(url, RecipeDetailResult.class, new RecipeDetailResultListener(), getErrorListener());
 
                     ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
                 }
             }
         } else {
             //recipe of the day
-            final Listener<RecipeQueryResult> listener = getRecipeQueryResultListener();
+            final Listener<RecipeQueryResult> listener = new RecipeQueryResultListener();
 
             final ErrorListener errorListener = getErrorListener();
 
@@ -87,23 +87,37 @@ public class RecipeDetailFragment extends Fragment {
         return view;
     }
 
-    private Listener<RecipeQueryResult> getRecipeQueryResultListener() {
-        return new RecipeQueryResultListener();
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        parallaxScrollAppCompat = new ParallaxScrollAppCompat()
+                                      .actionBarBackground(R.drawable.actionbar_background)
+                                      .headerLayout(R.layout.header)
+                                      .contentLayout(R.layout.parallax_listview)
+                                      .lightActionBar(true);
+
+        if (activity instanceof MainActivity) {
+            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
+        }
     }
 
-    private Listener<RecipeDetailResult> getRecipeDetailResultListener() {
-        return new RecipeDetailResultListener();
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        parallaxScrollAppCompat.initActionBar(getActivity());
+    }
+
+    @Nullable
+    private String getRecipeId() {
+        return getActivity().getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
     }
 
     private void loadData(RecipeDetailResult recipeDetailResult) {
         loadImage(getImage(recipeDetailResult));
 
         loadRecipeData(recipeDetailResult.getName(), recipeDetailResult.getIngredientLines(), recipeDetailResult.getSource().getSourceRecipeUrl());
-    }
-
-    @Nullable
-    private String getRecipeId() {
-        return getActivity().getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
     }
 
     protected void loadData(Recipe recipe) {
@@ -155,7 +169,7 @@ public class RecipeDetailFragment extends Fragment {
                    .setInflater((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE));
     }
 
-    protected ErrorListener getErrorListener() {
+    private ErrorListener getErrorListener() {
         return new ErrorListener() {
 
             @Override
@@ -181,28 +195,6 @@ public class RecipeDetailFragment extends Fragment {
         return imageUrlsBySize360;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        parallaxScrollAppCompat = new ParallaxScrollAppCompat()
-                                      .actionBarBackground(R.drawable.actionbar_background)
-                                      .headerLayout(R.layout.header)
-                                      .contentLayout(R.layout.parallax_listview)
-                                      .lightActionBar(true);
-
-        if (activity instanceof MainActivity) {
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
-        }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        parallaxScrollAppCompat.initActionBar(getActivity());
-    }
-
     private Recipe getRecipeFromDatabase(String recipeID) {
         try {
             return RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao().queryForId(recipeID);
@@ -223,7 +215,7 @@ public class RecipeDetailFragment extends Fragment {
             if (recipes.size() == 1) {
                 final String url = UriBuilder.createGetUri(recipes.get(0).getId()).toString();
 
-                final GsonRequest<RecipeDetailResult> request = new GsonRequest<>(url, RecipeDetailResult.class, getRecipeDetailResultListener(), getErrorListener());
+                final GsonRequest<RecipeDetailResult> request = new GsonRequest<>(url, RecipeDetailResult.class, new RecipeDetailResultListener(), getErrorListener());
 
                 ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
             } else {
