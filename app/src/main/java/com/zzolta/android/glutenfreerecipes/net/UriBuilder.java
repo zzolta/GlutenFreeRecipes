@@ -26,6 +26,7 @@ public final class UriBuilder {
     private static final String MAX_RESULT = "maxResult";
     private static final String START = "start";
     private static final String RECIPE = "recipe";
+    private static final String ALLOWED_CUISINE = "allowedCuisine[]";
 
     private UriBuilder() {
     }
@@ -49,6 +50,19 @@ public final class UriBuilder {
                    .appendPath(recipeId)
                    .appendQueryParameter(APP_ID, APP_ID_VALUE)
                    .appendQueryParameter(APP_KEY, APP_KEY_VALUE)
+                   .build();
+    }
+
+    public static Uri createCuisineOfTheDayUri() {
+        return getBuilder()
+                   .appendPath(RECIPES)
+                   .appendQueryParameter(APP_ID, APP_ID_VALUE)
+                   .appendQueryParameter(APP_KEY, APP_KEY_VALUE)
+                   .appendQueryParameter(REQUIRE_PICTURES, TRUE)
+                   .appendQueryParameter(ALLOWED_ALLERGY, GLUTEN_FREE)
+                   .appendQueryParameter(ALLOWED_CUISINE, CuisineHelper.getCuisineOfTheDay())
+                   .appendQueryParameter(MAX_RESULT, String.valueOf(1))
+                   .appendQueryParameter(START, "0")
                    .build();
     }
 

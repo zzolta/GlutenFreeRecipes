@@ -16,10 +16,7 @@ public class RecipeDetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_recipe_detail_main);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, new RecipeDetailFragment())
-                .commit();
+            getFragmentManager().beginTransaction().add(R.id.container, new RecipeDetailFragment()).commit();
         }
     }
 }

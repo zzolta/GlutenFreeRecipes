@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
+import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
@@ -41,22 +42,33 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
         final FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                       .replace(R.id.container, MainFragment.newInstance(position + 1))
-                       .commit();
+        final Fragment fragment;
+        if (position == 0) {
+            fragment = new RecipeDetailFragment();
+            final Bundle bundle = new Bundle();
+            bundle.putString(ApplicationConstants.RECIPE_ID, getRecipeOfTheDay());
+            bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
+            fragment.setArguments(bundle);
+        } else {
+            fragment = MainFragment.newInstance(position);
+        }
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
+    private String getRecipeOfTheDay() {
+        return "Pizza-Fries-753754";
+    }
+
+    public void onSectionAttached(int position) {
+        switch (position) {
+            case 0:
                 mTitle = getString(R.string.title_home);
                 break;
-            case 2:
+            case 1:
                 mTitle = getString(R.string.title_my_recipes);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_settings);
                 break;
         }
@@ -106,10 +118,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static MainFragment newInstance(int sectionNumber) {
+        public static MainFragment newInstance(int position) {
             final MainFragment fragment = new MainFragment();
             final Bundle args = new Bundle();
-            args.putInt(ApplicationConstants.ARG_SECTION_NUMBER, sectionNumber);
+            args.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
             fragment.setArguments(args);
             return fragment;
         }
