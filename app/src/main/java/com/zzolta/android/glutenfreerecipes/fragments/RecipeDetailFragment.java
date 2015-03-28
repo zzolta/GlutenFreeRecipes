@@ -45,10 +45,15 @@ public class RecipeDetailFragment extends Fragment {
             if (recipe != null) {
                 recipeDetailHelper.loadData(recipe);
             } else {
-                loadRecipe(recipeID);
+                getRecipeUsingREST(recipeID);
             }
         } else {
-            loadRecipeOfTheDay();
+            final String recipeOfTheDayId = this.getArguments().getString(ApplicationConstants.RECIPE_ID);
+            if (recipeOfTheDayId == null) {
+                loadRecipeOfTheDay();
+            } else {
+                recipeDetailHelper.loadData(getRecipeFromDatabase(recipeOfTheDayId));
+            }
         }
 
         return view;
@@ -76,7 +81,7 @@ public class RecipeDetailFragment extends Fragment {
         parallaxScrollAppCompat.initActionBar(getActivity());
     }
 
-    private void loadRecipe(String recipeID) {
+    private void getRecipeUsingREST(String recipeID) {
         final String url = UriBuilder.createGetUri(recipeID).toString();
 
         final GsonRequest<RecipeDetailResult> request = new GsonRequest<>(url, RecipeDetailResult.class, new RecipeDetailResultListener(getActivity()), new VolleyErrorListener());

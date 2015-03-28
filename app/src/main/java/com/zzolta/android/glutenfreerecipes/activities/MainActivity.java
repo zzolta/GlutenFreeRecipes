@@ -3,7 +3,9 @@ package com.zzolta.android.glutenfreerecipes.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -56,10 +58,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
 
-    private String getRecipeOfTheDay() {
-        return "Pizza-Fries-753754";
-    }
-
     public void onSectionAttached(int position) {
         switch (position) {
             case 0:
@@ -107,6 +105,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private String getRecipeOfTheDay() {
+        final SharedPreferences sharedPreferences = getSharedPreferences(ApplicationConstants.PRIVATE_STORAGE, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, null);
     }
 
     /**
