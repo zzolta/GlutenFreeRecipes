@@ -1,7 +1,7 @@
 package com.zzolta.android.glutenfreerecipes.listeners;
 
+import android.support.v7.app.ActionBarActivity;
 import com.android.volley.Response.Listener;
-import com.zzolta.android.glutenfreerecipes.activities.SearchActivity;
 import com.zzolta.android.glutenfreerecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
@@ -14,10 +14,10 @@ import java.util.List;
  * Created by Zolta.Szekely on 2015-03-28.
  */
 public class RecipeQueryResultListener implements Listener<RecipeQueryResult> {
-    private final SearchActivity searchActivity;
+    private final ActionBarActivity searchActivity;
     private final RecipeListAdapter recipeListAdapter;
 
-    public RecipeQueryResultListener(SearchActivity searchActivity, RecipeListAdapter recipeListAdapter) {
+    public RecipeQueryResultListener(ActionBarActivity searchActivity, RecipeListAdapter recipeListAdapter) {
         this.searchActivity = searchActivity;
         this.recipeListAdapter = recipeListAdapter;
     }
