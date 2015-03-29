@@ -46,28 +46,42 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void onNavigationDrawerItemSelected(int position) {
         final FragmentManager fragmentManager = getFragmentManager();
         final Fragment fragment;
-        if (position == 0) {
-            fragment = new RecipeDetailFragment();
-            final Bundle bundle = new Bundle();
-            bundle.putString(ApplicationConstants.RECIPE_ID, getRecipeOfTheDay());
-            bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
-            fragment.setArguments(bundle);
-        } else {
-            fragment = MainFragment.newInstance(position);
+        switch (position) {
+            case 0:
+                fragment = setupRecipeDetailFragment(position);
+                break;
+            case 1:
+                fragment = MainFragment.newInstance(position);
+                break;
+            case 2:
+                fragment = MainFragment.newInstance(position);
+                break;
+            default:
+                fragment = MainFragment.newInstance(position);
+                break;
         }
         fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+    }
+
+    private Fragment setupRecipeDetailFragment(int position) {
+        final Fragment fragment = new RecipeDetailFragment();
+        final Bundle bundle = new Bundle();
+        bundle.putString(ApplicationConstants.RECIPE_ID, getRecipeOfTheDay());
+        bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     public void onSectionAttached(int position) {
         switch (position) {
             case 0:
-                mTitle = getString(R.string.title_home);
+                mTitle = getString(R.string.recipe_of_the_day_menu);
                 break;
             case 1:
-                mTitle = getString(R.string.title_my_recipes);
+                mTitle = getString(R.string.search_menu);
                 break;
             case 2:
-                mTitle = getString(R.string.title_settings);
+                mTitle = getString(R.string.help_and_feedback_menu);
                 break;
         }
     }

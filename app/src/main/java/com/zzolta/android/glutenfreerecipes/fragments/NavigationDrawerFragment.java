@@ -87,9 +87,9 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
         final String[] menuItems = {
-                                       getString(R.string.title_home),
-                                       getString(R.string.title_my_recipes),
-                                       getString(R.string.title_settings)
+                                       getString(R.string.recipe_of_the_day_menu),
+                                       getString(R.string.search_menu),
+                                       getString(R.string.help_and_feedback_menu)
         };
         drawerListView.setAdapter(new ArrayAdapter<>(
                                                          getActionBar().getThemedContext(),
