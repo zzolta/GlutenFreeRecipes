@@ -34,7 +34,7 @@ public class SearchActivity extends ActionBarActivity {
         final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false);
-
+        searchView.requestFocus();
         return true;
     }
 }
