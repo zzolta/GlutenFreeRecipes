@@ -1,6 +1,5 @@
 package com.zzolta.android.glutenfreerecipes.activities;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -49,18 +48,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         switch (position) {
             case 0:
                 fragment = setupRecipeDetailFragment(position);
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                 break;
             case 1:
-                fragment = MainFragment.newInstance(position);
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 break;
             case 2:
-                fragment = MainFragment.newInstance(position);
                 break;
             default:
-                fragment = MainFragment.newInstance(position);
                 break;
         }
-        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
 
     private Fragment setupRecipeDetailFragment(int position) {
@@ -82,6 +79,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
             case 2:
                 mTitle = getString(R.string.help_and_feedback_menu);
+                break;
+            default:
                 break;
         }
     }
@@ -124,29 +123,5 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private String getRecipeOfTheDay() {
         final SharedPreferences sharedPreferences = getSharedPreferences(ApplicationConstants.PRIVATE_STORAGE, Context.MODE_PRIVATE);
         return sharedPreferences.getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, null);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class MainFragment extends Fragment {
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static MainFragment newInstance(int position) {
-            final MainFragment fragment = new MainFragment();
-            final Bundle args = new Bundle();
-            args.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
-        }
     }
 }
