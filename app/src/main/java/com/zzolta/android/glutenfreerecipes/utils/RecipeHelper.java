@@ -54,7 +54,7 @@ public final class RecipeHelper {
                                   .setIngredients(new ArrayList<>(recipeDetailResult.getIngredientLines()))
                                   .setRating(recipeDetailResult.getRating())
                                   .setTotalTimeInSeconds(recipeDetailResult.getTotalTimeInSeconds())
-                                  .setImagePath(recipeDetailResult.getSource().getSourceRecipeUrl());
+                                  .setSourceRecipeUrl(recipeDetailResult.getSource().getSourceRecipeUrl());
 
         final String imageUrlsBySize360 = getImage(recipeDetailResult);
 
