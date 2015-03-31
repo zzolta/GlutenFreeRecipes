@@ -41,7 +41,7 @@ public final class CuisineHelper {
         return CUISINE + CUISINES[index];
     }
 
-    private static int getDayOfYear() {
+    public static int getDayOfYear() {
         final Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.DAY_OF_YEAR);
     }

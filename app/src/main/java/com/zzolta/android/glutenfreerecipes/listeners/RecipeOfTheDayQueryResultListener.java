@@ -9,6 +9,7 @@ import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailR
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
+import com.zzolta.android.glutenfreerecipes.net.CuisineHelper;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
@@ -49,6 +50,7 @@ public class RecipeOfTheDayQueryResultListener implements Listener<RecipeQueryRe
     private void saveRecipeIdOfTheDay(String recipeId) {
         final SharedPreferences sharedPreferences = activity.getSharedPreferences(ApplicationConstants.PRIVATE_STORAGE, Context.MODE_PRIVATE);
         final Editor editor = sharedPreferences.edit();
+        editor.putString(ApplicationConstants.DAY_OF_YEAR, String.valueOf(CuisineHelper.getDayOfYear()));
         editor.putString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, recipeId);
         editor.apply();
     }

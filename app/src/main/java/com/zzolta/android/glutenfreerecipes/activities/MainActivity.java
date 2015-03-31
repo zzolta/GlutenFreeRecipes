@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +16,7 @@ import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
+import com.zzolta.android.glutenfreerecipes.net.CuisineHelper;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
@@ -63,7 +65,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private Fragment setupRecipeDetailFragment(int position) {
         final Fragment fragment = new RecipeDetailFragment();
         final Bundle bundle = new Bundle();
-        bundle.putString(ApplicationConstants.RECIPE_ID, getRecipeOfTheDay());
+        final String recipeOfTheDay = getRecipeOfTheDay();
+        if (recipeOfTheDay != null) {
+            bundle.putString(ApplicationConstants.RECIPE_ID, recipeOfTheDay);
+        }
         bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
         fragment.setArguments(bundle);
         return fragment;
@@ -120,8 +125,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         return super.onOptionsItemSelected(item);
     }
 
+    @Nullable
     private String getRecipeOfTheDay() {
+        String recipeOfTheDay = null;
         final SharedPreferences sharedPreferences = getSharedPreferences(ApplicationConstants.PRIVATE_STORAGE, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, null);
+        final String dayOfYear = sharedPreferences.getString(ApplicationConstants.DAY_OF_YEAR, null);
+        if (dayOfYear != null && dayOfYear.equals(CuisineHelper.getCuisineOfTheDay())) {
+            recipeOfTheDay = sharedPreferences.getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, null);
+        }
+        return recipeOfTheDay;
     }
 }

@@ -11,6 +11,7 @@ public final class ApplicationConstants {
     public static final int MAX_RESULT_VALUE = 6;
     public static final String PRIVATE_STORAGE = "PRIVATE_STORAGE";
     public static final String RECIPE_OF_THE_DAY_ID = "RECIPE_OF_THE_DAY_ID";
+    public static final String DAY_OF_YEAR = "DAY_OF_YEAR";
 
     private ApplicationConstants() {
     }
