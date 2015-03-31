@@ -47,15 +47,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void onNavigationDrawerItemSelected(int position) {
         final FragmentManager fragmentManager = getFragmentManager();
         final Fragment fragment;
-        switch (position) {
-            case 0:
+        switch (Section.values()[position]) {
+            case RECIPE_OF_THE_DAY:
                 fragment = setupRecipeDetailFragment(position);
                 fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                 break;
-            case 1:
+            case SEARCH:
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 break;
-            case 2:
+            case SETTINGS:
+                break;
+            case HELP_AND_FEEDBACK:
                 break;
             default:
                 break;
@@ -75,14 +77,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
 
     public void onSectionAttached(int position) {
-        switch (position) {
-            case 0:
+        switch (Section.values()[position]) {
+            case RECIPE_OF_THE_DAY:
                 mTitle = getString(R.string.recipe_of_the_day_menu);
                 break;
-            case 1:
+            case SEARCH:
                 mTitle = getString(R.string.search_menu);
                 break;
-            case 2:
+            case SETTINGS:
+                mTitle = getString(R.string.settings_menu);
+                break;
+            case HELP_AND_FEEDBACK:
                 mTitle = getString(R.string.help_and_feedback_menu);
                 break;
             default:
@@ -134,5 +139,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             recipeOfTheDay = sharedPreferences.getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, null);
         }
         return recipeOfTheDay;
+    }
+
+    private enum Section {
+        RECIPE_OF_THE_DAY,
+        SEARCH,
+        SETTINGS,
+        HELP_AND_FEEDBACK
     }
 }

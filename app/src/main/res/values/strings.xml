@@ -3,6 +3,7 @@
 
     <string name="recipe_of_the_day_menu">Recipe of the Day</string>
     <string name="search_menu">Search</string>
+    <string name="settings_menu">Settings</string>
     <string name="help_and_feedback_menu">Help and Feedback</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -10,6 +11,8 @@
 
     <string name="action_search">Search</string>
     <string name="action_share">Share</string>
+    <string name="action_clear_search_history">Clear search history</string>
+    <string name="confirmation_clear_search_history">Do you really want to clear the search history?</string>
     <string name="search_hint">Search for recipes</string>
 
     <string name="recipe_detail_image" translateable="false">Detail image of the recipe</string>

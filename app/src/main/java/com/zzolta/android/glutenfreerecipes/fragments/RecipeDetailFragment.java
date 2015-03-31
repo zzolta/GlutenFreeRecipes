@@ -1,12 +1,19 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
+import android.R.drawable;
+import android.R.string;
 import android.app.Activity;
+import android.app.AlertDialog.Builder;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.*;
+import android.view.MenuItem.OnMenuItemClickListener;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.MainActivity;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
@@ -20,6 +27,7 @@ import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
 import com.zzolta.android.glutenfreerecipes.persistence.database.RecipeDBHelper;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 import com.zzolta.android.glutenfreerecipes.providers.RecipeDetailShareActionProvider;
+import com.zzolta.android.glutenfreerecipes.providers.RecipeSearchRecentSuggestionsProvider;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 import com.zzolta.android.glutenfreerecipes.utils.RecipeDetailHelper;
 import com.zzolta.parallax.ParallaxScrollAppCompat;
@@ -88,8 +96,28 @@ public class RecipeDetailFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_detail, menu);
 
-        final MenuItem menuItem = menu.findItem(R.id.action_share);
-        RecipeDetailShareActionProvider.getInstance().setShareActionProvider((ShareActionProvider) MenuItemCompat.getActionProvider(menuItem));
+        final MenuItem share = menu.findItem(R.id.action_share);
+        RecipeDetailShareActionProvider.getInstance().setShareActionProvider((ShareActionProvider) MenuItemCompat.getActionProvider(share));
+
+        final MenuItem clearSearchHistory = menu.findItem(R.id.action_clear_search_history);
+        clearSearchHistory.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                new Builder(getActivity())
+                    .setTitle(getString(R.string.action_clear_search_history))
+                    .setMessage(getString(R.string.confirmation_clear_search_history))
+                    .setIcon(drawable.ic_dialog_alert)
+                    .setPositiveButton(string.yes, new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(), RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
+                            suggestions.clearHistory();
+                        }
+                    })
+                    .setNegativeButton(string.no, null).show();
+                return false;
+            }
+        });
     }
 
     private void getRecipeUsingREST(String recipeID) {
