@@ -3,6 +3,7 @@ package com.zzolta.android.glutenfreerecipes.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
@@ -15,6 +16,7 @@ import com.zzolta.android.glutenfreerecipes.adapters.GroupingAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
+import com.zzolta.android.glutenfreerecipes.providers.RecipeDetailShareActionProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +54,17 @@ public final class RecipeDetailHelper {
 
     public void loadData(RecipeDetailResult recipeDetailResult) {
         loadData(RecipeHelper.convertRecipe(recipeDetailResult));
+        ShareActionProvider shareActionProvider = RecipeDetailShareActionProvider.getInstance().getShareActionProvider();
+        if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(createShareRecipeIntent(recipeDetailResult.getSource().getSourceRecipeUrl()));
+        }
+    }
+
+    private Intent createShareRecipeIntent(String sourceRecipeUrl) {
+        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, sourceRecipeUrl);
+        return shareIntent;
     }
 
     private void loadImage(String imagePath) {

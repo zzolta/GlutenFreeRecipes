@@ -3,10 +3,10 @@ package com.zzolta.android.glutenfreerecipes.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.MainActivity;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
@@ -19,6 +19,7 @@ import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
 import com.zzolta.android.glutenfreerecipes.persistence.database.RecipeDBHelper;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
+import com.zzolta.android.glutenfreerecipes.providers.RecipeDetailShareActionProvider;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 import com.zzolta.android.glutenfreerecipes.utils.RecipeDetailHelper;
 import com.zzolta.parallax.ParallaxScrollAppCompat;
@@ -41,6 +42,7 @@ public class RecipeDetailFragment extends Fragment {
 
         final String recipeID = getActivity().getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
         if (recipeID != null) {
+            //recipe detail
             final Recipe recipe = getRecipeFromDatabase(recipeID);
             if (recipe != null) {
                 recipeDetailHelper.loadData(recipe);
@@ -48,6 +50,7 @@ public class RecipeDetailFragment extends Fragment {
                 getRecipeUsingREST(recipeID);
             }
         } else {
+            //recipe of the day
             final String recipeOfTheDayId = this.getArguments().getString(ApplicationConstants.RECIPE_ID);
             if (recipeOfTheDayId == null) {
                 loadRecipeOfTheDay();
@@ -55,7 +58,7 @@ public class RecipeDetailFragment extends Fragment {
                 recipeDetailHelper.loadData(getRecipeFromDatabase(recipeOfTheDayId));
             }
         }
-
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -79,6 +82,14 @@ public class RecipeDetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         parallaxScrollAppCompat.initActionBar(getActivity());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_detail, menu);
+
+        final MenuItem menuItem = menu.findItem(R.id.action_share);
+        RecipeDetailShareActionProvider.getInstance().setShareActionProvider((ShareActionProvider) MenuItemCompat.getActionProvider(menuItem));
     }
 
     private void getRecipeUsingREST(String recipeID) {

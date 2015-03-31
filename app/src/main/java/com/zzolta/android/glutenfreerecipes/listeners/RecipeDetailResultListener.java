@@ -24,8 +24,8 @@ public class RecipeDetailResultListener implements Listener<RecipeDetailResult> 
 
     @Override
     public void onResponse(RecipeDetailResult recipeDetailResult) {
-        saveRecipe(RecipeHelper.convertRecipe(recipeDetailResult));
         RecipeDetailHelper.getInstance().loadData(recipeDetailResult);
+        saveRecipe(RecipeHelper.convertRecipe(recipeDetailResult));
     }
 
     private void saveRecipe(Recipe recipe) {
