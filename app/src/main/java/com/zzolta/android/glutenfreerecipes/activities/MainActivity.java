@@ -55,8 +55,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             case SEARCH:
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 break;
-            case SETTINGS:
-                break;
             case HELP_AND_FEEDBACK:
                 break;
             default:
@@ -83,9 +81,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
             case SEARCH:
                 mTitle = getString(R.string.search_menu);
-                break;
-            case SETTINGS:
-                mTitle = getString(R.string.settings_menu);
                 break;
             case HELP_AND_FEEDBACK:
                 mTitle = getString(R.string.help_and_feedback_menu);
@@ -144,7 +139,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private enum Section {
         RECIPE_OF_THE_DAY,
         SEARCH,
-        SETTINGS,
         HELP_AND_FEEDBACK
     }
 }
