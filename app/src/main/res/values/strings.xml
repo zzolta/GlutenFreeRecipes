@@ -18,4 +18,14 @@
 
     <string name="ingredients">Ingredients</string>
     <string name="directions">Click here for directions</string>
+
+    <string name="feedback_user_name">Name (optional)</string>
+    <string name="feedback_wants_response">Would you like an email response?</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="feedback_type">Select feedback type</string>
+    <string name="feedback_body">Details...</string>
+    <string name="feedback_praise">Praise</string>
+    <string name="feedback_gripe">Gripe</string>
+    <string name="feedback_suggestion">Suggestion</string>
+    <string name="feedback_bug">Bug</string>
 </resources>

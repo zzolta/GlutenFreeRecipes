@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="feedback_type_list">
+        <item>@string/feedback_praise</item>
+        <item>@string/feedback_gripe</item>
+        <item>@string/feedback_suggestion</item>
+        <item>@string/feedback_bug</item>
+    </string-array>
+</resources>
