@@ -18,5 +18,6 @@ public final class Contract {
         public static final String RATING = "rating";
         public static final String IMAGE_PATH = "imagePath";
         public static final String SOURCE_RECIPE_URL = "sourceRecipeUrl";
+        public static final String MY_RECIPE = "myRecipe";
     }
 }

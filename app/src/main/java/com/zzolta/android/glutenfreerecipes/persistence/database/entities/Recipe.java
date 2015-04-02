@@ -27,6 +27,8 @@ public class Recipe {
     private String imagePath;
     @DatabaseField(columnName = Contract.Recipe.SOURCE_RECIPE_URL)
     private String sourceRecipeUrl;
+    @DatabaseField(columnName = Contract.Recipe.MY_RECIPE)
+    private boolean myRecipe;
 
     public String getId() {
         return id;
@@ -88,6 +90,15 @@ public class Recipe {
 
     public Recipe setSourceRecipeUrl(String sourceRecipeUrl) {
         this.sourceRecipeUrl = sourceRecipeUrl;
+        return this;
+    }
+
+    public Boolean getMyRecipe() {
+        return myRecipe;
+    }
+
+    public Recipe setMyRecipe(Boolean myRecipe) {
+        this.myRecipe = myRecipe;
         return this;
     }
 }

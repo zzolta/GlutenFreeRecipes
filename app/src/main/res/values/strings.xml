@@ -3,6 +3,7 @@
 
     <string name="recipe_of_the_day_menu">Recipe of the Day</string>
     <string name="search_menu">Search</string>
+    <string name="my_recipes_menu">My Recipes</string>
     <string name="feedback_menu">Feedback</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -28,4 +29,7 @@
     <string name="feedback_gripe">Gripe</string>
     <string name="feedback_suggestion">Suggestion</string>
     <string name="feedback_bug">Bug</string>
+
+    <string name="action_add_to_my_recipes">Add to my recipes</string>
+    <string name="action_remove_from_my_recipes">Remove from my recipes</string>
 </resources>

@@ -30,6 +30,7 @@ public final class RecipeDetailHelper {
     private static final RecipeDetailHelper INSTANCE = new RecipeDetailHelper();
     private Activity mActivity;
     private View mView;
+    private String currentRecipeId;
 
     private RecipeDetailHelper() {
     }
@@ -47,6 +48,7 @@ public final class RecipeDetailHelper {
     }
 
     public void loadData(Recipe recipe) {
+        currentRecipeId = recipe.getId();
         loadImage(recipe.getImagePath());
 
         loadRecipeData(recipe.getName(), recipe.getIngredients(), recipe.getSourceRecipeUrl());
@@ -54,10 +56,14 @@ public final class RecipeDetailHelper {
 
     public void loadData(RecipeDetailResult recipeDetailResult) {
         loadData(RecipeHelper.convertRecipe(recipeDetailResult));
-        ShareActionProvider shareActionProvider = RecipeDetailShareActionProvider.getInstance().getShareActionProvider();
+        final ShareActionProvider shareActionProvider = RecipeDetailShareActionProvider.getInstance().getShareActionProvider();
         if (shareActionProvider != null) {
             shareActionProvider.setShareIntent(createShareRecipeIntent(recipeDetailResult.getSource().getSourceRecipeUrl()));
         }
+    }
+
+    public String getCurrentRecipeId() {
+        return currentRecipeId;
     }
 
     private Intent createShareRecipeIntent(String sourceRecipeUrl) {

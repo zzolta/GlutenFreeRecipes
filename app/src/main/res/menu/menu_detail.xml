@@ -8,6 +8,16 @@
             app:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
 
     <item
+            android:id="@+id/action_add_to_my_recipes"
+            android:title="@string/action_add_to_my_recipes"
+            app:showAsAction="collapseActionView"/>
+
+    <item
+            android:id="@+id/action_remove_from_my_recipes"
+            android:title="@string/action_remove_from_my_recipes"
+            app:showAsAction="collapseActionView"/>
+
+    <item
             android:id="@+id/action_clear_search_history"
             android:title="@string/action_clear_search_history"
             app:showAsAction="collapseActionView"/>

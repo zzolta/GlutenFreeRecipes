@@ -14,6 +14,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
+import com.j256.ormlite.dao.Dao;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.MainActivity;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
@@ -115,9 +116,62 @@ public class RecipeDetailFragment extends Fragment {
                         }
                     })
                     .setNegativeButton(string.no, null).show();
-                return false;
+                return true;
             }
         });
+
+        final MenuItem addToMyRecipes = menu.findItem(R.id.action_add_to_my_recipes);
+        addToMyRecipes.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                myRecipeHandler(true);
+                return true;
+            }
+        });
+
+        final MenuItem removeFromMyRecipes = menu.findItem(R.id.action_remove_from_my_recipes);
+        removeFromMyRecipes.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                myRecipeHandler(false);
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+
+        final String recipeId = RecipeDetailHelper.getInstance().getCurrentRecipeId();
+        try {
+            final Dao<Recipe, String> recipeDao = RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao();
+            final Recipe recipe = recipeDao.queryForId(recipeId);
+            final MenuItem addToMyRecipes = menu.findItem(R.id.action_add_to_my_recipes);
+            final MenuItem removeFromMyRecipes = menu.findItem(R.id.action_remove_from_my_recipes);
+            if (recipe.getMyRecipe()) {
+                addToMyRecipes.setVisible(false);
+                removeFromMyRecipes.setVisible(true);
+            } else {
+                addToMyRecipes.setVisible(true);
+                removeFromMyRecipes.setVisible(false);
+            }
+        }
+        catch (final SQLException e) {
+            Log.e(LOG_TAG, e.getMessage());
+        }
+    }
+
+    private void myRecipeHandler(boolean myRecipe) {
+        final String recipeId = RecipeDetailHelper.getInstance().getCurrentRecipeId();
+        try {
+            final Dao<Recipe, String> recipeDao = RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao();
+            final Recipe recipe = recipeDao.queryForId(recipeId);
+            recipe.setMyRecipe(myRecipe);
+            recipeDao.update(recipe);
+        }
+        catch (final SQLException e) {
+            Log.e(LOG_TAG, e.getMessage());
+        }
     }
 
     private void getRecipeUsingREST(String recipeID) {

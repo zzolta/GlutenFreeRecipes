@@ -89,13 +89,14 @@ public class NavigationDrawerFragment extends Fragment {
         final String[] menuItems = {
                                        getString(R.string.recipe_of_the_day_menu),
                                        getString(R.string.search_menu),
+                                       getString(R.string.my_recipes_menu),
                                        getString(R.string.feedback_menu)
         };
         drawerListView.setAdapter(new ArrayAdapter<>(
-                                                         getActionBar().getThemedContext(),
-                                                         android.R.layout.simple_list_item_activated_1,
-                                                         android.R.id.text1,
-                                                         menuItems));
+                                                        getActionBar().getThemedContext(),
+                                                        android.R.layout.simple_list_item_activated_1,
+                                                        android.R.id.text1,
+                                                        menuItems));
         drawerListView.setItemChecked(currentSelectedPosition, true);
         return drawerListView;
     }
@@ -124,10 +125,10 @@ public class NavigationDrawerFragment extends Fragment {
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
         actionBarDrawerToggle = new ActionBarDrawerToggle(
-                                                     getActivity(),                    /* host Activity */
-                                                     NavigationDrawerFragment.this.drawerLayout,                    /* DrawerLayout object */
-                                                     R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
-                                                     R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
+                                                             getActivity(),                    /* host Activity */
+                                                             NavigationDrawerFragment.this.drawerLayout,                    /* DrawerLayout object */
+                                                             R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
+                                                             R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
             @Override
             public void onDrawerClosed(View drawerView) {

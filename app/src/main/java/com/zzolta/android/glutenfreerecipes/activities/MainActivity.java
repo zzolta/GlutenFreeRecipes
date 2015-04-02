@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.fragments.FeedbackFragment;
+import com.zzolta.android.glutenfreerecipes.fragments.MyRecipesFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
@@ -56,6 +57,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             case SEARCH:
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 break;
+            case MY_RECIPES:
+                fragment = setupMyRecipesFragment(position);
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                break;
             case FEEDBACK:
                 fragment = setupFeedbackFragment(position);
                 fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
@@ -63,6 +68,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             default:
                 break;
         }
+    }
+
+    private Fragment setupMyRecipesFragment(int position) {
+        final Fragment fragment = new MyRecipesFragment();
+        final Bundle bundle = new Bundle();
+        bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     private Fragment setupRecipeDetailFragment(int position) {
@@ -92,6 +105,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
             case SEARCH:
                 mTitle = getString(R.string.search_menu);
+                break;
+            case MY_RECIPES:
+                mTitle = getString(R.string.my_recipes_menu);
                 break;
             case FEEDBACK:
                 mTitle = getString(R.string.feedback_menu);
@@ -141,7 +157,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         String recipeOfTheDay = null;
         final SharedPreferences sharedPreferences = getSharedPreferences(ApplicationConstants.PRIVATE_STORAGE, Context.MODE_PRIVATE);
         final String dayOfYear = sharedPreferences.getString(ApplicationConstants.DAY_OF_YEAR, null);
-        if (dayOfYear != null && dayOfYear.equals(CuisineHelper.getCuisineOfTheDay())) {
+        if (dayOfYear != null && dayOfYear.equals(String.valueOf(CuisineHelper.getDayOfYear()))) {
             recipeOfTheDay = sharedPreferences.getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, null);
         }
         return recipeOfTheDay;
@@ -150,6 +166,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private enum Section {
         RECIPE_OF_THE_DAY,
         SEARCH,
+        MY_RECIPES,
         FEEDBACK
     }
 }
