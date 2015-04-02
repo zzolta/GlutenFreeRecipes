@@ -81,10 +81,7 @@ public abstract class ParallaxScroll {
                 updateHeaderHeight(currentHeaderHeight);
             }
 
-            final int headerHeight = currentHeaderHeight - getActionBarHeight();
-            final float ratio = (float) Math.min(Math.max(scrollPosition, 0), headerHeight) / headerHeight;
-            final int newAlpha = (int) (ratio * 255);
-            mActionBarBackgroundDrawable.setAlpha(newAlpha);
+            mActionBarBackgroundDrawable.setAlpha(255);
 
             addParallaxEffect(scrollPosition);
         }
@@ -172,7 +169,7 @@ public abstract class ParallaxScroll {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             mActionBarBackgroundDrawable.setCallback(mDrawableCallback);
         }
-        mActionBarBackgroundDrawable.setAlpha(0);
+        mActionBarBackgroundDrawable.setAlpha(255);
     }
 
     @Nullable

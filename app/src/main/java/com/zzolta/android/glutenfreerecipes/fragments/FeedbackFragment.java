@@ -23,7 +23,7 @@ public class FeedbackFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final LinearLayout feedbackForm = (LinearLayout) inflater.inflate(R.layout.feedback_form, container, false);
+        final ScrollView feedbackForm = (ScrollView) inflater.inflate(R.layout.feedback_form, container, false);
         final Spinner feedbackSpinner = (Spinner) feedbackForm.findViewById(R.id.feedback_type);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.feedback_type_list, R.layout.spinner_item);
         feedbackSpinner.setAdapter(adapter);

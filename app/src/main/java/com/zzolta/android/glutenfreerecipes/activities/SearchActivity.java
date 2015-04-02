@@ -23,6 +23,8 @@ public class SearchActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction().add(R.id.container, new SearchFragment()).commit();
         }
+
+        getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.color.list_row));
     }
 
     @Override
