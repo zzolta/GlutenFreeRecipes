@@ -75,7 +75,7 @@ public final class RecipeDetailHelper {
 
     private void loadImage(String imagePath) {
         final NetworkImageView recipeImage = (NetworkImageView) mView.findViewById(R.id.recipe_image);
-        recipeImage.setDefaultImageResId(R.mipmap.recipe_big_placeholder);
+        recipeImage.setDefaultImageResId(R.mipmap.recipe_placeholder);
         if (imagePath != null) {
             recipeImage.setImageUrl(imagePath, ApplicationRequestQueue.getInstance(mActivity.getApplicationContext()).getImageLoader());
         }
