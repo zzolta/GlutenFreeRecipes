@@ -143,34 +143,38 @@ public class RecipeDetailFragment extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
 
         final String recipeId = RecipeDetailHelper.getInstance().getCurrentRecipeId();
-        try {
-            final Dao<Recipe, String> recipeDao = RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao();
-            final Recipe recipe = recipeDao.queryForId(recipeId);
-            final MenuItem addToMyRecipes = menu.findItem(R.id.action_add_to_my_recipes);
-            final MenuItem removeFromMyRecipes = menu.findItem(R.id.action_remove_from_my_recipes);
-            if (recipe.getMyRecipe()) {
-                addToMyRecipes.setVisible(false);
-                removeFromMyRecipes.setVisible(true);
-            } else {
-                addToMyRecipes.setVisible(true);
-                removeFromMyRecipes.setVisible(false);
+        if (recipeId != null) {
+            try {
+                final Dao<Recipe, String> recipeDao = RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao();
+                final Recipe recipe = recipeDao.queryForId(recipeId);
+                final MenuItem addToMyRecipes = menu.findItem(R.id.action_add_to_my_recipes);
+                final MenuItem removeFromMyRecipes = menu.findItem(R.id.action_remove_from_my_recipes);
+                if (recipe.getMyRecipe()) {
+                    addToMyRecipes.setVisible(false);
+                    removeFromMyRecipes.setVisible(true);
+                } else {
+                    addToMyRecipes.setVisible(true);
+                    removeFromMyRecipes.setVisible(false);
+                }
             }
-        }
-        catch (final SQLException e) {
-            Log.e(LOG_TAG, e.getMessage());
+            catch (final SQLException e) {
+                Log.e(LOG_TAG, e.getMessage());
+            }
         }
     }
 
     private void myRecipeHandler(boolean myRecipe) {
         final String recipeId = RecipeDetailHelper.getInstance().getCurrentRecipeId();
-        try {
-            final Dao<Recipe, String> recipeDao = RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao();
-            final Recipe recipe = recipeDao.queryForId(recipeId);
-            recipe.setMyRecipe(myRecipe);
-            recipeDao.update(recipe);
-        }
-        catch (final SQLException e) {
-            Log.e(LOG_TAG, e.getMessage());
+        if (recipeId != null) {
+            try {
+                final Dao<Recipe, String> recipeDao = RecipeDBHelper.getInstance(getActivity().getApplicationContext()).getDao();
+                final Recipe recipe = recipeDao.queryForId(recipeId);
+                recipe.setMyRecipe(myRecipe);
+                recipeDao.update(recipe);
+            }
+            catch (final SQLException e) {
+                Log.e(LOG_TAG, e.getMessage());
+            }
         }
     }
 
