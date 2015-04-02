@@ -2,6 +2,8 @@ package com.zzolta.android.glutenfreerecipes.net;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.LruCache;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,11 +18,13 @@ public final class ApplicationRequestQueue {
     private static ApplicationRequestQueue instance;
     private final RequestQueue requestQueue;
     private final ImageLoader imageLoader;
+    private final Context context;
 
     private ApplicationRequestQueue(Context context) {
+        this.context = context;
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         imageLoader = new ImageLoader(requestQueue, new ImageCache() {
-            private final LruCache<String, Bitmap> imageCache = new LruCache<>(10);
+            private final LruCache<String, Bitmap> imageCache = new LruCache<>(100);
 
             @Override
             public Bitmap getBitmap(String url) {
@@ -42,10 +46,18 @@ public final class ApplicationRequestQueue {
     }
 
     public <T> void addToRequestQueue(Request<T> request) {
-        this.requestQueue.add(request);
+        if (isNetworkConnected()) {
+            this.requestQueue.add(request);
+        }
     }
 
     public ImageLoader getImageLoader() {
         return imageLoader;
+    }
+
+    private boolean isNetworkConnected() {
+        final ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.getState() == NetworkInfo.State.CONNECTED;
     }
 }

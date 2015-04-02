@@ -9,11 +9,11 @@ import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailR
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.Match;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.net.ApplicationRequestQueue;
-import com.zzolta.android.glutenfreerecipes.net.CuisineHelper;
 import com.zzolta.android.glutenfreerecipes.net.GsonRequest;
 import com.zzolta.android.glutenfreerecipes.net.UriBuilder;
 import com.zzolta.android.glutenfreerecipes.persistence.database.entities.Recipe;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
+import com.zzolta.android.glutenfreerecipes.utils.CuisineHelper;
 import com.zzolta.android.glutenfreerecipes.utils.RecipeHelper;
 
 import java.util.List;

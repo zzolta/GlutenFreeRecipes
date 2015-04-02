@@ -3,6 +3,7 @@ package com.zzolta.android.glutenfreerecipes.net;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
+import com.zzolta.android.glutenfreerecipes.utils.CuisineHelper;
 
 /**
  * Created by Zolta.Szekely on 2015-02-28.

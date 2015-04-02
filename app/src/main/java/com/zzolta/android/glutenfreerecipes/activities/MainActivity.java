@@ -18,8 +18,8 @@ import com.zzolta.android.glutenfreerecipes.fragments.MyRecipesFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
-import com.zzolta.android.glutenfreerecipes.net.CuisineHelper;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
+import com.zzolta.android.glutenfreerecipes.utils.CuisineHelper;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 

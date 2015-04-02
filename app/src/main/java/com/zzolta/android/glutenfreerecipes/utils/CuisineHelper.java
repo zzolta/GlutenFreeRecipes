@@ -1,4 +1,4 @@
-package com.zzolta.android.glutenfreerecipes.net;
+package com.zzolta.android.glutenfreerecipes.utils;
 
 import java.util.Calendar;
 
