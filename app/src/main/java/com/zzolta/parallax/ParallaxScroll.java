@@ -194,7 +194,7 @@ public abstract class ParallaxScroll {
         final ViewGroup contentContainer = (ViewGroup) mInflater.inflate(R.layout.parallax_listview_container, null);
         contentContainer.addView(mContentView);
 
-        mHeaderContainer = (FrameLayout) contentContainer.findViewById(R.id.fab__header_container);
+        mHeaderContainer = (FrameLayout) contentContainer.findViewById(R.id.parallax_header_container);
         initializeGradient(mHeaderContainer);
         addHeaderView(mHeaderContainer, mHeaderLayoutResId);
 
@@ -203,7 +203,7 @@ public abstract class ParallaxScroll {
         listView.addHeaderView(mMarginView, null, false);
 
         // Make the background as high as the screen so that it fills regardless of the amount of scroll.
-        mListViewBackgroundView = contentContainer.findViewById(R.id.fab__listview_background);
+        mListViewBackgroundView = contentContainer.findViewById(R.id.parallax_listview_background);
         final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mListViewBackgroundView.getLayoutParams();
         params.height = getDisplayHeight(listView.getContext());
         mListViewBackgroundView.setLayoutParams(params);
@@ -232,7 +232,7 @@ public abstract class ParallaxScroll {
     }
 
     private void initializeGradient(ViewGroup headerContainer) {
-        final View gradientView = headerContainer.findViewById(R.id.fab__gradient);
+        final View gradientView = headerContainer.findViewById(R.id.parallax_gradient);
         int gradient = R.drawable.parallax_gradient;
         if (mLightActionBar) {
             gradient = R.drawable.parallax_gradient_light;

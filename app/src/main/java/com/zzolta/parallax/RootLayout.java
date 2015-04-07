@@ -28,10 +28,10 @@ public class RootLayout extends FrameLayout {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         //at first find headerViewContainer and listViewBackground
         if (headerContainer == null) {
-            headerContainer = findViewById(R.id.fab__header_container);
+            headerContainer = findViewById(R.id.parallax_header_container);
         }
         if (listViewBackground == null) {
-            listViewBackground = findViewById(R.id.fab__listview_background);
+            listViewBackground = findViewById(R.id.parallax_listview_background);
         }
 
         //if there's no headerViewContainer then fallback to standard FrameLayout

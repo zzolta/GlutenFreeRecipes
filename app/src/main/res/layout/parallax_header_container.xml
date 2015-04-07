@@ -2,12 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              tools:ignore="MergeRootFrame"
-             android:id="@+id/fab__header_container"
+             android:id="@+id/parallax_header_container"
              android:layout_width="match_parent"
              android:layout_height="wrap_content">
 
     <View
-            android:id="@+id/fab__gradient"
+            android:id="@+id/parallax_gradient"
             android:layout_width="match_parent"
             android:layout_height="100dp"/>
 
