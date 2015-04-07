@@ -2,6 +2,6 @@
 <com.android.volley.toolbox.NetworkImageView xmlns:android="http://schemas.android.com/apk/res/android"
                                              android:id="@+id/recipe_image"
                                              android:layout_width="match_parent"
-                                             android:layout_height="250dp"
+                                             android:layout_height="360dp"
                                              android:adjustViewBounds="true"
                                              android:scaleType="centerCrop"/>
