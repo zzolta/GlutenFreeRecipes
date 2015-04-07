@@ -18,6 +18,10 @@
                 android:layout_width="match_parent"
                 android:hint="@string/feedback_user_name"
                 android:inputType="textPersonName"
+                android:background="@drawable/backwithborder"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:layout_margin="5dp"
                 android:textSize="20sp"/>
 
         <Spinner
@@ -26,6 +30,9 @@
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
                 android:prompt="@string/feedback_type"
+                android:textColor="@color/white"
+                android:layout_margin="5dp"
+                android:background="@drawable/backwithborder"
                 android:entries="@array/feedback_type_list"/>
 
         <EditText
@@ -38,6 +45,10 @@
                 android:minLines="6"
                 android:maxLines="10"
                 android:gravity="top|start"
+                android:layout_margin="5dp"
+                android:background="@drawable/backwithborder"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:scrollbars="vertical"/>
 
@@ -45,13 +56,18 @@
                 android:id="@+id/wants_response"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/white"
+                android:layout_margin="5dp"
                 android:text="@string/feedback_wants_response"/>
 
         <Button
                 android:id="@+id/send_feedback"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:background="@color/list_row"
+                android:background="@drawable/backwithborder"
+                android:textColor="@color/white"
+                android:layout_margin="5dp"
                 android:text="@string/send_feedback"/>
     </LinearLayout>
 </ScrollView>

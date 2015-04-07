@@ -52,14 +52,15 @@ public final class RecipeDetailHelper {
         loadImage(recipe.getImagePath());
 
         loadRecipeData(recipe.getName(), recipe.getIngredients(), recipe.getSourceRecipeUrl());
+
+        final ShareActionProvider shareActionProvider = RecipeDetailShareActionProvider.getInstance().getShareActionProvider();
+        if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(createShareRecipeIntent(recipe.getSourceRecipeUrl()));
+        }
     }
 
     public void loadData(RecipeDetailResult recipeDetailResult) {
         loadData(RecipeHelper.convertRecipe(recipeDetailResult));
-        final ShareActionProvider shareActionProvider = RecipeDetailShareActionProvider.getInstance().getShareActionProvider();
-        if (shareActionProvider != null) {
-            shareActionProvider.setShareIntent(createShareRecipeIntent(recipeDetailResult.getSource().getSourceRecipeUrl()));
-        }
     }
 
     public String getCurrentRecipeId() {

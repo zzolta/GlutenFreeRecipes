@@ -23,7 +23,7 @@
             android:layout_alignTop="@+id/thumbnail"
             android:layout_toRightOf="@+id/thumbnail"
             android:layout_toEndOf="@+id/thumbnail"
-            android:textColor="@color/recipe_name"
+            android:textColor="@color/white"
             android:textSize="@dimen/recipe_name"
             android:textStyle="bold"/>
 
@@ -36,7 +36,7 @@
             android:layout_marginTop="1dp"
             android:layout_toRightOf="@+id/thumbnail"
             android:layout_toEndOf="@+id/thumbnail"
-            android:textColor="@color/rating"
+            android:textColor="@color/white"
             android:textSize="@dimen/rating"/>
 
     <!-- Total Time -->
@@ -48,7 +48,7 @@
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/thumbnail"
             android:layout_toEndOf="@+id/thumbnail"
-            android:textColor="@color/total_time"
+            android:textColor="@color/white"
             android:textSize="@dimen/total_time"/>
 
 </RelativeLayout>

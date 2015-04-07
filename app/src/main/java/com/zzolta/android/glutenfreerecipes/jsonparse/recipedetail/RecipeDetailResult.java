@@ -6,7 +6,6 @@ import com.google.gson.annotations.Expose;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Generated("org.jsonschema2pojo")
 public class RecipeDetailResult {
 
     @Expose

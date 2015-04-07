@@ -23,7 +23,7 @@
                 android:layout_marginStart="5dp"
                 android:textIsSelectable="true"
                 android:textSize="14sp"
-                android:textColor="@color/details"
+                android:textColor="@color/white"
                 android:textStyle="normal"/>
     </LinearLayout>
 

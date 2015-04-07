@@ -3,7 +3,6 @@ package com.zzolta.android.glutenfreerecipes.jsonparse.recipequery;
 
 import com.google.gson.annotations.Expose;
 
-//@Generated("org.jsonschema2pojo")
 public class Attribution {
 
     @Expose

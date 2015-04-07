@@ -4,7 +4,6 @@ package com.zzolta.android.glutenfreerecipes.jsonparse.recipequery;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-//@Generated("org.jsonschema2pojo")
 public class ImageUrlsBySize {
 
     @SerializedName("90")

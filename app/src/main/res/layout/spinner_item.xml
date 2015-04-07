@@ -4,5 +4,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:textSize="20sp"
+          android:textColor="@color/white"
+          android:background="@color/list_row"
           android:gravity="start"
           android:padding="5dip"/>

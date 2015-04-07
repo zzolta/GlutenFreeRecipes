@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="recipe_name">#FFFFFF</color>
-    <color name="rating">#FFFFFF</color>
-    <color name="total_time">#FFFFFF</color>
-    <color name="details">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="list_divider">#FFFFFF</color>
 
     <color name="list_row">#d75c1d</color>
-
-    <color name="list_row_hover">#e26b2c</color>
+    <color name="status_bar">#AC4A17</color>
+    <color name="list_row_hover">#F28B55</color>
 </resources>

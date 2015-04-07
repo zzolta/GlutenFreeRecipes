@@ -8,5 +8,5 @@
           android:background="@color/list_row"
           android:padding="10dp"
           android:textSize="15sp"
-          android:textColor="@color/details"
+          android:textColor="@color/white"
           android:textStyle="bold"/>
