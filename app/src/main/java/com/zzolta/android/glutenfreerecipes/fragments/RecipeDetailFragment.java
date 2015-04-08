@@ -17,6 +17,8 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import com.j256.ormlite.dao.Dao;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.MainActivity;
+import com.zzolta.android.glutenfreerecipes.activities.RecipeDetailActivity;
+import com.zzolta.android.glutenfreerecipes.activities.SearchActivity;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.listeners.RecipeDetailResultListener;
@@ -46,10 +48,22 @@ public class RecipeDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = parallaxScrollAppCompat.createView(inflater);
         final RecipeDetailHelper recipeDetailHelper = RecipeDetailHelper.getInstance();
-        recipeDetailHelper.setActivity(getActivity());
+        final Activity activity = getActivity();
+        recipeDetailHelper.setActivity(activity);
         recipeDetailHelper.setView(view);
+        String recipeID = null;
+        if (activity instanceof SearchActivity) {
+            if (((SearchActivity) activity).isTwoPane()) {
+                recipeID = getArguments().getString(ApplicationConstants.RECIPE_ID);
+            } else {
+                recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
+            }
+        } else if (activity instanceof RecipeDetailActivity) {
+            recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
+        } else {
+            //it is a MainActivity
+        }
 
-        final String recipeID = getActivity().getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
         if (recipeID != null) {
             //recipe detail
             final Recipe recipe = getRecipeFromDatabase(recipeID);
@@ -60,7 +74,7 @@ public class RecipeDetailFragment extends Fragment {
             }
         } else {
             //recipe of the day
-            final String recipeOfTheDayId = this.getArguments().getString(ApplicationConstants.RECIPE_ID);
+            final String recipeOfTheDayId = this.getArguments().getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID);
             if (recipeOfTheDayId == null) {
                 loadRecipeOfTheDay();
             } else {

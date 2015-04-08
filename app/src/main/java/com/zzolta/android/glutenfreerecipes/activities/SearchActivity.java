@@ -14,6 +14,8 @@ import com.zzolta.android.glutenfreerecipes.fragments.SearchFragment;
  * Created by Zolta.Szekely on 2015-02-28.
  */
 public class SearchActivity extends ActionBarActivity {
+    private boolean twoPane;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,14 @@ public class SearchActivity extends ActionBarActivity {
         setContentView(R.layout.activity_fragment);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().add(R.id.container, new SearchFragment()).commit();
+            if (findViewById(R.id.recipe_list) != null) {
+                twoPane = true;
+                final SearchFragment searchFragment = ((SearchFragment) getFragmentManager().findFragmentById(R.id.recipe_list));
+                getFragmentManager().beginTransaction().replace(R.id.recipe_list, searchFragment).commit();
+            } else {
+                twoPane = false;
+                getFragmentManager().beginTransaction().add(R.id.container, new SearchFragment()).commit();
+            }
         }
 
         getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.color.list_row));
@@ -38,5 +47,9 @@ public class SearchActivity extends ActionBarActivity {
         searchView.setIconifiedByDefault(false);
         searchView.requestFocus();
         return true;
+    }
+
+    public boolean isTwoPane() {
+        return twoPane;
     }
 }

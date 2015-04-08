@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         final Bundle bundle = new Bundle();
         final String recipeOfTheDay = getRecipeOfTheDay();
         if (recipeOfTheDay != null) {
-            bundle.putString(ApplicationConstants.RECIPE_ID, recipeOfTheDay);
+            bundle.putString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, recipeOfTheDay);
         }
         bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
         fragment.setArguments(bundle);

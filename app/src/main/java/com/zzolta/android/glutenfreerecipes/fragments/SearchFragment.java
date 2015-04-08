@@ -1,5 +1,6 @@
 package com.zzolta.android.glutenfreerecipes.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.RecipeDetailActivity;
+import com.zzolta.android.glutenfreerecipes.activities.SearchActivity;
 import com.zzolta.android.glutenfreerecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.listeners.EndlessScrollListener;
@@ -52,10 +54,21 @@ public class SearchFragment extends Fragment {
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
-                final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
-                intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
-                startActivity(intent);
+                final Activity activity = getActivity();
+                if (activity instanceof SearchActivity) {
+                    final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
+                    if (((SearchActivity) activity).isTwoPane()) {
+                        final Bundle arguments = new Bundle();
+                        arguments.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
+                        final RecipeDetailFragment fragment = new RecipeDetailFragment();
+                        fragment.setArguments(arguments);
+                        getFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, fragment).commit();
+                    } else {
+                        final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
+                        intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
+                        startActivity(intent);
+                    }
+                }
             }
         });
 
