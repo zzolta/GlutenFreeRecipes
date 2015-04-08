@@ -17,6 +17,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import com.j256.ormlite.dao.Dao;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.MainActivity;
+import com.zzolta.android.glutenfreerecipes.activities.MyRecipesActivity;
 import com.zzolta.android.glutenfreerecipes.activities.RecipeDetailActivity;
 import com.zzolta.android.glutenfreerecipes.activities.SearchResultsActivity;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipedetail.RecipeDetailResult;
@@ -60,6 +61,12 @@ public class RecipeDetailFragment extends Fragment {
             }
         } else if (activity instanceof RecipeDetailActivity) {
             recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
+        } else if (activity instanceof MyRecipesActivity) {
+            if (((MyRecipesActivity) activity).isTwoPane()) {
+                recipeID = getArguments().getString(ApplicationConstants.RECIPE_ID);
+            } else {
+                recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
+            }
         } else {
             //it is a MainActivity
         }

@@ -53,6 +53,12 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".activities.RecipeDetailActivity"/>
         </activity>
+
+        <activity android:name=".activities.MyRecipesActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".activities.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

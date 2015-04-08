@@ -16,6 +16,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.MainActivity;
+import com.zzolta.android.glutenfreerecipes.activities.MyRecipesActivity;
 import com.zzolta.android.glutenfreerecipes.activities.RecipeDetailActivity;
 import com.zzolta.android.glutenfreerecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.glutenfreerecipes.content.Contract;
@@ -44,10 +45,21 @@ public class MyRecipesFragment extends Fragment {
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
-                final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
-                intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
-                startActivity(intent);
+                final Activity activity = getActivity();
+                if (activity instanceof MyRecipesActivity) {
+                    final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
+                    if (((MyRecipesActivity) activity).isTwoPane()) {
+                        final Bundle arguments = new Bundle();
+                        arguments.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
+                        final RecipeDetailFragment fragment = new RecipeDetailFragment();
+                        fragment.setArguments(arguments);
+                        getFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, fragment).commit();
+                    } else {
+                        final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
+                        intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
+                        startActivity(intent);
+                    }
+                }
             }
         });
 

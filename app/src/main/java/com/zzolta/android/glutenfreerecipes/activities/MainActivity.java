@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.fragments.FeedbackFragment;
-import com.zzolta.android.glutenfreerecipes.fragments.MyRecipesFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment;
 import com.zzolta.android.glutenfreerecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
 import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
@@ -58,8 +57,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 startActivity(new Intent(getApplicationContext(), SearchResultsActivity.class));
                 break;
             case MY_RECIPES:
-                fragment = setupMyRecipesFragment(position);
-                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                startActivity(new Intent(getApplicationContext(), MyRecipesActivity.class));
                 break;
             case FEEDBACK:
                 fragment = setupFeedbackFragment(position);
@@ -68,14 +66,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             default:
                 break;
         }
-    }
-
-    private Fragment setupMyRecipesFragment(int position) {
-        final Fragment fragment = new MyRecipesFragment();
-        final Bundle bundle = new Bundle();
-        bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
-        fragment.setArguments(bundle);
-        return fragment;
     }
 
     private Fragment setupRecipeDetailFragment(int position) {
