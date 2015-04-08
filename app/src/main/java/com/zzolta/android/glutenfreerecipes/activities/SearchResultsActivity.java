@@ -20,7 +20,7 @@ public class SearchResultsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_fragment);
+        setContentView(R.layout.activity_search);
 
         if (savedInstanceState == null) {
             if (findViewById(R.id.recipe_list) != null) {

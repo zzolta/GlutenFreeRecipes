@@ -38,7 +38,7 @@ public class SearchResultsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final ListView listView = (ListView) inflater.inflate(R.layout.activity_search, container, false);
+        final ListView listView = (ListView) inflater.inflate(R.layout.recipe_list, container, false);
 
         recipeListAdapter = new RecipeListAdapter(getActivity());
         listView.setAdapter(recipeListAdapter);

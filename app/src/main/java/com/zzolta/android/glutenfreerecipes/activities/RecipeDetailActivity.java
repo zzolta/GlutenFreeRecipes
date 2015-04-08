@@ -13,14 +13,10 @@ public class RecipeDetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_fragment);
+        setContentView(R.layout.activity_detail);
 
         if (savedInstanceState == null) {
-            if (findViewById(R.id.recipe_detail_container) != null) {
-                //getFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, new RecipeDetailFragment()).commit();
-            } else {
-                getFragmentManager().beginTransaction().add(R.id.container, new RecipeDetailFragment()).commit();
-            }
+            getFragmentManager().beginTransaction().add(R.id.container, new RecipeDetailFragment()).commit();
         }
     }
 }
