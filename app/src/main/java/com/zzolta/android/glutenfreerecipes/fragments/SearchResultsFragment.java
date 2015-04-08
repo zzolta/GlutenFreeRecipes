@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +88,7 @@ public class SearchResultsFragment extends Fragment {
     private void doSearch(String query, String from) {
         final String url = UriBuilder.createQueryUri(query, from).toString();
 
-        final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, new RecipeQueryResultListener((ActionBarActivity) getActivity(), recipeListAdapter), new VolleyErrorListener());
+        final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, new RecipeQueryResultListener(recipeListAdapter), new VolleyErrorListener());
 
         ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
     }
