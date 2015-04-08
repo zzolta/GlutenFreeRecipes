@@ -19,6 +19,10 @@ public final class ApplicationConstants {
     public static final String PLEASE_RESPOND = "Please respond to my feedback.\n";
     public static final String REGARDS = "Regards,\n%s";
     public static final String FEEDBACK_EMAIL = "zoltagroup@yahoo.com";
+    public static final String USER_NAME = "USER_NAME";
+    public static final String TYPE = "TYPE";
+    public static final String BODY = "BODY";
+    public static final String WANTS_RESPONSE = "WANTS_RESPONSE";
 
     private ApplicationConstants() {
     }

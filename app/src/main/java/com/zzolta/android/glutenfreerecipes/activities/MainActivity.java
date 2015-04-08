@@ -45,26 +45,28 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        final FragmentManager fragmentManager = getFragmentManager();
-        final Fragment fragment;
-        switch (Section.values()[position]) {
-            case RECIPE_OF_THE_DAY:
-                fragment = setupRecipeDetailFragment(position);
-                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-                break;
-            case SEARCH:
-                startActivity(new Intent(getApplicationContext(), SearchResultsActivity.class));
-                break;
-            case MY_RECIPES:
-                startActivity(new Intent(getApplicationContext(), MyRecipesActivity.class));
-                break;
-            case FEEDBACK:
-                fragment = setupFeedbackFragment(position);
-                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-                break;
-            default:
-                break;
+    public void onNavigationDrawerItemSelected(int position, boolean fromSavedInstanceState) {
+        if (!fromSavedInstanceState) {
+            final FragmentManager fragmentManager = getFragmentManager();
+            final Fragment fragment;
+            switch (Section.values()[position]) {
+                case RECIPE_OF_THE_DAY:
+                    fragment = setupRecipeDetailFragment(position);
+                    fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                    break;
+                case SEARCH:
+                    startActivity(new Intent(getApplicationContext(), SearchResultsActivity.class));
+                    break;
+                case MY_RECIPES:
+                    startActivity(new Intent(getApplicationContext(), MyRecipesActivity.class));
+                    break;
+                case FEEDBACK:
+                    fragment = setupFeedbackFragment(position);
+                    fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
