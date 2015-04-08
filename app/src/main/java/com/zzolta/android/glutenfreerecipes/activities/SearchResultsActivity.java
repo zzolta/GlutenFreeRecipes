@@ -8,12 +8,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.SearchView;
 import com.zzolta.android.glutenfreerecipes.R;
-import com.zzolta.android.glutenfreerecipes.fragments.SearchFragment;
+import com.zzolta.android.glutenfreerecipes.fragments.SearchResultsFragment;
 
 /**
  * Created by Zolta.Szekely on 2015-02-28.
  */
-public class SearchActivity extends ActionBarActivity {
+public class SearchResultsActivity extends ActionBarActivity {
     private boolean twoPane;
 
     @Override
@@ -25,11 +25,11 @@ public class SearchActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             if (findViewById(R.id.recipe_list) != null) {
                 twoPane = true;
-                final SearchFragment searchFragment = ((SearchFragment) getFragmentManager().findFragmentById(R.id.recipe_list));
-                getFragmentManager().beginTransaction().replace(R.id.recipe_list, searchFragment).commit();
+                final SearchResultsFragment searchResultsFragment = ((SearchResultsFragment) getFragmentManager().findFragmentById(R.id.recipe_list));
+                getFragmentManager().beginTransaction().replace(R.id.recipe_list, searchResultsFragment).commit();
             } else {
                 twoPane = false;
-                getFragmentManager().beginTransaction().add(R.id.container, new SearchFragment()).commit();
+                getFragmentManager().beginTransaction().add(R.id.container, new SearchResultsFragment()).commit();
             }
         }
 

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.SearchActivity">
+        <activity android:name=".activities.SearchResultsActivity">
             <intent-filter>
                 <action android:name="com.google.android.gms.actions.SEARCH_ACTION"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -45,7 +45,7 @@
         <activity android:name=".activities.RecipeDetailActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.SearchActivity"/>
+                    android:value=".activities.SearchResultsActivity"/>
         </activity>
 
         <activity android:name=".activities.DirectionsActivity">

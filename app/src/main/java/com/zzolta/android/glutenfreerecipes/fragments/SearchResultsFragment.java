@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.activities.RecipeDetailActivity;
-import com.zzolta.android.glutenfreerecipes.activities.SearchActivity;
+import com.zzolta.android.glutenfreerecipes.activities.SearchResultsActivity;
 import com.zzolta.android.glutenfreerecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.glutenfreerecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.glutenfreerecipes.listeners.EndlessScrollListener;
@@ -32,7 +32,7 @@ import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 /**
  * Created by Zolta.Szekely on 2015-03-29.
  */
-public class SearchFragment extends Fragment {
+public class SearchResultsFragment extends Fragment {
     private RecipeListAdapter recipeListAdapter;
 
     @Nullable
@@ -55,9 +55,9 @@ public class SearchFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Activity activity = getActivity();
-                if (activity instanceof SearchActivity) {
+                if (activity instanceof SearchResultsActivity) {
                     final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
-                    if (((SearchActivity) activity).isTwoPane()) {
+                    if (((SearchResultsActivity) activity).isTwoPane()) {
                         final Bundle arguments = new Bundle();
                         arguments.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
                         final RecipeDetailFragment fragment = new RecipeDetailFragment();

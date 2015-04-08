@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                 break;
             case SEARCH:
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                startActivity(new Intent(getApplicationContext(), SearchResultsActivity.class));
                 break;
             case MY_RECIPES:
                 fragment = setupMyRecipesFragment(position);
@@ -145,7 +145,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            startActivity(new Intent(this, SearchActivity.class));
+            startActivity(new Intent(this, SearchResultsActivity.class));
             return true;
         }
 
