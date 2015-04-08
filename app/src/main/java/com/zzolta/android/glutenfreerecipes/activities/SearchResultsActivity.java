@@ -31,6 +31,8 @@ public class SearchResultsActivity extends ActionBarActivity {
                 twoPane = false;
                 getFragmentManager().beginTransaction().add(R.id.container, new SearchResultsFragment()).commit();
             }
+        } else {
+            twoPane = findViewById(R.id.recipe_list) != null;
         }
 
         getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.color.list_row));
