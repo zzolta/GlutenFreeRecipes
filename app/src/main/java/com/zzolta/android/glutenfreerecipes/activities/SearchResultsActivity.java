@@ -4,9 +4,9 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.SearchView;
 import com.zzolta.android.glutenfreerecipes.R;
 import com.zzolta.android.glutenfreerecipes.fragments.SearchResultsFragment;
 
@@ -35,7 +35,7 @@ public class SearchResultsActivity extends ActionBarActivity {
             twoPane = findViewById(R.id.recipe_list) != null;
         }
 
-        getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.color.list_row));
+        getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.ab_solid_example));
     }
 
     @Override

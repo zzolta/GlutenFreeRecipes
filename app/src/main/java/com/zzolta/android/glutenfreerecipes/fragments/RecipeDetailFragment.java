@@ -97,7 +97,7 @@ public class RecipeDetailFragment extends Fragment {
         super.onAttach(activity);
 
         parallaxScrollAppCompat = new ParallaxScrollAppCompat()
-                                      .actionBarBackground(R.color.list_row)
+                                      .actionBarBackground(R.drawable.ab_solid_example)
                                       .headerLayout(R.layout.header)
                                       .contentLayout(R.layout.parallax_listview)
                                       .lightActionBar(true);
