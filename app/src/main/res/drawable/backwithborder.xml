@@ -3,5 +3,5 @@
     <solid android:color="#00000000"/>
     <stroke
             android:width="1dip"
-            android:color="@color/list_row_hover"/>
+            android:color="@color/light"/>
 </shape>

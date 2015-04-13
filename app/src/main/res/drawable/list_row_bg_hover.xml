@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
 
-    <solid android:color="@color/list_row_hover"/>
+    <solid android:color="@color/light"/>
 
 </shape>

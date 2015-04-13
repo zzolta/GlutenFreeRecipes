@@ -3,8 +3,8 @@
           android:id="@+id/list_recipes"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:divider="@color/list_divider"
-          android:background="@color/list_row_hover"
+          android:divider="@android:color/white"
+          android:background="@color/light"
           android:dividerHeight="1dp"
           android:listSelector="@drawable/list_row_selector">
 

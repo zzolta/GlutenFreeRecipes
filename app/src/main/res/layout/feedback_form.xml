@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/list_row"
+            android:background="@color/normal"
             android:fillViewport="true">
 
     <LinearLayout
@@ -10,7 +10,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="fill_vertical"
-            android:background="@color/list_row">
+            android:background="@color/normal">
 
         <EditText
                 android:id="@+id/feedback_user_name"
@@ -19,8 +19,8 @@
                 android:hint="@string/feedback_user_name"
                 android:inputType="textPersonName"
                 android:background="@drawable/backwithborder"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
                 android:layout_margin="5dp"
                 android:textSize="20sp"/>
 
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
                 android:prompt="@string/feedback_type"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:layout_margin="5dp"
                 android:background="@drawable/backwithborder"
                 android:entries="@array/feedback_type_list"/>
@@ -47,8 +47,8 @@
                 android:gravity="top|start"
                 android:layout_margin="5dp"
                 android:background="@drawable/backwithborder"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:scrollbars="vertical"/>
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:background="@drawable/backwithborder"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:layout_margin="5dp"
                 android:text="@string/feedback_wants_response"/>
 
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:background="@drawable/backwithborder"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:layout_margin="5dp"
                 android:text="@string/send_feedback"/>
     </LinearLayout>
