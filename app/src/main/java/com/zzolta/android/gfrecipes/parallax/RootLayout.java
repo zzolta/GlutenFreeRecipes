@@ -1,4 +1,4 @@
-package com.zzolta.parallax;
+package com.zzolta.android.gfrecipes.parallax;
 
 import android.content.Context;
 import android.util.AttributeSet;

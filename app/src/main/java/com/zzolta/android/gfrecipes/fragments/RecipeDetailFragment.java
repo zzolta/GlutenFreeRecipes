@@ -28,13 +28,13 @@ import com.zzolta.android.gfrecipes.listeners.VolleyErrorListener;
 import com.zzolta.android.gfrecipes.net.ApplicationRequestQueue;
 import com.zzolta.android.gfrecipes.net.GsonRequest;
 import com.zzolta.android.gfrecipes.net.UriBuilder;
+import com.zzolta.android.gfrecipes.parallax.ParallaxScrollAppCompat;
 import com.zzolta.android.gfrecipes.persistence.database.RecipeDBHelper;
 import com.zzolta.android.gfrecipes.persistence.database.entities.Recipe;
 import com.zzolta.android.gfrecipes.providers.RecipeDetailShareActionProvider;
 import com.zzolta.android.gfrecipes.providers.RecipeSearchRecentSuggestionsProvider;
 import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
 import com.zzolta.android.gfrecipes.utils.RecipeDetailHelper;
-import com.zzolta.parallax.ParallaxScrollAppCompat;
 
 import java.sql.SQLException;
 

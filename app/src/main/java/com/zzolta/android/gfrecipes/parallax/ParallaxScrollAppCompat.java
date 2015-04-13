@@ -1,4 +1,4 @@
-package com.zzolta.parallax;
+package com.zzolta.android.gfrecipes.parallax;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zzolta.parallax.RootLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+<com.zzolta.android.gfrecipes.parallax.RootLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                  android:layout_width="match_parent"
+                                                  android:layout_height="match_parent">
 
     <include layout="@layout/parallax_header_container"/>
 
@@ -12,4 +12,4 @@
             android:layout_gravity="top"
             android:background="@color/normal"/>
 
-</com.zzolta.parallax.RootLayout>
+</com.zzolta.android.gfrecipes.parallax.RootLayout>
