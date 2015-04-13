@@ -55,7 +55,9 @@ public class FeedbackFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         final Activity activity = getActivity();
         if (activity instanceof MainActivity) {
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
+            final MainActivity mainActivity = (MainActivity) activity;
+            mainActivity.onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
+            mainActivity.getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.ab_solid_example));
         }
         if (savedInstanceState != null) {
             restoreState(savedInstanceState, activity);
