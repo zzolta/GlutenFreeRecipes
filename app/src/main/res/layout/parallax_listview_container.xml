@@ -6,10 +6,10 @@
     <include layout="@layout/parallax_header_container"/>
 
     <View
-            android:layout_gravity="top"
-            android:id="@+id/parallax_listview_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/parallax_listview_background"
+            android:layout_gravity="top"
             android:background="@color/normal"/>
 
 </com.zzolta.parallax.RootLayout>

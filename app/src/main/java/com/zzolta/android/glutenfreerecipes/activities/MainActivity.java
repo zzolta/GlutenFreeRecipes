@@ -20,28 +20,36 @@ import com.zzolta.android.glutenfreerecipes.fragments.RecipeDetailFragment;
 import com.zzolta.android.glutenfreerecipes.utils.ApplicationConstants;
 import com.zzolta.android.glutenfreerecipes.utils.CuisineHelper;
 
+/*
+ * Copyright (C) 2015 Zolta Szekely
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private NavigationDrawerFragment navigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
+    private CharSequence lastScreenTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        lastScreenTitle = getTitle();
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     @Override
@@ -93,16 +101,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void onSectionAttached(int position) {
         switch (Section.values()[position]) {
             case RECIPE_OF_THE_DAY:
-                mTitle = getString(R.string.recipe_of_the_day_menu);
+                lastScreenTitle = getString(R.string.recipe_of_the_day_menu);
                 break;
             case SEARCH:
-                mTitle = getString(R.string.search_menu);
+                lastScreenTitle = getString(R.string.search_menu);
                 break;
             case MY_RECIPES:
-                mTitle = getString(R.string.my_recipes_menu);
+                lastScreenTitle = getString(R.string.my_recipes_menu);
                 break;
             case FEEDBACK:
-                mTitle = getString(R.string.feedback_menu);
+                lastScreenTitle = getString(R.string.feedback_menu);
                 break;
             default:
                 break;
@@ -112,12 +120,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void restoreActionBar() {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+        actionBar.setTitle(lastScreenTitle);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+        if (!navigationDrawerFragment.isDrawerOpen()) {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
