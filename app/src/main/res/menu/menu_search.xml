@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.zzolta.android.glutenfreerecipes.SearchActivity">
+      tools:context="com.zzolta.android.gfrecipes.SearchActivity">
 
-    <item
+<item
             android:id="@+id/search"
             android:title="@string/action_search"
             app:showAsAction="always"

@@ -17,7 +17,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import com.zzolta.android.glutenfreerecipes.R;
+import com.zzolta.android.gfrecipes.R;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
