@@ -6,7 +6,7 @@
           android:divider="@android:color/white"
           android:background="@color/light"
           android:dividerHeight="1dp"
-          android:choiceMode="singleChoice"
+          style="@style/SelectionStyle"
           android:listSelector="@drawable/list_row_selector">
 
 </ListView>
