@@ -19,11 +19,6 @@ public class ParallaxScrollAppCompat extends ParallaxScroll {
     }
 
     @Override
-    protected int getActionBarHeight() {
-        return actionBar.getHeight();
-    }
-
-    @Override
     protected boolean isActionBarNull() {
         return actionBar == null;
     }

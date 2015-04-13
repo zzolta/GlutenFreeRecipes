@@ -47,7 +47,6 @@ public abstract class ParallaxScroll {
     private int mContentLayoutResId;
     private View mContentView;
     private LayoutInflater mInflater;
-    private boolean mLightActionBar;
     private int mLastDampedScroll;
     private int mLastHeaderHeight = -1;
     private boolean mFirstGlobalLayoutPerformed;
@@ -122,7 +121,6 @@ public abstract class ParallaxScroll {
     }
 
     public final <T extends ParallaxScroll> T lightActionBar(boolean value) {
-        mLightActionBar = value;
         return (T) this;
     }
 
@@ -186,8 +184,6 @@ public abstract class ParallaxScroll {
 
     protected abstract boolean isActionBarNull();
 
-    protected abstract int getActionBarHeight();
-
     protected abstract void setActionBarBackgroundDrawable(Drawable drawable);
 
     private View createListView(ListView listView) {
@@ -195,7 +191,6 @@ public abstract class ParallaxScroll {
         contentContainer.addView(mContentView);
 
         mHeaderContainer = (FrameLayout) contentContainer.findViewById(R.id.parallax_header_container);
-        initializeGradient(mHeaderContainer);
         addHeaderView(mHeaderContainer, mHeaderLayoutResId);
 
         mMarginView = new FrameLayout(listView.getContext());
@@ -229,14 +224,5 @@ public abstract class ParallaxScroll {
             mListViewBackgroundView.setLayoutParams(params2);
         }
         mLastHeaderHeight = headerHeight;
-    }
-
-    private void initializeGradient(ViewGroup headerContainer) {
-        final View gradientView = headerContainer.findViewById(R.id.parallax_gradient);
-        int gradient = R.drawable.parallax_gradient;
-        if (mLightActionBar) {
-            gradient = R.drawable.parallax_gradient_light;
-        }
-        gradientView.setBackgroundResource(gradient);
     }
 }
