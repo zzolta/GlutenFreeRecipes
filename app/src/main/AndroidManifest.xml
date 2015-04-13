@@ -45,14 +45,10 @@
         <activity android:name="com.zzolta.android.gfrecipes.activities.RecipeDetailActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.zzolta.android.gfrecipes.activities.SearchResultsActivity"/>
+                    android:value="com.zzolta.android.gfrecipes.activities.MainActivity"/>
         </activity>
 
-        <activity android:name="com.zzolta.android.gfrecipes.activities.DirectionsActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.zzolta.android.gfrecipes.activities.RecipeDetailActivity"/>
-        </activity>
+        <activity android:name="com.zzolta.android.gfrecipes.activities.DirectionsActivity"/>
 
         <activity android:name="com.zzolta.android.gfrecipes.activities.MyRecipesActivity">
             <meta-data
