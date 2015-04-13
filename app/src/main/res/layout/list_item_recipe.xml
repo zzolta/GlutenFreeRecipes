@@ -5,7 +5,6 @@
                 android:background="@drawable/list_row_selector"
                 android:padding="8dp">
 
-    <!-- Thumbnail Image -->
     <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/thumbnail"
             android:layout_width="80dp"
@@ -15,7 +14,6 @@
             android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp"/>
 
-    <!-- Recipe Name -->
     <TextView
             android:id="@+id/recipe_name"
             android:layout_width="wrap_content"
@@ -27,7 +25,6 @@
             android:textSize="@dimen/recipe_name"
             android:textStyle="bold"/>
 
-    <!-- Rating -->
     <TextView
             android:id="@+id/rating"
             android:layout_width="fill_parent"
@@ -39,7 +36,6 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/rating"/>
 
-    <!-- Total Time -->
     <TextView
             android:id="@+id/total_time"
             android:layout_width="fill_parent"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="normal">#d75c1d</color>
+    <color name="normal_transparent">#80d75c1d</color>
     <color name="dark">#AC4A17</color>
     <color name="light">#F28B55</color>
 </resources>
