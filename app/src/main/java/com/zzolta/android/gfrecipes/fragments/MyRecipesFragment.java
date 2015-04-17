@@ -1,6 +1,5 @@
 package com.zzolta.android.gfrecipes.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +14,6 @@ import android.widget.ListView;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.zzolta.android.gfrecipes.R;
-import com.zzolta.android.gfrecipes.activities.MainActivity;
-import com.zzolta.android.gfrecipes.activities.MyRecipesActivity;
 import com.zzolta.android.gfrecipes.activities.RecipeDetailActivity;
 import com.zzolta.android.gfrecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.gfrecipes.content.Contract;
@@ -57,36 +54,16 @@ public class MyRecipesFragment extends Fragment {
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Activity activity = getActivity();
-                if (activity instanceof MyRecipesActivity) {
-                    final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
-                    if (((MyRecipesActivity) activity).isTwoPane()) {
-                        final Bundle arguments = new Bundle();
-                        arguments.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
-                        final RecipeDetailFragment fragment = new RecipeDetailFragment();
-                        fragment.setArguments(arguments);
-                        getFragmentManager().beginTransaction().replace(R.id.recipe_detail_container, fragment).commit();
-                    } else {
-                        final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
-                        intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
-                        startActivity(intent);
-                    }
-                }
+                final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
+                final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
+                intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
+                startActivity(intent);
             }
         });
 
         addRecipes(search());
 
         return listView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        if (activity instanceof MainActivity) {
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
-        }
     }
 
     private void addRecipes(List<Recipe> recipes) {

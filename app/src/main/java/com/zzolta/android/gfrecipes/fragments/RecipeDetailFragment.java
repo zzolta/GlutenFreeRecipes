@@ -17,9 +17,6 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import com.j256.ormlite.dao.Dao;
 import com.zzolta.android.gfrecipes.R;
 import com.zzolta.android.gfrecipes.activities.MainActivity;
-import com.zzolta.android.gfrecipes.activities.MyRecipesActivity;
-import com.zzolta.android.gfrecipes.activities.RecipeDetailActivity;
-import com.zzolta.android.gfrecipes.activities.SearchResultsActivity;
 import com.zzolta.android.gfrecipes.jsonparse.recipedetail.RecipeDetailResult;
 import com.zzolta.android.gfrecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.gfrecipes.listeners.RecipeDetailResultListener;
@@ -64,24 +61,7 @@ public class RecipeDetailFragment extends Fragment {
         final Activity activity = getActivity();
         recipeDetailHelper.setActivity(activity);
         recipeDetailHelper.setView(view);
-        String recipeID = null;
-        if (activity instanceof SearchResultsActivity) {
-            if (((SearchResultsActivity) activity).isTwoPane()) {
-                recipeID = getArguments().getString(ApplicationConstants.RECIPE_ID);
-            } else {
-                recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
-            }
-        } else if (activity instanceof RecipeDetailActivity) {
-            recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
-        } else if (activity instanceof MyRecipesActivity) {
-            if (((MyRecipesActivity) activity).isTwoPane()) {
-                recipeID = getArguments().getString(ApplicationConstants.RECIPE_ID);
-            } else {
-                recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
-            }
-        } else {
-            //it is a MainActivity
-        }
+        final String recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
 
         if (recipeID != null) {
             //recipe detail

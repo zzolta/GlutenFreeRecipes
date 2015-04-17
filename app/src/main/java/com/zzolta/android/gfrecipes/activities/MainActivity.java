@@ -2,21 +2,30 @@ package com.zzolta.android.gfrecipes.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.zzolta.android.gfrecipes.R;
-import com.zzolta.android.gfrecipes.fragments.FeedbackFragment;
-import com.zzolta.android.gfrecipes.fragments.NavigationDrawerFragment;
+import com.zzolta.android.gfrecipes.fragments.*;
 import com.zzolta.android.gfrecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
-import com.zzolta.android.gfrecipes.fragments.RecipeDetailFragment;
+import com.zzolta.android.gfrecipes.jsonparse.recipequery.RecipeQueryResult;
+import com.zzolta.android.gfrecipes.listeners.RecipeQueryResultListener;
+import com.zzolta.android.gfrecipes.listeners.VolleyErrorListener;
+import com.zzolta.android.gfrecipes.net.ApplicationRequestQueue;
+import com.zzolta.android.gfrecipes.net.GsonRequest;
+import com.zzolta.android.gfrecipes.net.UriBuilder;
+import com.zzolta.android.gfrecipes.providers.RecipeSearchRecentSuggestionsProvider;
 import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
 import com.zzolta.android.gfrecipes.utils.CuisineHelper;
 
@@ -41,6 +50,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     private CharSequence lastScreenTitle;
 
+    private SearchResultsFragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +73,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragment = setupRecipeDetailFragment(position);
                     fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                     break;
-                case SEARCH:
-                    startActivity(new Intent(getApplicationContext(), SearchResultsActivity.class));
-                    break;
                 case MY_RECIPES:
-                    startActivity(new Intent(getApplicationContext(), MyRecipesActivity.class));
+                    fragmentManager.beginTransaction().replace(R.id.container, new MyRecipesFragment()).commit();
                     break;
                 case FEEDBACK:
                     fragment = setupFeedbackFragment(position);
@@ -103,9 +111,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             case RECIPE_OF_THE_DAY:
                 lastScreenTitle = getString(R.string.recipe_of_the_day_menu);
                 break;
-            case SEARCH:
-                lastScreenTitle = getString(R.string.search_menu);
-                break;
             case MY_RECIPES:
                 lastScreenTitle = getString(R.string.my_recipes_menu);
                 break;
@@ -129,11 +134,54 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
+            getMenuInflater().inflate(R.menu.menu_search, menu);
+
+            // Get the SearchView and set the searchable configuration
+            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+            // Assumes current activity is the searchable activity
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+            searchView.setOnQueryTextListener(new OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    fragment = new SearchResultsFragment();
+                    getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    return false;
+                }
+            });
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            final String query = intent.getStringExtra(SearchManager.QUERY);
+            final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
+            doSearch(query, ApplicationConstants.START_INDEX);
+        }
+    }
+
+    public void doSearch(String query, String from) {
+        final String url = UriBuilder.createQueryUri(query, from).toString();
+        final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, new RecipeQueryResultListener(fragment.getRecipeListAdapter()), new VolleyErrorListener());
+
+        ApplicationRequestQueue.getInstance(this.getApplicationContext()).addToRequestQueue(request);
     }
 
     @Override
@@ -144,8 +192,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         final int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            startActivity(new Intent(this, SearchResultsActivity.class));
+        if (id == R.id.search) {
+            //startActivity(new Intent(this, SearchResultsActivity.class));
             return true;
         }
 
@@ -165,7 +213,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     private enum Section {
         RECIPE_OF_THE_DAY,
-        SEARCH,
         MY_RECIPES,
         FEEDBACK
     }
