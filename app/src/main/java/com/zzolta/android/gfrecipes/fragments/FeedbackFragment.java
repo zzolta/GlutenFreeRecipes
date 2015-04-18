@@ -30,6 +30,11 @@ import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
  */
 public class FeedbackFragment extends Fragment {
 
+    private String userName;
+    private String body;
+    private int type;
+    private boolean wantsResponse;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,26 +77,25 @@ public class FeedbackFragment extends Fragment {
     }
 
     private void saveState(Bundle outState) {
-        final Activity activity = getActivity();
-        final EditText userNameField = (EditText) activity.findViewById(R.id.feedback_user_name);
-        outState.putString(ApplicationConstants.USER_NAME, userNameField.getText().toString());
-        final Spinner feedbackSpinner = (Spinner) activity.findViewById(R.id.feedback_type);
-        outState.putInt(ApplicationConstants.TYPE, feedbackSpinner.getSelectedItemPosition());
-        final EditText detailsField = (EditText) activity.findViewById(R.id.feedback_body);
-        outState.putString(ApplicationConstants.BODY, detailsField.getText().toString());
-        final Checkable responseCheckbox = (Checkable) activity.findViewById(R.id.wants_response);
-        outState.putBoolean(ApplicationConstants.WANTS_RESPONSE, responseCheckbox.isChecked());
+        outState.putString(ApplicationConstants.USER_NAME, userName);
+        outState.putInt(ApplicationConstants.TYPE, type);
+        outState.putString(ApplicationConstants.BODY, body);
+        outState.putBoolean(ApplicationConstants.WANTS_RESPONSE, wantsResponse);
     }
 
     private void restoreState(Bundle savedInstanceState, Activity activity) {
         final EditText userNameField = (EditText) activity.findViewById(R.id.feedback_user_name);
-        userNameField.setText(savedInstanceState.getString(ApplicationConstants.USER_NAME));
+        userName = savedInstanceState.getString(ApplicationConstants.USER_NAME);
+        userNameField.setText(userName);
         final EditText detailsField = (EditText) activity.findViewById(R.id.feedback_body);
-        detailsField.setText(savedInstanceState.getString(ApplicationConstants.BODY));
+        body = savedInstanceState.getString(ApplicationConstants.BODY);
+        detailsField.setText(body);
         final Spinner feedbackSpinner = (Spinner) activity.findViewById(R.id.feedback_type);
-        feedbackSpinner.setSelection(savedInstanceState.getInt(ApplicationConstants.TYPE));
+        type = savedInstanceState.getInt(ApplicationConstants.TYPE);
+        feedbackSpinner.setSelection(type);
         final Checkable responseCheckbox = (Checkable) activity.findViewById(R.id.wants_response);
-        responseCheckbox.setChecked(savedInstanceState.getBoolean(ApplicationConstants.WANTS_RESPONSE));
+        wantsResponse = savedInstanceState.getBoolean(ApplicationConstants.WANTS_RESPONSE);
+        responseCheckbox.setChecked(wantsResponse);
     }
 
     private class SendFeedbackClickListener implements OnClickListener {
