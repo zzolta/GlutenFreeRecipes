@@ -57,21 +57,8 @@ public class SearchResultsFragment extends Fragment {
         final ListView listView = (ListView) inflater.inflate(R.layout.recipe_list, container, false);
 
         recipeListAdapter = new RecipeListAdapter(getActivity());
-        if (savedInstanceState == null) {
-            final Parcelable[] parcelableArray = navigationState.getParcelableArray(ApplicationConstants.RECIPE_ARRAY);
-            if (parcelableArray != null) {
-                final Recipe[] recipeArray = (Recipe[]) parcelableArray;
-                recipeListAdapter.addRecipes(Arrays.asList(recipeArray));
-            }
-            listView.setAdapter(recipeListAdapter);
-            recipeListAdapter.notifyDataSetChanged();
-        } else {
-            final Parcelable[] parcelableArray = savedInstanceState.getParcelableArray(ApplicationConstants.RECIPE_ARRAY);
-            final Recipe[] recipeArray = (Recipe[]) parcelableArray;
-            recipeListAdapter.addRecipes(Arrays.asList(recipeArray));
-            listView.setAdapter(recipeListAdapter);
-            recipeListAdapter.notifyDataSetChanged();
-        }
+
+        restoreSearchList(listView, savedInstanceState == null ? navigationState : savedInstanceState);
 
         listView.setOnScrollListener(new EndlessScrollListener() {
             @Override
@@ -100,6 +87,16 @@ public class SearchResultsFragment extends Fragment {
         });
 
         return listView;
+    }
+
+    private void restoreSearchList(ListView listView, Bundle bundle) {
+        final Parcelable[] parcelableArray = bundle.getParcelableArray(ApplicationConstants.RECIPE_ARRAY);
+        if (parcelableArray != null) {
+            final Recipe[] recipeArray = (Recipe[]) parcelableArray;
+            recipeListAdapter.addRecipes(Arrays.asList(recipeArray));
+        }
+        listView.setAdapter(recipeListAdapter);
+        recipeListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -138,14 +135,11 @@ public class SearchResultsFragment extends Fragment {
         return recipeListAdapter;
     }
 
-    public void handleIntent() {
-        final Intent searchIntent = SearchIntentProvider.getInstance().getSearchIntent();
-        if (Intent.ACTION_SEARCH.equals(searchIntent.getAction())) {
-            final String query = searchIntent.getStringExtra(SearchManager.QUERY);
-            final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity().getApplicationContext(), RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
-            suggestions.saveRecentQuery(query, null);
-            doSearch(query, ApplicationConstants.START_INDEX);
-        }
+    public void handleIntent(Intent intent) {
+        final String query = intent.getStringExtra(SearchManager.QUERY);
+        final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity().getApplicationContext(), RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
+        suggestions.saveRecentQuery(query, null);
+        doSearch(query, ApplicationConstants.START_INDEX);
     }
 
     private void doSearch(String query, String from) {

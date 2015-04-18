@@ -182,9 +182,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        searchResultsFragment.getRecipeListAdapter().clear();
-        SearchIntentProvider.getInstance().setSearchIntent(intent);
-        searchResultsFragment.handleIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            searchResultsFragment.getRecipeListAdapter().clear();
+            SearchIntentProvider.getInstance().setSearchIntent(intent);
+            searchResultsFragment.handleIntent(intent);
+        }
     }
 
     @Override
