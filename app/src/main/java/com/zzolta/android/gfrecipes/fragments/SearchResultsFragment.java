@@ -88,8 +88,9 @@ public class SearchResultsFragment extends Fragment {
 
     private void doSearch(String query, String from) {
         final String url = UriBuilder.createQueryUri(query, from).toString();
+
         final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, new RecipeQueryResultListener(recipeListAdapter), new VolleyErrorListener());
 
-        ApplicationRequestQueue.getInstance(this.getActivity().getApplicationContext()).addToRequestQueue(request);
+        ApplicationRequestQueue.getInstance(getActivity().getApplicationContext()).addToRequestQueue(request);
     }
 }
