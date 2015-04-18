@@ -66,7 +66,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                     break;
                 case MY_RECIPES:
-                    fragmentManager.beginTransaction().replace(R.id.container, new MyRecipesFragment()).addToBackStack(null).commit();
+                    fragment = setupMyRecipesFragment(position);
+                    fragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
                     break;
                 case FEEDBACK:
                     fragment = setupFeedbackFragment(position);
@@ -85,6 +86,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         if (recipeOfTheDay != null) {
             bundle.putString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, recipeOfTheDay);
         }
+        bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    private Fragment setupMyRecipesFragment(int position) {
+        final Fragment fragment = new MyRecipesFragment();
+        final Bundle bundle = new Bundle();
         bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, position);
         fragment.setArguments(bundle);
         return fragment;
@@ -109,6 +118,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             case FEEDBACK:
                 lastScreenTitle = getString(R.string.feedback_menu);
                 break;
+            case RECIPE_DETAIL:
+                lastScreenTitle = getString(R.string.recipe_detail_menu);
             default:
                 break;
         }
@@ -213,9 +224,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         }
     }
 
-    private enum Section {
+    public enum Section {
         RECIPE_OF_THE_DAY,
         MY_RECIPES,
-        FEEDBACK
+        FEEDBACK,
+        RECIPE_DETAIL
     }
 }

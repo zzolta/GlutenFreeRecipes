@@ -3,6 +3,7 @@
 
     <string name="recipe_of_the_day_menu">Recipe of the Day</string>
     <string name="my_recipes_menu">My Recipes</string>
+    <string name="recipe_detail_menu">Recipe Details</string>
     <string name="feedback_menu">Feedback</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

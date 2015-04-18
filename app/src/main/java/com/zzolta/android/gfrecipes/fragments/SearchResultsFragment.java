@@ -9,14 +9,13 @@ import android.os.Parcelable;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.zzolta.android.gfrecipes.R;
 import com.zzolta.android.gfrecipes.activities.MainActivity;
+import com.zzolta.android.gfrecipes.activities.MainActivity.Section;
 import com.zzolta.android.gfrecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.gfrecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.gfrecipes.listeners.EndlessScrollListener;
@@ -90,6 +89,7 @@ public class SearchResultsFragment extends Fragment {
 
                     final Bundle bundle = new Bundle();
                     bundle.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
+                    bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, Section.RECIPE_DETAIL.ordinal());
                     final RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
                     recipeDetailFragment.setArguments(bundle);
                     getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).addToBackStack(null).commit();
@@ -106,6 +106,14 @@ public class SearchResultsFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         saveState(outState);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        final MenuItem searchMenu = menu.findItem(R.id.search);
+        if (searchMenu != null) {
+            searchMenu.setVisible(false);
+        }
     }
 
     private void saveState(Bundle outState) {

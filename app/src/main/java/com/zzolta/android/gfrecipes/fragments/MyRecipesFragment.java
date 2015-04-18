@@ -4,17 +4,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.zzolta.android.gfrecipes.R;
+import com.zzolta.android.gfrecipes.activities.MainActivity;
+import com.zzolta.android.gfrecipes.activities.MainActivity.Section;
 import com.zzolta.android.gfrecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.gfrecipes.content.Contract;
 import com.zzolta.android.gfrecipes.persistence.database.RecipeDBHelper;
@@ -58,6 +57,7 @@ public class MyRecipesFragment extends Fragment {
 
                 final Bundle bundle = new Bundle();
                 bundle.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
+                bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, Section.RECIPE_DETAIL.ordinal());
                 final RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
                 recipeDetailFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).addToBackStack(null).commit();
@@ -65,6 +65,8 @@ public class MyRecipesFragment extends Fragment {
         });
 
         addRecipes(search());
+
+        setHasOptionsMenu(true);
 
         return listView;
     }
@@ -74,8 +76,18 @@ public class MyRecipesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         final Activity activity = getActivity();
-        if (activity instanceof ActionBarActivity) {
-            ((ActionBarActivity) activity).getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.ab_solid_example));
+        if (activity instanceof MainActivity) {
+            final MainActivity mainActivity = (MainActivity) activity;
+            mainActivity.onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
+            mainActivity.getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.ab_solid_example));
+        }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        final MenuItem searchMenu = menu.findItem(R.id.search);
+        if (searchMenu != null) {
+            searchMenu.setVisible(false);
         }
     }
 

@@ -53,6 +53,7 @@ import java.sql.SQLException;
 public class RecipeDetailFragment extends Fragment {
     private static final String LOG_TAG = RecipeDetailFragment.class.getName();
     private ParallaxScrollAppCompat parallaxScrollAppCompat;
+    private boolean recipeOfTheDay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class RecipeDetailFragment extends Fragment {
                 getRecipeUsingREST(recipeID);
             }
         } else {
-            //recipe of the day
+            recipeOfTheDay = true;
             final String recipeOfTheDayId = this.getArguments().getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID);
             if (recipeOfTheDayId == null) {
                 loadRecipeOfTheDay();
@@ -93,17 +94,18 @@ public class RecipeDetailFragment extends Fragment {
                                       .headerLayout(R.layout.header)
                                       .contentLayout(R.layout.parallax_listview)
                                       .lightActionBar(true);
-
-        if (activity instanceof MainActivity) {
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
-        }
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        parallaxScrollAppCompat.initActionBar(getActivity());
+        final Activity activity = getActivity();
+        parallaxScrollAppCompat.initActionBar(activity);
+
+        if (activity instanceof MainActivity) {
+            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ApplicationConstants.ARG_SECTION_NUMBER));
+        }
     }
 
     @Override
@@ -154,7 +156,10 @@ public class RecipeDetailFragment extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-
+        final MenuItem searchMenu = menu.findItem(R.id.search);
+        if (searchMenu != null && !recipeOfTheDay) {
+            searchMenu.setVisible(false);
+        }
         final String recipeId = RecipeDetailHelper.getInstance().getCurrentRecipeId();
         if (recipeId != null) {
             try {
