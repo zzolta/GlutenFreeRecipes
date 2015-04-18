@@ -151,8 +151,8 @@ public class Recipe implements Parcelable {
         dest.writeString(id);
         dest.writeString(name);
         dest.writeStringList(ingredients);
-        dest.writeInt(totalTimeInSeconds);
-        dest.writeInt(rating);
+        dest.writeInt(totalTimeInSeconds != null ? totalTimeInSeconds : 0);
+        dest.writeInt(rating != null ? rating : 0);
         dest.writeString(imagePath);
         dest.writeString(sourceRecipeUrl);
     }
