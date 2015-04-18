@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -19,13 +18,6 @@ import android.view.MenuItem;
 import com.zzolta.android.gfrecipes.R;
 import com.zzolta.android.gfrecipes.fragments.*;
 import com.zzolta.android.gfrecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
-import com.zzolta.android.gfrecipes.jsonparse.recipequery.RecipeQueryResult;
-import com.zzolta.android.gfrecipes.listeners.RecipeQueryResultListener;
-import com.zzolta.android.gfrecipes.listeners.VolleyErrorListener;
-import com.zzolta.android.gfrecipes.net.ApplicationRequestQueue;
-import com.zzolta.android.gfrecipes.net.GsonRequest;
-import com.zzolta.android.gfrecipes.net.UriBuilder;
-import com.zzolta.android.gfrecipes.providers.RecipeSearchRecentSuggestionsProvider;
 import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
 import com.zzolta.android.gfrecipes.utils.CuisineHelper;
 
@@ -165,23 +157,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        handleIntent(intent);
-    }
-
-    private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            final String query = intent.getStringExtra(SearchManager.QUERY);
-            final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
-            suggestions.saveRecentQuery(query, null);
-            doSearch(query, ApplicationConstants.START_INDEX);
-        }
-    }
-
-    public void doSearch(String query, String from) {
-        final String url = UriBuilder.createQueryUri(query, from).toString();
-        final GsonRequest<RecipeQueryResult> request = new GsonRequest<>(url, RecipeQueryResult.class, new RecipeQueryResultListener(fragment.getRecipeListAdapter()), new VolleyErrorListener());
-
-        ApplicationRequestQueue.getInstance(this.getApplicationContext()).addToRequestQueue(request);
+        fragment.handleIntent(intent);
     }
 
     @Override
