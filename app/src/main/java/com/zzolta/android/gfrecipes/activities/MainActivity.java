@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             final FragmentManager fragmentManager = getFragmentManager();
             final Fragment fragment;
             switch (Section.values()[position]) {
-                case RECIPE_OF_THE_DAY:
+                case HOME:
                     fragment = setupRecipeDetailFragment(position);
                     fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                     break;
@@ -109,8 +109,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     public void onSectionAttached(int position) {
         switch (Section.values()[position]) {
-            case RECIPE_OF_THE_DAY:
-                lastScreenTitle = getString(R.string.recipe_of_the_day_menu);
+            case HOME:
+                lastScreenTitle = getString(R.string.home_menu);
                 break;
             case MY_RECIPES:
                 lastScreenTitle = getString(R.string.my_recipes_menu);
@@ -227,7 +227,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
 
     public enum Section {
-        RECIPE_OF_THE_DAY,
+        HOME,
         MY_RECIPES,
         FEEDBACK,
         RECIPE_DETAIL

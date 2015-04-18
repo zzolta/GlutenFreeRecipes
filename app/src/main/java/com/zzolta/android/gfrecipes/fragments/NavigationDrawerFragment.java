@@ -97,7 +97,7 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
         final String[] menuItems = {
-                                       getString(R.string.recipe_of_the_day_menu),
+                                       getString(R.string.home_menu),
                                        getString(R.string.my_recipes_menu),
                                        getString(R.string.feedback_menu)
         };
