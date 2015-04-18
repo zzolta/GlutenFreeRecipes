@@ -43,7 +43,7 @@ public class RecipeQueryResultListener implements Listener<RecipeQueryResult> {
 
         if (recipes.size() > 0) {
             recipeListAdapter.addRecipes(recipes);
+            recipeListAdapter.notifyDataSetChanged();
         }
-        recipeListAdapter.notifyDataSetChanged();
     }
 }

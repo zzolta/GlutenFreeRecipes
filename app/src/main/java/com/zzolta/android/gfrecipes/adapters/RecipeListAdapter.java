@@ -83,6 +83,10 @@ public class RecipeListAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void clear() {
+        recipes.clear();
+    }
+
     private String getTotalTimeInMinutes(@Nullable Integer totalTimeInSeconds) {
         return totalTimeInSeconds != null ? String.format("Total time: %d minutes", totalTimeInSeconds / SECONDS_IN_MINUTE) : "";
     }

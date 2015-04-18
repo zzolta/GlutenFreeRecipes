@@ -90,6 +90,10 @@ public class SearchResultsFragment extends Fragment {
         }
     }
 
+    public RecipeListAdapter getRecipeListAdapter() {
+        return recipeListAdapter;
+    }
+
     public void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             searchIntent = intent;
