@@ -61,7 +61,7 @@ public class RecipeDetailFragment extends Fragment {
         final Activity activity = getActivity();
         recipeDetailHelper.setActivity(activity);
         recipeDetailHelper.setView(view);
-        final String recipeID = activity.getIntent().getStringExtra(ApplicationConstants.RECIPE_ID);
+        final String recipeID = this.getArguments().getString(ApplicationConstants.RECIPE_ID);
 
         if (recipeID != null) {
             //recipe detail

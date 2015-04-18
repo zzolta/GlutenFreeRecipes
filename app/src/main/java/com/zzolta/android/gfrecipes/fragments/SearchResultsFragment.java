@@ -17,7 +17,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import com.zzolta.android.gfrecipes.R;
 import com.zzolta.android.gfrecipes.activities.MainActivity;
-import com.zzolta.android.gfrecipes.activities.RecipeDetailActivity;
 import com.zzolta.android.gfrecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.gfrecipes.jsonparse.recipequery.RecipeQueryResult;
 import com.zzolta.android.gfrecipes.listeners.EndlessScrollListener;
@@ -61,7 +60,7 @@ public class SearchResultsFragment extends Fragment {
         if (savedInstanceState == null) {
             listView.setAdapter(recipeListAdapter);
         } else {
-            final Parcelable[] parcelableArray = savedInstanceState.getParcelableArray("recipeArray");
+            final Parcelable[] parcelableArray = savedInstanceState.getParcelableArray(ApplicationConstants.RECIPE_ARRAY);
             final Recipe[] recipeArray = (Recipe[]) parcelableArray;
             recipeListAdapter.addRecipes(Arrays.asList(recipeArray));
             listView.setAdapter(recipeListAdapter);
@@ -82,9 +81,11 @@ public class SearchResultsFragment extends Fragment {
                 if (getActivity() instanceof MainActivity) {
                     final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
 
-                    final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
-                    intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
-                    startActivity(intent);
+                    final Bundle bundle = new Bundle();
+                    bundle.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
+                    final RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
+                    recipeDetailFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).commit();
                 }
             }
         });
@@ -97,7 +98,7 @@ public class SearchResultsFragment extends Fragment {
 
         final List<Recipe> recipes = recipeListAdapter.getRecipes();
         final Recipe[] recipeArray = recipes.toArray(new Recipe[recipes.size()]);
-        outState.putParcelableArray("recipeArray", recipeArray);
+        outState.putParcelableArray(ApplicationConstants.RECIPE_ARRAY, recipeArray);
 
         super.onSaveInstanceState(outState);
     }

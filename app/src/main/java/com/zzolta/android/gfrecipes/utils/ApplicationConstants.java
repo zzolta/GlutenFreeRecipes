@@ -35,6 +35,7 @@ public final class ApplicationConstants {
     public static final String TYPE = "TYPE";
     public static final String BODY = "BODY";
     public static final String WANTS_RESPONSE = "WANTS_RESPONSE";
+    public static final String RECIPE_ARRAY = "recipeArray";
 
     private ApplicationConstants() {
     }

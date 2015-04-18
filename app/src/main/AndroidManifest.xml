@@ -31,12 +31,6 @@
                     android:resource="@xml/searchable"/>
         </activity>
 
-        <activity android:name="com.zzolta.android.gfrecipes.activities.RecipeDetailActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.zzolta.android.gfrecipes.activities.MainActivity"/>
-        </activity>
-
         <activity android:name="com.zzolta.android.gfrecipes.activities.DirectionsActivity"/>
     </application>
 

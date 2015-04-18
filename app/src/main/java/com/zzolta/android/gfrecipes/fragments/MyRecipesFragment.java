@@ -2,7 +2,6 @@ package com.zzolta.android.gfrecipes.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
@@ -16,7 +15,6 @@ import android.widget.ListView;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.zzolta.android.gfrecipes.R;
-import com.zzolta.android.gfrecipes.activities.RecipeDetailActivity;
 import com.zzolta.android.gfrecipes.adapters.RecipeListAdapter;
 import com.zzolta.android.gfrecipes.content.Contract;
 import com.zzolta.android.gfrecipes.persistence.database.RecipeDBHelper;
@@ -57,9 +55,12 @@ public class MyRecipesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Recipe recipe = (Recipe) recipeListAdapter.getItem(position);
-                final Intent intent = new Intent(getActivity().getApplicationContext(), RecipeDetailActivity.class);
-                intent.putExtra(ApplicationConstants.RECIPE_ID, recipe.getId());
-                startActivity(intent);
+
+                final Bundle bundle = new Bundle();
+                bundle.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
+                final RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
+                recipeDetailFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).commit();
             }
         });
 
