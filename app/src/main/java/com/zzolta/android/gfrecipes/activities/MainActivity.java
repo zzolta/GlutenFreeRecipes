@@ -15,7 +15,6 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.support.v7.widget.SearchView.OnSuggestionListener;
 import android.view.Menu;
-import android.view.MenuItem;
 import com.zzolta.android.gfrecipes.R;
 import com.zzolta.android.gfrecipes.fragments.*;
 import com.zzolta.android.gfrecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
@@ -187,22 +186,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             SearchIntentProvider.getInstance().setSearchIntent(intent);
             searchResultsFragment.handleIntent(intent);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        final int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.search) {
-            //startActivity(new Intent(this, SearchResultsActivity.class));
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Nullable
