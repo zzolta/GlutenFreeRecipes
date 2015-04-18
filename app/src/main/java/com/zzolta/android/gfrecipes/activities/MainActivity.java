@@ -66,11 +66,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                     break;
                 case MY_RECIPES:
-                    fragmentManager.beginTransaction().replace(R.id.container, new MyRecipesFragment()).commit();
+                    fragmentManager.beginTransaction().replace(R.id.container, new MyRecipesFragment()).addToBackStack(null).commit();
                     break;
                 case FEEDBACK:
                     fragment = setupFeedbackFragment(position);
-                    fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
                     break;
                 default:
                     break;
@@ -143,7 +143,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         searchView.setOnQueryTextListener(new OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
                 return false;
             }
 
@@ -155,13 +155,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         searchView.setOnSuggestionListener(new OnSuggestionListener() {
             @Override
             public boolean onSuggestionSelect(int i) {
-                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
                 return false;
             }
 
             @Override
             public boolean onSuggestionClick(int i) {
-                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
                 return false;
             }
         });
@@ -201,6 +201,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             recipeOfTheDay = sharedPreferences.getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID, null);
         }
         return recipeOfTheDay;
+    }
+
+    @Override
+    public void onBackPressed() {
+        final FragmentManager fragmentManager = getFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else {
+            fragmentManager.popBackStack();
+        }
     }
 
     private enum Section {

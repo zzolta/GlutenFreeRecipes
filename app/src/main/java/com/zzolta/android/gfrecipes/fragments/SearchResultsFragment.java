@@ -49,6 +49,7 @@ import java.util.List;
  * limitations under the License.
  */
 public class SearchResultsFragment extends Fragment {
+    private final Bundle navigationState = new Bundle();
     private RecipeListAdapter recipeListAdapter;
 
     @Nullable
@@ -58,7 +59,13 @@ public class SearchResultsFragment extends Fragment {
 
         recipeListAdapter = new RecipeListAdapter(getActivity());
         if (savedInstanceState == null) {
+            final Parcelable[] parcelableArray = navigationState.getParcelableArray(ApplicationConstants.RECIPE_ARRAY);
+            if (parcelableArray != null) {
+                final Recipe[] recipeArray = (Recipe[]) parcelableArray;
+                recipeListAdapter.addRecipes(Arrays.asList(recipeArray));
+            }
             listView.setAdapter(recipeListAdapter);
+            recipeListAdapter.notifyDataSetChanged();
         } else {
             final Parcelable[] parcelableArray = savedInstanceState.getParcelableArray(ApplicationConstants.RECIPE_ARRAY);
             final Recipe[] recipeArray = (Recipe[]) parcelableArray;
@@ -85,7 +92,9 @@ public class SearchResultsFragment extends Fragment {
                     bundle.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
                     final RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
                     recipeDetailFragment.setArguments(bundle);
-                    getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).addToBackStack(null).commit();
+
+                    saveState(navigationState);
                 }
             }
         });
@@ -95,12 +104,16 @@ public class SearchResultsFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-
-        final List<Recipe> recipes = recipeListAdapter.getRecipes();
-        final Recipe[] recipeArray = recipes.toArray(new Recipe[recipes.size()]);
-        outState.putParcelableArray(ApplicationConstants.RECIPE_ARRAY, recipeArray);
-
+        saveState(outState);
         super.onSaveInstanceState(outState);
+    }
+
+    private void saveState(Bundle outState) {
+        if (recipeListAdapter != null) {
+            final List<Recipe> recipes = recipeListAdapter.getRecipes();
+            final Recipe[] recipeArray = recipes.toArray(new Recipe[recipes.size()]);
+            outState.putParcelableArray(ApplicationConstants.RECIPE_ARRAY, recipeArray);
+        }
     }
 
     @Override

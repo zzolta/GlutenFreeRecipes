@@ -60,7 +60,7 @@ public class MyRecipesFragment extends Fragment {
                 bundle.putString(ApplicationConstants.RECIPE_ID, recipe.getId());
                 final RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
                 recipeDetailFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).addToBackStack(null).commit();
             }
         });
 

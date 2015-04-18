@@ -89,9 +89,7 @@ public abstract class ParallaxScroll {
     public final View createView(LayoutInflater inflater) {
 
         layoutInflater = inflater;
-        if (contentView == null) {
-            contentView = inflater.inflate(contentLayoutResId, null);
-        }
+        contentView = inflater.inflate(contentLayoutResId, null);
 
         final ListView listView = (ListView) contentView.findViewById(R.id.parallaxList);
         final View root = createListView(listView);
@@ -165,9 +163,7 @@ public abstract class ParallaxScroll {
     }
 
     private void addHeaderView(ViewGroup headerContainer, int headerLayoutResId) {
-        if (headerView == null) {
-            headerView = layoutInflater.inflate(headerLayoutResId, headerContainer, false);
-        }
+        headerView = layoutInflater.inflate(headerLayoutResId, headerContainer, false);
         headerContainer.addView(headerView, 0);
     }
 
