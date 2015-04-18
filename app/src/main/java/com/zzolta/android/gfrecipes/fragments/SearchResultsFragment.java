@@ -44,6 +44,7 @@ import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
  */
 public class SearchResultsFragment extends Fragment {
     private RecipeListAdapter recipeListAdapter;
+    private Intent searchIntent;
 
     @Nullable
     @Override
@@ -56,7 +57,7 @@ public class SearchResultsFragment extends Fragment {
         listView.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-                final String query = getActivity().getIntent().getStringExtra(SearchManager.QUERY);
+                final String query = searchIntent.getStringExtra(SearchManager.QUERY);
                 doSearch(query, String.valueOf(page * ApplicationConstants.MAX_RESULT_VALUE));
             }
         });
@@ -79,6 +80,7 @@ public class SearchResultsFragment extends Fragment {
 
     public void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            searchIntent = intent;
             final String query = intent.getStringExtra(SearchManager.QUERY);
             final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(), RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
             suggestions.saveRecentQuery(query, null);
