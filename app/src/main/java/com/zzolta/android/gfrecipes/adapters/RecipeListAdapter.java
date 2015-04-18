@@ -45,6 +45,10 @@ public class RecipeListAdapter extends BaseAdapter {
         this.recipes.addAll(recipes);
     }
 
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
     @Override
     public int getCount() {
         return recipes.size();

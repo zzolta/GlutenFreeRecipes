@@ -1,5 +1,7 @@
 package com.zzolta.android.gfrecipes.persistence.database.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -24,7 +26,19 @@ import java.util.List;
  * limitations under the License.
  */
 @DatabaseTable(tableName = Contract.Recipe.TABLE_NAME)
-public class Recipe {
+public class Recipe implements Parcelable {
+    public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
+
+        @Override
+        public Recipe createFromParcel(Parcel source) {
+            return new Recipe(source);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
     @DatabaseField(id = true, columnName = Contract.Recipe._ID)
     private String id;
     @DatabaseField(columnName = Contract.Recipe.NAME)
@@ -41,6 +55,19 @@ public class Recipe {
     private String sourceRecipeUrl;
     @DatabaseField(columnName = Contract.Recipe.MY_RECIPE)
     private boolean myRecipe;
+
+    public Recipe() {
+    }
+
+    public Recipe(Parcel parcel) {
+        this.id = parcel.readString();
+        this.name = parcel.readString();
+        parcel.readStringList(this.ingredients);
+        this.totalTimeInSeconds = parcel.readInt();
+        this.rating = parcel.readInt();
+        this.imagePath = parcel.readString();
+        this.sourceRecipeUrl = parcel.readString();
+    }
 
     public String getId() {
         return id;
@@ -112,5 +139,21 @@ public class Recipe {
     public Recipe setMyRecipe(Boolean myRecipe) {
         this.myRecipe = myRecipe;
         return this;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeStringList(ingredients);
+        dest.writeInt(totalTimeInSeconds);
+        dest.writeInt(rating);
+        dest.writeString(imagePath);
+        dest.writeString(sourceRecipeUrl);
     }
 }

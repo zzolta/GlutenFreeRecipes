@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
@@ -27,7 +28,11 @@ import com.zzolta.android.gfrecipes.net.GsonRequest;
 import com.zzolta.android.gfrecipes.net.UriBuilder;
 import com.zzolta.android.gfrecipes.persistence.database.entities.Recipe;
 import com.zzolta.android.gfrecipes.providers.RecipeSearchRecentSuggestionsProvider;
+import com.zzolta.android.gfrecipes.providers.SearchIntentProvider;
 import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
+
+import java.util.Arrays;
+import java.util.List;
 
 /*
  * Copyright (C) 2015 Zolta Szekely
@@ -46,7 +51,6 @@ import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
  */
 public class SearchResultsFragment extends Fragment {
     private RecipeListAdapter recipeListAdapter;
-    private Intent searchIntent;
 
     @Nullable
     @Override
@@ -54,12 +58,20 @@ public class SearchResultsFragment extends Fragment {
         final ListView listView = (ListView) inflater.inflate(R.layout.recipe_list, container, false);
 
         recipeListAdapter = new RecipeListAdapter(getActivity());
-        listView.setAdapter(recipeListAdapter);
+        if (savedInstanceState == null) {
+            listView.setAdapter(recipeListAdapter);
+        } else {
+            final Parcelable[] parcelableArray = savedInstanceState.getParcelableArray("recipeArray");
+            final Recipe[] recipeArray = (Recipe[]) parcelableArray;
+            recipeListAdapter.addRecipes(Arrays.asList(recipeArray));
+            listView.setAdapter(recipeListAdapter);
+            recipeListAdapter.notifyDataSetChanged();
+        }
 
         listView.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-                final String query = searchIntent.getStringExtra(SearchManager.QUERY);
+                final String query = SearchIntentProvider.getInstance().getSearchIntent().getStringExtra(SearchManager.QUERY);
                 doSearch(query, String.valueOf(page * ApplicationConstants.MAX_RESULT_VALUE));
             }
         });
@@ -81,6 +93,16 @@ public class SearchResultsFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        final List<Recipe> recipes = recipeListAdapter.getRecipes();
+        final Recipe[] recipeArray = recipes.toArray(new Recipe[recipes.size()]);
+        outState.putParcelableArray("recipeArray", recipeArray);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -94,10 +116,10 @@ public class SearchResultsFragment extends Fragment {
         return recipeListAdapter;
     }
 
-    public void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            searchIntent = intent;
-            final String query = intent.getStringExtra(SearchManager.QUERY);
+    public void handleIntent() {
+        final Intent searchIntent = SearchIntentProvider.getInstance().getSearchIntent();
+        if (Intent.ACTION_SEARCH.equals(searchIntent.getAction())) {
+            final String query = searchIntent.getStringExtra(SearchManager.QUERY);
             final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity().getApplicationContext(), RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
             suggestions.saveRecentQuery(query, null);
             doSearch(query, ApplicationConstants.START_INDEX);

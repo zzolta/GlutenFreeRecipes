@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.zzolta.android.gfrecipes.R;
 import com.zzolta.android.gfrecipes.fragments.*;
 import com.zzolta.android.gfrecipes.fragments.NavigationDrawerFragment.NavigationDrawerCallbacks;
+import com.zzolta.android.gfrecipes.providers.SearchIntentProvider;
 import com.zzolta.android.gfrecipes.utils.ApplicationConstants;
 import com.zzolta.android.gfrecipes.utils.CuisineHelper;
 
@@ -39,11 +40,9 @@ import com.zzolta.android.gfrecipes.utils.CuisineHelper;
  */
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
+    private final SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
     private NavigationDrawerFragment navigationDrawerFragment;
-
     private CharSequence lastScreenTitle;
-
-    private SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +172,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         super.onNewIntent(intent);
 
         searchResultsFragment.getRecipeListAdapter().clear();
-        searchResultsFragment.handleIntent(intent);
+        SearchIntentProvider.getInstance().setSearchIntent(intent);
+        searchResultsFragment.handleIntent();
     }
 
     @Override
