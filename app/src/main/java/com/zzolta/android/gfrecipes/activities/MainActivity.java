@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
+import android.support.v7.widget.SearchView.OnSuggestionListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.zzolta.android.gfrecipes.R;
@@ -42,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     private CharSequence lastScreenTitle;
 
-    private SearchResultsFragment fragment;
+    private SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,36 +129,50 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.menu_search, menu);
 
-            // Get the SearchView and set the searchable configuration
-            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-            // Assumes current activity is the searchable activity
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
-            searchView.setOnQueryTextListener(new OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    fragment = new SearchResultsFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
-                }
-            });
+            final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+            setupSearchView(searchView);
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
     }
 
+    private void setupSearchView(SearchView searchView) {
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(new OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+        searchView.setOnSuggestionListener(new OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionSelect(int i) {
+                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionClick(int i) {
+                getFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+                return false;
+            }
+        });
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        fragment.handleIntent(intent);
+        searchResultsFragment.handleIntent(intent);
     }
 
     @Override

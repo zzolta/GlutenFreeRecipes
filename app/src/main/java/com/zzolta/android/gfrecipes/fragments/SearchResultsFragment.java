@@ -1,11 +1,13 @@
 package com.zzolta.android.gfrecipes.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,11 +80,21 @@ public class SearchResultsFragment extends Fragment {
         return listView;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Activity activity = getActivity();
+        if (activity instanceof ActionBarActivity) {
+            ((ActionBarActivity) activity).getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.ab_solid_example));
+        }
+    }
+
     public void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             searchIntent = intent;
             final String query = intent.getStringExtra(SearchManager.QUERY);
-            final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(), RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
+            final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity().getApplicationContext(), RecipeSearchRecentSuggestionsProvider.AUTHORITY, RecipeSearchRecentSuggestionsProvider.MODE);
             suggestions.saveRecentQuery(query, null);
             doSearch(query, ApplicationConstants.START_INDEX);
         }

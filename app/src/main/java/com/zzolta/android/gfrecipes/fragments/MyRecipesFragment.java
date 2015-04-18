@@ -1,9 +1,11 @@
 package com.zzolta.android.gfrecipes.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +66,16 @@ public class MyRecipesFragment extends Fragment {
         addRecipes(search());
 
         return listView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Activity activity = getActivity();
+        if (activity instanceof ActionBarActivity) {
+            ((ActionBarActivity) activity).getSupportActionBar().setBackgroundDrawable(this.getResources().getDrawable(R.drawable.ab_solid_example));
+        }
     }
 
     private void addRecipes(List<Recipe> recipes) {
