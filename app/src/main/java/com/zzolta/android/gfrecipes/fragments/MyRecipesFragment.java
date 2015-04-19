@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -41,13 +42,24 @@ import java.util.List;
 public class MyRecipesFragment extends Fragment {
     private static final String LOG_TAG = MyRecipesFragment.class.getName();
     private RecipeListAdapter recipeListAdapter;
+    private boolean twoPane;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final ListView listView = (ListView) inflater.inflate(R.layout.recipe_list, container, false);
 
-        recipeListAdapter = new RecipeListAdapter(getActivity());
+        final Activity activity = getActivity();
+        if (activity instanceof MainActivity) {
+            twoPane = ((MainActivity) activity).isTwoPane();
+        }
+        if (twoPane) {
+            final View viewById = activity.findViewById(R.id.recipe_detail);
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewById.getLayoutParams();
+            params.weight = 4;
+            viewById.setLayoutParams(params);
+        }
+        recipeListAdapter = new RecipeListAdapter(activity);
         listView.setAdapter(recipeListAdapter);
 
         listView.setOnItemClickListener(new OnItemClickListener() {
@@ -60,7 +72,11 @@ public class MyRecipesFragment extends Fragment {
                 bundle.putInt(ApplicationConstants.ARG_SECTION_NUMBER, Section.RECIPE_DETAIL.ordinal());
                 final RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
                 recipeDetailFragment.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).addToBackStack(null).commit();
+                if (twoPane) {
+                    getFragmentManager().beginTransaction().replace(R.id.recipe_detail, recipeDetailFragment).commit();
+                } else {
+                    getFragmentManager().beginTransaction().replace(R.id.container, recipeDetailFragment).addToBackStack(null).commit();
+                }
             }
         });
 

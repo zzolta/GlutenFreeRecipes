@@ -42,6 +42,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private final SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
     private NavigationDrawerFragment navigationDrawerFragment;
     private CharSequence lastScreenTitle;
+    private boolean twoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         lastScreenTitle = getTitle();
 
         navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        twoPane = findViewById(R.id.recipe_detail) != null;
     }
 
     @Override
@@ -207,6 +210,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         } else {
             fragmentManager.popBackStack();
         }
+    }
+
+    public boolean isTwoPane() {
+        return twoPane;
     }
 
     public enum Section {

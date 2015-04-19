@@ -34,17 +34,28 @@ public class FeedbackFragment extends Fragment {
     private String body;
     private int type;
     private boolean wantsResponse;
+    private boolean twoPane;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final Activity activity = getActivity();
+        if (activity instanceof MainActivity) {
+            twoPane = ((MainActivity) activity).isTwoPane();
+        }
         final ScrollView feedbackForm = (ScrollView) inflater.inflate(R.layout.feedback_form, container, false);
         final Spinner feedbackSpinner = (Spinner) feedbackForm.findViewById(R.id.feedback_type);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.feedback_type_list, R.layout.spinner_item);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, R.array.feedback_type_list, R.layout.spinner_item);
         feedbackSpinner.setAdapter(adapter);
         final Button sendFeedback = (Button) feedbackForm.findViewById(R.id.send_feedback);
         sendFeedback.setOnClickListener(new SendFeedbackClickListener());
         setHasOptionsMenu(true);
+        if (twoPane) {
+            final View viewById = activity.findViewById(R.id.recipe_detail);
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewById.getLayoutParams();
+            params.weight = 0;
+            viewById.setLayoutParams(params);
+        }
         return feedbackForm;
     }
 

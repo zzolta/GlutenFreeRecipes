@@ -14,6 +14,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.LinearLayout;
 import com.j256.ormlite.dao.Dao;
 import com.zzolta.android.gfrecipes.R;
 import com.zzolta.android.gfrecipes.activities.MainActivity;
@@ -54,12 +55,18 @@ public class RecipeDetailFragment extends Fragment {
     private static final String LOG_TAG = RecipeDetailFragment.class.getName();
     private ParallaxScrollAppCompat parallaxScrollAppCompat;
     private boolean recipeOfTheDay;
+    private boolean twoPane;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        final Activity activity = getActivity();
+        if (activity instanceof MainActivity) {
+            twoPane = ((MainActivity) activity).isTwoPane();
+        }
+
         final View view = parallaxScrollAppCompat.createView(inflater);
         final RecipeDetailHelper recipeDetailHelper = RecipeDetailHelper.getInstance();
-        final Activity activity = getActivity();
         recipeDetailHelper.setActivity(activity);
         recipeDetailHelper.setView(view);
         final String recipeID = this.getArguments().getString(ApplicationConstants.RECIPE_ID);
@@ -74,6 +81,12 @@ public class RecipeDetailFragment extends Fragment {
             }
         } else {
             recipeOfTheDay = true;
+            if (twoPane) {
+                final View viewById = activity.findViewById(R.id.recipe_detail);
+                final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewById.getLayoutParams();
+                params.weight = 0;
+                viewById.setLayoutParams(params);
+            }
             final String recipeOfTheDayId = this.getArguments().getString(ApplicationConstants.RECIPE_OF_THE_DAY_ID);
             if (recipeOfTheDayId == null) {
                 loadRecipeOfTheDay();
